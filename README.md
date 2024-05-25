@@ -37,4 +37,4 @@ Blockbuster Movie Website is a platform where users can discover the latest movi
 
 ## ERD
 
-![ERD](teal_coral_erd.png)
+![ERD](coral_erd.png)
