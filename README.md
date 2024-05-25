@@ -2,18 +2,18 @@
 
 ## Table of Contents
 
-
+- [Introduction](#introduction)
 - [User Story](#user-story)
 - [Wireframe](#wireframe)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [ERD](#erd)
 
-## User Story
+## Introduction
 
 Blockbuster Movie Website is a platform where users can discover the latest movies and TV shows. Users can sign up, log in, view their profile, and browse through a list of movies and TV shows. The site uses data from The Movie Database (TMDB) API to fetch information about movies and TV shows.
 
-
+## User Story
 
 ## Wireframe
 
