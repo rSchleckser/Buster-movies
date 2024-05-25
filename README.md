@@ -1,4 +1,4 @@
-# Blockbuster Movie Website
+# Buster Movie Website
 
 ## Table of Contents
 
