@@ -17,7 +17,7 @@ Blockbuster Movie Website is a platform where users can discover the latest movi
 
 ## Wireframe
 
-![WireFrame](teal_coral_wireframe.png)
+![WireFrame](coral_wireframe.png)
 
 ## Features
 
@@ -36,3 +36,5 @@ Blockbuster Movie Website is a platform where users can discover the latest movi
 - **API**: The Movie Database (TMDB) API
 
 ## ERD
+
+![ERD](teal_coral_erd.png)
