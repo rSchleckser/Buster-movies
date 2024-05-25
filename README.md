@@ -30,8 +30,8 @@ Blockbuster Movie Website is a platform where users can discover the latest movi
 
 ## Technologies Used
 
-- **Backend**: Node.js, Express
 - **Frontend**: HTML, CSS, Semantic UI, EJS
+- **Backend**: Node.js, Express
 - **Database**: MongoDB, Mongoose
 - **API**: The Movie Database (TMDB) API
 
