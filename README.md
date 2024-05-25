@@ -11,9 +11,18 @@
 
 ## Introduction
 
-Blockbuster Movie Website is a platform where users can discover the latest movies and TV shows. Users can sign up, log in, view their profile, and browse through a list of movies and TV shows. The site uses data from The Movie Database (TMDB) API to fetch information about movies and TV shows.
+Buster Movie Website is a platform where users can discover the latest movies and TV shows. Users can sign up, log in, view their profile, and browse through a list of movies and TV shows. The site uses data from The Movie Database (TMDB) API to fetch information about movies and TV shows.
 
 ## User Story
+
+Users:
+
+- reate an account to view and interact with website
+- Log into account after creatation
+- Access User Dashboard, this will allow the user to browse movies/tv shows and view personal profile
+- Viewers can click on movies or tv show to access more information on the movie /tv show
+- Specific movie / tv show displayed will have watchlist and favorites buttons which will be added to users list and can be viewed at a later time
+- User can create, edit, or delete reviews specific to ones that they have made
 
 ## Wireframe
 
@@ -36,5 +45,16 @@ Blockbuster Movie Website is a platform where users can discover the latest movi
 - **API**: The Movie Database (TMDB) API
 
 ## ERD
+
+- **User**:
+  <br>id, username, email, password
+
+- **Movie**:
+  <br>id, title, release date, overview, poster, vote_average, popularity
+
+- **TV Show**:
+  <br>id, title, first air date, overview,poster, vote_average, popularity
+- **Review**:
+  <br>id, userid, subject, message, vote
 
 ![ERD](coral_erd.png)
