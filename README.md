@@ -15,9 +15,9 @@ Buster Movie Website is a platform where users can discover the latest movies an
 
 ## User Story
 
-Users:
+Users can:
 
-- reate an account to view and interact with website
+- Create an account to view and interact with website
 - Log into account after creatation
 - Access User Dashboard, this will allow the user to browse movies/tv shows and view personal profile
 - Viewers can click on movies or tv show to access more information on the movie /tv show
