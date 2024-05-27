@@ -67,6 +67,6 @@ const tv_genre = {
   ],
 };
 
-module.exports = {
-  tv_genre,
-};
+module.exports = 
+  tv_genre
+;

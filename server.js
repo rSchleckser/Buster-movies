@@ -4,6 +4,10 @@ const PORT = process.env.PORT || 5000;
 const axios = require('axios');
 require('dotenv').config();
 
+//import models
+const movie_genre = require('./models/movieGenres');
+const tv_genre = require('./models/tvGenres')
+
 //Middleware
 app.set('view engine', 'ejs');
 app.use('/', express.static('public'));
@@ -12,16 +16,16 @@ app.use(
   express.static(__dirname + 'node_modules/semantic-ui-css')
 );
 
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: process.env.API_READ_ACCESS_TOKEN,
+  },
+};
+
 //GET - Home Page
 app.get('/', async (req, res) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: process.env.API_READ_ACCESS_TOKEN,
-    },
-  };
-
   //Featured movies today ${day}/ week ${week}
   try {
     const response = await axios.get(
@@ -53,14 +57,6 @@ app.get('/search', (req, res) => {
 
 //Show Page
 app.get('/search/result', async (req, res) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: process.env.API_READ_ACCESS_TOKEN,
-    },
-  };
-
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/search/multi?query=${req.query.media}&language=en`,
@@ -80,11 +76,19 @@ app.get('/search/result', async (req, res) => {
       console.log(media);
     });
 
-    res.status(200).render('home/show', { response: response.data.results });
+    
+    res
+      .status(200)
+      .render('home/show', { response: response.data.results, movie_genre: movie_genre.genres, tv_genre: tv_genre.genres});
   } catch (error) {
     console.error('Error fetching movie', error);
     res.status(500).send('Error fetching movie');
   }
+});
+
+// GET - Movie Show Page
+app.get('/movies/:id', async (req, res) => {
+  res.send('Movie Page');
 });
 
 app.listen(PORT, () => {
