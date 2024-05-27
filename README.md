@@ -26,7 +26,7 @@ Users can:
 
 ## Wireframe
 
-![WireFrame](coral_wireframe.png)
+![WireFrame](/public/img/coral_wireframe.png)
 
 ## Features
 
@@ -57,4 +57,4 @@ Users can:
 - **Review**:
   <br>id, userid, subject, message, vote
 
-![ERD](coral_erd.png)
+![ERD](/public/img/coral_erd.png)

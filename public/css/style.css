@@ -1,0 +1,47 @@
+:root {
+  --main-color: #0057b8;
+  --secondary-color: #ffcc00;
+}
+
+body {
+  background-color: #e9e5e5;
+  color: #fff;
+}
+
+/* Header Container */
+div.ui.container div.ui.inverted.vertical.masthead.center.aligned.segment.bg {
+  background-color: var(--main-color);
+}
+/* Header text color */
+.ui.menu .item {
+  color: var(--secondary-color) !important;
+}
+div.ui.text.container h1.ui.inverted.header {
+  padding-top: 2rem;
+}
+.ui.button.primary {
+  background-color: var(--secondary-color) !important;
+  color: #000 !important;
+}
+.ui.vertical.stripe.segment {
+  border: none !important;
+}
+
+/* Cards */
+.ui.link.cards {
+  padding-right: 2rem;
+}
+.ui.card .image img {
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Footer */
+.ui.inverted.vertical.footer.segment {
+  border: none !important;
+}
+
+footer.ui.inverted.vertical.footer.segment {
+  background-color: #0057b8;
+  padding-left: 2rem;
+}

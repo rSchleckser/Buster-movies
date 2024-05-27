@@ -1,0 +1,21 @@
+{
+  "name": "blockbuster-movies",
+  "version": "1.0.0",
+  "description": "- [Introduction](#introduction)\r - [User Story](#user-story)\r - [Wireframe](#wireframe)\r - [Features](#features)\r - [Technologies Used](#technologies-used)\r - [ERD](#erd)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon"
+  },
+  "author": "Richard Schleckser",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.1",
+    "semantic-ui-css": "^2.5.0"
+  }
+}
