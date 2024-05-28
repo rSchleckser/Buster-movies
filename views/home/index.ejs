@@ -1,113 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blockbuster Movie Website</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <div class="ui container">
-      <!-- Header -->
-      <div class="ui inverted vertical masthead center aligned segment bg">
-        <div class="ui container">
-          <div class="ui large secondary inverted pointing menu">
-            <a class="toc item">
-              <i class="sidebar icon"></i>
-            </a>
-            <a class="active item">Home</a>
-            <a class="item">Movies</a>
-            <a class="item">TV Shows</a>
-            <a class="item">About</a>
-            <div class="right item">
-              <div class="ui inverted button">Log in</div>
-              <div class="ui inverted button">Sign up</div>
-            </div>
-          </div>
-        </div>
 
-        <div class="ui text container">
-          <h1 class="ui inverted header" style="color: #ffcc00">
-            Welcome to Blockbuster Movie Website
-          </h1>
-          <h2 style="color: #ffcc00">
-            Discover the latest blockbuster movies and TV shows
-          </h2>
-          <div class="ui huge primary button">Get Started</div>
-        </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blockbuster Movie Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-      <!-- Featured Content -->
-      <div class="ui vertical stripe segment">
-        <div class="ui middle aligned stackable grid container">
-          <div class="row">
-            <div class="ui link cards">
-              <% featuredMovies.forEach(function(movie){ %>
-              <div class="card">
-                <div class="image">
-                  <img
-                    src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
-                    alt="<%= movie.original_title %>"
-                  />
-                </div>
-                <div class="content">
-                  <div class="header"><%= movie.original_title %></div>
-                  <div class="meta">
-                    <span class="date"><%= movie.release_date %></span>
-                  </div>
-                  <div class="description"><%= movie.overview %></div>
-                </div>
-                <div class="extra content">
-                  <span class="right floated">
-                    <i class="star icon"></i>
-                    <%= movie.vote_average.toFixed(1) %>
-                  </span>
-                  <span>
-                    <i class="users icon"></i>
-                    <%= movie.popularity.toFixed(2) %>
-                  </span>
-                </div>
-              </div>
-              <% }); %>
-            </div>
+<body>
+  <div class="ui container">
+    <!-- Header -->
+    <div class="ui inverted vertical masthead center aligned segment bg">
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a class="active item">Home</a>
+          <a class="item">Movies</a>
+          <a class="item">TV Shows</a>
+          <a class="item">About</a>
+          <div class="right item">
+            <div class="ui inverted button">Log in</div>
+            <div class="ui inverted button">Sign up</div>
           </div>
         </div>
       </div>
 
-      <!-- Footer -->
-      <footer class="ui inverted vertical footer segment">
-        <div class="ui container">
-          <div
-            class="ui stackable inverted divided equal height stackable grid"
-          >
-            <div class="three wide column">
-              <h4 class="ui inverted header">About</h4>
-              <div class="ui inverted link list">
-                <a href="#" class="item">Contact Us</a>
-                <a href="#" class="item">Privacy Policy</a>
-              </div>
-            </div>
-            <div class="three wide column">
-              <h4 class="ui inverted header">Services</h4>
-              <div class="ui inverted link list">
-                <a href="#" class="item">Movies</a>
-                <a href="#" class="item">TV Shows</a>
-              </div>
-            </div>
-            <div class="seven wide column">
-              <h4 class="ui inverted header">Blockbuster Movie Website</h4>
-              <p>
-                A website for movie lovers to discover and watch the latest
-                blockbuster movies and TV shows.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <div class="ui text container">
+        <h1 class="ui inverted header" style="color: #ffcc00">
+          Welcome to Blockbuster Movie Website
+        </h1>
+        <h2 style="color: #ffcc00">
+          Discover the latest blockbuster movies and TV shows
+        </h2>
+        <div class="ui huge primary button">Get Started</div>
+      </div>
     </div>
-  </body>
+
+    <!-- Featured Content -->
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="ui link cards">
+            <% featuredMovies.forEach(function(movie){ %>
+            <div class="card">
+              <div class="image">
+                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.original_title %>" />
+              </div>
+              <div class="content">
+                <div class="header"><%= movie.original_title %></div>
+                <div class="meta">
+                  <span class="date"><%= movie.release_date %></span>
+                </div>
+
+              </div>
+              <div class="extra content">
+                <span class="right floated">
+                  <i class="star icon"></i>
+                  <%= movie.vote_average.toFixed(1) %>
+                </span>
+                <span>
+                  <i class="users icon"></i>
+                  <%= movie.popularity.toFixed(2) %>
+                </span>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Contact Us</a>
+              <a href="#" class="item">Privacy Policy</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Services</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Movies</a>
+              <a href="#" class="item">TV Shows</a>
+            </div>
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">Blockbuster Movie Website</h4>
+            <p>
+              A website for movie lovers to discover and watch the latest
+              blockbuster movies and TV shows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
 </html>
