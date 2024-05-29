@@ -12,6 +12,7 @@ const SECRET_SESSION = process.env.SECRET_SESSION;
 //import models
 const movie_genre = require('./models/movieGenres');
 const tv_genre = require('./models/tvGenres')
+const { User } = require('./models');
 
 //Middleware
 app.set('view engine', 'ejs');
