@@ -57,7 +57,7 @@ app.get('/search', (req, res) => {
 });
 
 
-//Show Page
+//Search Results Page
 app.get('/search/result', async (req, res) => {
   try {
     const response = await axios.get(
@@ -68,19 +68,15 @@ app.get('/search/result', async (req, res) => {
     if (response.status !== 200) {
       throw new Error('Failed to fetch trending movies');
     }
+const medias = response.data.results;
+const movie_genre = movie_genre.genres;
+const tv_genre = tv_genre.genres;
+const query = req.query.media
 
-    response.data.results.forEach((media) => {
-      if (media.media_type === 'tv') {
-        console.log({ TV_SHOW: media.name, media_type: media.media_type });
-      } else if (media.media_type === 'movie') {
-        console.log({ Movie: media.title, media_type: media.media_type });
-      }
-      console.log(media);
-    });
     
     res
       .status(200)
-      .render('home/show', { response: response.data.results, movie_genre: movie_genre.genres, tv_genre: tv_genre.genres});
+      .render('home/show', { medias, movie_genre, tv_genre, query});
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
@@ -106,6 +102,8 @@ const videos = videoResponse.data.results;
 const credits = creditsResponse.data.cast;
 const reviews = reviewsResponse.data.results;
 const recommendations = recommendationsResponse.data.results;
+
+
 
   res.render('movie/show', {details, images,videos, credits, reviews, recommendations})
 } catch (error) {
@@ -140,6 +138,28 @@ app.get('/tv/:id', async (req,res)=>{
     const { success, status_message } = error.response.data;
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
   } 
+  })
+
+  // GET - Person Show Page
+  app.get('/person/:id', async (req,res)=>{
+    try {
+      const detailsResponse = await axios.get(`https://api.themoviedb.org/3/person/${req.params.id}`, options);
+      const imagesResponse = await axios.get(`https://api.themoviedb.org/3/person/${req.params.id}/images`, options)
+      const movieCreditsResponse = await axios.get(`https://api.themoviedb.org/3/person/${req.params.id}/movie_credits`, options)
+      const tvCreditsResponse = await axios.get(`https://api.themoviedb.org/3/person/${req.params.id}/tv_credits`, options)
+
+      const details = detailsResponse.data;
+      const images = imagesResponse.data.profiles;
+      const movies = movieCreditsResponse.data.cast;
+      const tvShows = tvCreditsResponse.data.cast;
+
+      res.render('person/show', {details, images, movies, tvShows})
+
+    } catch (error) {
+      console.error('Error fetching movie', error)
+      const { success, status_message } = error.response.data;
+      res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    }
   })
 
 app.listen(PORT, () => {

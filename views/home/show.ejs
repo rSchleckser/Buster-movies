@@ -35,8 +35,10 @@
     </div>
   </nav>
 
+  <h1>Results for: <%=query%></h1>
+
   <div class="row row-cols-1 row-cols-md-5 g-4">
-    <% response.forEach(media => { %>
+    <% medias.forEach(media => { %>
     <div class="col">
       <div class="card">
         <img <% if (media.media_type === 'person') { %> src="https://image.tmdb.org/t/p/w500/<%= media.profile_path %>" <% }
@@ -90,7 +92,7 @@
           </button>
           <% } else { %>
           <button>
-            <a href="#">More Info</a>
+            <a href="/person/<%= media.id %>">More Info</a>
           </button>
           <% } %>
 

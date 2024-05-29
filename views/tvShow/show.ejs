@@ -24,32 +24,6 @@
       object-fit: cover;
     }
 
-    .card-body-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      /* Semi-transparent background */
-      color: white;
-      text-align: center;
-    }
-
-    .card-body-overlay .card-title {
-      margin: 0;
-      font-size: 1.25rem;
-      font-weight: bold;
-    }
-
-    .card-body-overlay .character-name {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: normal;
-      color: #ccc;
-      /* Lighter color to differentiate */
-    }
-
     .carousel-item img {
       width: 100%;
       height: auto;
@@ -58,6 +32,27 @@
 
     .carousel-inner {
       height: 400px;
+    }
+
+    .ui card .content,
+    .ui.cards .card .content.text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: center;
+    }
+
+    .ui card .content,
+    .ui.cards .card .content.text .character-name {
+      color: rgb(152, 194, 194)
+    }
+
+    .ui.inverted.button {
+      top: 0;
     }
 
     .review {
@@ -80,7 +75,8 @@
 
           <!-- Filter through Genre Name -->
           <% const genre = details.genres.map(genre => { %>
-          <% return genre.name %> <% }).filter(name => name).join(', ') %>
+          <% return genre.name %>
+          <% }).filter(name => name).join(', ') %>
 
           <p><strong>Rating:</strong> <%= details.vote_average.toFixed(1) %></p>
           <p><strong>Genre:</strong> <%= genre %></p>
@@ -137,38 +133,59 @@
 
 
     <!-- Cast Carousel -->
-    <h1 style="text-align: center">Cast</h1>
+    <h1 class='heading'>Cast</h1>
     <div id="castCarousel" class="carousel slide mt-5" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <div class="d-flex justify-content-around flex-wrap">
-            <% for(let i = 0; i < 4 && i < credits.length; i++) { %>
-            <% let cast = credits[i]; %>
-            <div class="card" style="width: 18rem; position: relative;">
-              <img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" class="card-img-top" alt="<%= cast.name %>" />
-              <div class="card-body-overlay">
-                <h5 class="card-title actor-name"><%= cast.name %></h5>
-                <h6 class="card-title character-name"><%= cast.character %></h6>
+          <div class="d-flex justify-content-around">
+            <div class="ui link cards">
+              <% for( let i = 0; i < 4; i++ ) { %>
+              <% let cast = credits[i] %>
+              <div class="card" style="width: 18rem; position: relative;">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <button class="ui inverted button"> <a href="/person/<%= cast.id %>">More Info</a></button>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" class="card-img-top" alt="<%= cast.name %>" />
+                </div>
+                <div class="content text">
+                  <h3 class="card-title actor-name"><%= cast.name %></h3>
+                  <h6 class="card-title character-name"><%= cast.character %></h6>
+                </div>
               </div>
+              <% } %>
             </div>
-            <% } %>
           </div>
         </div>
 
-        <!-- Subsequent carousel items -->
         <% for(let i = 4; i < credits.length; i += 4) { %>
         <div class="carousel-item">
-          <div class="d-flex justify-content-around flex-wrap">
-            <% for(let j = 0; j < 4 && (i + j) < credits.length; j++) { %>
-            <% let cast = credits[i + j]; %>
-            <div class="card" style="width: 18rem; position: relative;">
-              <img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" class="card-img-top" alt="<%= cast.name %>" />
-              <div class="card-body-overlay">
-                <h5 class="card-title actor-name"><%= cast.name %></h5>
-                <h6 class="card-title character-name"><%= cast.character %></h6>
+          <div class="d-flex justify-content-around">
+            <div class="ui link cards">
+              <% for(let j = 0; j < 4 && (i + j) < credits.length; j++) { %>
+              <% let cast = credits[i + j]; %>
+              <div class="card" style="width: 18rem; position: relative;">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <button class="ui inverted button"> <a href="/person/<%= cast.id %>">More Info</a></button>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" class="card-img-top" alt="<%= cast.name %>" />
+                </div>
+                <div class="content text">
+                  <h3 class="card-title actor-name"><%= cast.name %></h3>
+                  <h6 class="card-title character-name"><%= cast.character %></h6>
+                </div>
               </div>
+              <% } %>
             </div>
-            <% } %>
           </div>
         </div>
         <% } %>
@@ -238,31 +255,51 @@
     </div>
 
     <!-- Recommendations Carousel -->
-    <h1 style="text-align: center">Recommendations</h1>
+    <h1 class='heading'>Recommendations</h1>
     <div id="recommendationsCarousel" class="carousel slide mt-5" data-ride="carousel" style="padding-bottom: 5rem">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="d-flex justify-content-around">
-            <% for( let i = 0; i < 3; i++ ) { %> <% let recommend =
-              recommendations[i] %>
-            <div class="card" style="width: 18rem">
-              <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="Recommendation 1" />
-
+            <div class="ui link cards">
+              <% for(let i = 0; i < 3; i++) { %>
+              <% let recommend = recommendations[i] %>
+              <div class="card" style="width: 18rem">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <button class="ui inverted button"> <a href="/movie/<%= recommend.id %>">View Show</a></button>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="<%= recommend.title %>" />
+                </div>
+              </div>
+              <% } %>
             </div>
-            <% } %>
           </div>
         </div>
 
         <% for(let i = 3; i < recommendations.length; i += 3) { %>
         <div class="carousel-item">
           <div class="d-flex justify-content-around">
-            <% for(let j = 0; j < 3 && (i + j) < recommendations.length; j++)
-              { %> <% let recommend = recommendations[i + j]; %>
-            <div class="card" style="width: 18rem">
-              <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="<%= recommend.title %>" />
-
+            <div class="ui link cards">
+              <% for(let j = 0; j < 3 && (i + j) < recommendations.length; j++) { %>
+              <% let recommend = recommendations[i + j]; %>
+              <div class="card" style="width: 18rem">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <button class="ui inverted button"> <a href="/movie/<%= recommend.id %>">View Show</a></button>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="<%= recommend.title %>" />
+                </div>
+              </div>
+              <% } %>
             </div>
-            <% } %>
           </div>
         </div>
         <% } %>
@@ -283,6 +320,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Semantic UI JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.blurring.dimmable.image').dimmer({
+        on: 'hover'
+      });
+    });
+  </script>
 </body>
 
 </html>
