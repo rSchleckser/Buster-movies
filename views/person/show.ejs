@@ -18,6 +18,10 @@
       padding-left: 20px;
     }
 
+    h1.heading {
+      text-align: center;
+    }
+
     .card img {
       height: 100%;
       width: 100%;
@@ -83,22 +87,24 @@
             <div class="ui link cards">
               <% for (let i = 0; i < 4; i++) { %>
               <% let movie = movies[i]; %>
+              <% if (movie) { %>
               <div class="card" style="width: 18rem; position: relative;">
                 <div class="blurring dimmable image">
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
-                        <button class="ui inverted button"> <a href="/movie/<%= movie.id %>">More Info</a></button>
+                        <a href="<%= movie.id ? '/movie/' + movie.id : '#' %>" class="ui inverted button">More Info</a>
                       </div>
                     </div>
                   </div>
-                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.title %>" />
+                  <img src="<%= movie.poster_path ? 'https://image.tmdb.org/t/p/w500/' + movie.poster_path : '#' %>" class="card-img-top" alt="<%= movie.title %>" />
                 </div>
                 <div class="content text">
                   <h3 class="card-title actor-name"><%= movie.title %></h3>
                   <h6 class="card-title character-name"><%= movie.character %></h6>
                 </div>
               </div>
+              <% } %>
               <% } %>
             </div>
           </div>
@@ -110,12 +116,13 @@
             <div class="ui link cards">
               <% for (let j = 0; j < 4 && (i + j) < movies.length; j++) { %>
               <% let movie = movies[i + j]; %>
+              <% if (movie) { %>
               <div class="card" style="width: 18rem; position: relative;">
                 <div class="blurring dimmable image">
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
-                        <button class="ui inverted button"> <a href="/movie/<%= movie.id %>">More Info</a></button>
+                        <a href="<%= movie.id ? '/movie/' + movie.id : '#' %>" class="ui inverted button">More Info</a>
                       </div>
                     </div>
                   </div>
@@ -126,6 +133,7 @@
                   <h6 class="card-title character-name"><%= movie.character %></h6>
                 </div>
               </div>
+              <% } %>
               <% } %>
             </div>
           </div>
@@ -142,6 +150,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+
 
     <!-- TV Shows Carousel -->
     <h1 class='heading'>TV Shows</h1>

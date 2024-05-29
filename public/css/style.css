@@ -6,42 +6,46 @@
 body {
   background-color: #e9e5e5;
   color: #fff;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the body takes the full height of the viewport */
 }
 
-/* Header Container */
-div.ui.container div.ui.inverted.vertical.masthead.center.aligned.segment.bg {
-  background-color: var(--main-color);
-}
-/* Header text color */
-.ui.menu .item {
-  color: var(--secondary-color) !important;
-}
-div.ui.text.container h1.ui.inverted.header {
+
+.ui.text.container h1.ui.inverted.header {
   padding-top: 2rem;
+  color: var(--secondary-color);
 }
+
+.ui.text.container h2 {
+  color: var(--secondary-color);
+}
+
 .ui.button.primary {
   background-color: var(--secondary-color) !important;
   color: #000 !important;
+  
 }
+h1.title{
+  text-align: center; 
+  color: black;
+  margin-top: 2rem;
+}
+
 .ui.vertical.stripe.segment {
   border: none !important;
 }
 
-/* Cards */
-.ui.link.cards {
-  padding-right: 2rem;
-}
-.ui.card .image img {
-  height: 300px;
-  object-fit: cover;
+/* Carousel */
+#featuredCarousel {
+  margin-bottom: 20px;
 }
 
 /* Footer */
-.ui.inverted.vertical.footer.segment {
-  border: none !important;
-}
-
-footer.ui.inverted.vertical.footer.segment {
-  background-color: #0057b8;
-  padding-left: 2rem;
+.footer.segment {
+  margin-top: auto; /* Pushes the footer to the bottom */
+  display: block;
+  padding: 2em 0em;
+  width: 100%;
 }

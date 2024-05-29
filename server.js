@@ -3,6 +3,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const axios = require('axios');
 require('dotenv').config();
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('./config/passport-config');
+const isLoggedIn = require('./middleware/isLoggedIn');
+const SECRET_SESSION = process.env.SECRET_SESSION;
 
 //import models
 const movie_genre = require('./models/movieGenres');
@@ -16,6 +21,27 @@ app.use(
   express.static(__dirname + 'node_modules/semantic-ui-css')
 );
 
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    secret: SECRET_SESSION,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(flash());
+
+// initial passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// middleware for tracking users and alerts
+app.use((req, res, next) => {
+  res.locals.alerts = req.flash();
+  res.locals.currentUser = req.user;
+  next(); // going to said route
+});
+
 const options = {
   method: 'GET',
   headers: {
@@ -24,28 +50,28 @@ const options = {
   },
 };
 
+// ==================================================================================
 //GET - Home Page
 app.get('/', async (req, res) => {
   //Featured movies today ${day}/ week ${week}
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/trending/movie/week`,
+      `https://api.themoviedb.org/3/trending/all/week?language=en`,
       options
     );
-edMovies = [];
 
-    for (let i = 0; i < 3; i++) {
-      featuredMovies.push(response.data.results[i]);
-    }
-    // res.json(response.data.results);
+const featured = response.data.results;
 
-    res.render('home/index', { featuredMovies });
+    res.render('home/index', { featured });
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
   }
 });
+
+//import auth routes
+app.use('/auth', require('./controllers/auth'));
 
 //Search Page
 app.get('/search', (req, res) => {
