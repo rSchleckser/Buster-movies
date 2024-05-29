@@ -51,8 +51,6 @@ app.get('/', async (req, res) => {
   }
 });
 
-
-
 //Search Page
 app.get('/search', (req, res) => {
   res.render('home/search');
@@ -94,51 +92,55 @@ app.get('/search/result', async (req, res) => {
 app.get('/movie/:id', async (req,res)=>{
 try {
 const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
+const imagesResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/images`, options)
 const videoResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/videos`, options)
 const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/credits`, options)
 const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/reviews`, options)
 const recommendationsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/recommendations`, options)
 
-if (detailsResponse.status !== 200) {
-  throw new Error('Failed to fetch trending movies Movie Details');
-}
-if (videoResponse.status !== 200) {
-  throw new Error('Failed to fetch trending movies Videos');
-}
-if (creditsResponse.status !== 200) {
-  throw new Error('Failed to fetch trending movies Credits');
-}
-if (reviewsResponse.status !== 200) {
-  throw new Error('Failed to fetch trending movies Reviews');
-}
-if (recommendationsResponse.status !== 200) {
-  throw new Error('Failed to fetch trending movies Recommendations');
-}
+
 
 const details = detailsResponse.data;
+const images = imagesResponse.data.backdrops;
 const videos = videoResponse.data.results;
 const credits = creditsResponse.data.cast;
 const reviews = reviewsResponse.data.results;
 const recommendations = recommendationsResponse.data.results;
 
-
-// console.log('=============================\n',detailsResponse.data)
-// console.log('=============================\n',videoResponse.data.results)
-// console.log('=============================\n',creditsResponse.data.cast[0])
-// console.log('=============================\n',reviewsResponse.data.results[0])
-// console.log('=============================\n',reviewsResponse.data.results)
-
-
-
-
-
-  res.render('movie/show', {details, videos, credits, reviews, recommendations})
+  res.render('movie/show', {details, images,videos, credits, reviews, recommendations})
 } catch (error) {
   console.error('Error fetching movie', error)
   const { success, status_message } = error.response.data;
   res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
 }
 })
+
+// GET - TV Show Page
+app.get('/tv/:id', async (req,res)=>{
+  try {
+  const detailsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}`, options);
+  const imagesResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/images`, options)
+  const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/videos`, options)
+  const creditsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/credits`, options)
+  const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/reviews`, options)
+  const recommendationsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/recommendations`, options)
+  
+  
+  
+  const details = detailsResponse.data;
+  const images = imagesResponse.data.backdrops;
+  const videos = videoResponse.data.results;
+  const credits = creditsResponse.data.cast;
+  const reviews = reviewsResponse.data.results;
+  const recommendations = recommendationsResponse.data.results;
+  
+    res.render('tvShow/show', {details, images, videos, credits, reviews, recommendations})
+  } catch (error) {
+    console.error('Error fetching movie', error)
+    const { success, status_message } = error.response.data;
+    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+  } 
+  })
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

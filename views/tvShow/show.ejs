@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movie Show Page</title>
+  <title><%= details.name %> Page</title>
   <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Semantic UI CSS -->
@@ -76,19 +76,26 @@
       </div>
       <div class="twelve wide column">
         <div class="movie-info">
-          <h1 class="ui header"><%= details.title %></h1>
+          <h1 class="ui header"><%= details.name %></h1>
 
           <!-- Filter through Genre Name -->
-          <% const genre = details.genres.map(genre => { %> <% return
-            genre.name %> <% }).filter(name => name).join(', ') %>
+          <% const genre = details.genres.map(genre => { %>
+          <% return genre.name %> <% }).filter(name => name).join(', ') %>
 
+          <p><strong>Rating:</strong> <%= details.vote_average.toFixed(1) %></p>
           <p><strong>Genre:</strong> <%= genre %></p>
-          <p><strong>Release Date:</strong> <%= details.release_date %></p>
+          <p><strong>Release Date:</strong> <%= details.first_air_date %></p>
           <p><strong>Rating:</strong> PG-13</p>
           <p><strong>Description:</strong> <%= details.overview %></p>
+          <p><strong>Tag Line:</strong> <%= details.tagline %></p>
+          <p><strong>Number of Seasons:</strong> <%= details.number_of_seasons %></p>
+          <p><strong>Number of Episodes:</strong> <%= details.number_of_episodes %></p>
         </div>
       </div>
     </div>
+
+
+
 
     <!-- Video Carousel -->
     <h1 style="text-align: center">Videos</h1>
@@ -134,9 +141,10 @@
     <div id="castCarousel" class="carousel slide mt-5" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <div class="d-flex justify-content-around">
-            <% for( let i = 0; i < 4; i++ ) { %> <% let cast = credits[i] %>
-            <div class="card" style="width: 18rem">
+          <div class="d-flex justify-content-around flex-wrap">
+            <% for(let i = 0; i < 4 && i < credits.length; i++) { %>
+            <% let cast = credits[i]; %>
+            <div class="card" style="width: 18rem; position: relative;">
               <img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" class="card-img-top" alt="<%= cast.name %>" />
               <div class="card-body-overlay">
                 <h5 class="card-title actor-name"><%= cast.name %></h5>
@@ -147,12 +155,13 @@
           </div>
         </div>
 
+        <!-- Subsequent carousel items -->
         <% for(let i = 4; i < credits.length; i += 4) { %>
         <div class="carousel-item">
-          <div class="d-flex justify-content-around">
-            <% for(let j = 0; j < 4 && (i + j) < credits.length; j++) { %> <%
-              let cast = credits[i + j]; %>
-            <div class="card" style="width: 18rem">
+          <div class="d-flex justify-content-around flex-wrap">
+            <% for(let j = 0; j < 4 && (i + j) < credits.length; j++) { %>
+            <% let cast = credits[i + j]; %>
+            <div class="card" style="width: 18rem; position: relative;">
               <img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" class="card-img-top" alt="<%= cast.name %>" />
               <div class="card-body-overlay">
                 <h5 class="card-title actor-name"><%= cast.name %></h5>
@@ -173,6 +182,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+
 
     <!-- Image Carousel -->
     <h1 style="text-align: center">Images</h1>
@@ -237,6 +247,7 @@
               recommendations[i] %>
             <div class="card" style="width: 18rem">
               <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="Recommendation 1" />
+
             </div>
             <% } %>
           </div>
@@ -249,6 +260,7 @@
               { %> <% let recommend = recommendations[i + j]; %>
             <div class="card" style="width: 18rem">
               <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="<%= recommend.title %>" />
+
             </div>
             <% } %>
           </div>

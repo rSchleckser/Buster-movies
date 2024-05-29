@@ -82,15 +82,15 @@
 
           <% if(media.media_type === 'movie') { %>
           <button>
-            <a href="/movie/<%= media.id %>">More Info</a>
+            <a href="/movie/<%= media.id %>">View Movie</a>
           </button>
           <% } else if (media.media_type === 'tv') { %>
           <button>
-            <a href="#">No Info</a>
+            <a href="/tv/<%= media.id %>">View TV Show</a>
           </button>
           <% } else { %>
           <button>
-            <a href="#">No Info</a>
+            <a href="#">More Info</a>
           </button>
           <% } %>
 

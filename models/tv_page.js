@@ -1,5 +1,7 @@
 //============== Tv Show Page ==================
 //Tv Show: Details ('https://api.themoviedb.org/3/tv/{series_id}')
+// -------------- Images ------------------
+//Tv Show: Images ('https://api.themoviedb.org/3/tv/{series_id}/images')
 // -------------- Videos ------------------
 //Tv Show: Video ('https://api.themoviedb.org/3/tv/{series_id}/videos')
 // -------------- CAST ------------------
@@ -7,4 +9,4 @@
 // -------------- Reviews ------------------
 //Tv Show: Reviews ('https://api.themoviedb.org/3/tv/{series_id}/reviews')
 // -------------- Reccomendations ------------------
-//Tv Show: Reccomendation ('https://api.themoviedb.org/3/tv/{series_id}/recommendations')
+//Tv Show: Recommendation ('https://api.themoviedb.org/3/tv/{series_id}/recommendations')
