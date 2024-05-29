@@ -32,11 +32,7 @@ app.get('/', async (req, res) => {
       `https://api.themoviedb.org/3/trending/movie/week`,
       options
     );
-
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch trending movies');
-    }
-    featuredMovies = [];
+edMovies = [];
 
     for (let i = 0; i < 3; i++) {
       featuredMovies.push(response.data.results[i]);
@@ -65,18 +61,14 @@ app.get('/search/result', async (req, res) => {
       options
     );
 
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch trending movies');
-    }
+
 const medias = response.data.results;
-const movie_genre = movie_genre.genres;
-const tv_genre = tv_genre.genres;
 const query = req.query.media
 
     
     res
       .status(200)
-      .render('home/show', { medias, movie_genre, tv_genre, query});
+      .render('home/show', { medias, movie_genre: movie_genre.genres, tv_genre: tv_genre.genres, query});
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
