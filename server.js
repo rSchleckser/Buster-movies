@@ -73,6 +73,12 @@ const featured = response.data.results;
 
 //import auth routes
 app.use('/auth', require('./controllers/auth'));
+//Go to user profile page
+app.get('/profile', isLoggedIn, (req, res) => {
+  // res.send(req.user);
+  const { name, email, phone } = req.user;
+  res.render('profile', { name, email, phone });
+});
 
 //Search Page
 app.get('/search', (req, res) => {

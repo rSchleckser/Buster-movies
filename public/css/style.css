@@ -27,6 +27,14 @@ body {
   color: #000 !important;
   
 }
+div.ui.big.inverted.yellow.button a{
+  color: var(--secondary-color);
+}
+
+.ui.big.inverted.yellow.button:hover a {
+  color: #000; 
+}
+
 h1.title{
   text-align: center; 
   color: black;

@@ -41,14 +41,24 @@
               <% let movie = featured[j]; %>
               <div class="card reduced-card-size">
                 <div class="image">
-                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.original_title %>" class="reduced-image-size" />
+                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>" class="reduced-image-size" />
                 </div>
+                <% if (movie.media_type === 'movie') { %>
                 <div class="content">
-                  <div class="header"><%= movie.original_title %></div>
+                  <div class="header"><%= movie.title %></div>
                   <div class="meta">
                     <span class="date"><%= movie.release_date %></span>
                   </div>
                 </div>
+                <% } else if(movie.media_type === 'tv'){ %>
+                <div class="content">
+                  <div class="header"><%= movie.name %></div>
+                  <div class="meta">
+                    <span class="date"><%= movie.first_air_date %></span>
+                  </div>
+                </div>
+                <% } %>
+
                 <div class="extra content">
                   <span class="right floated">
                     <i class="star icon"></i>
