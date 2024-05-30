@@ -41,7 +41,7 @@
 
   <header class="ui attached stackable menu">
     <div class="ui container">
-      <a class="item">
+      <a class="item" href='/'>
         <i class="home icon"></i> Home
       </a>
       <a class="item">
@@ -113,8 +113,35 @@
     </div>
   </section>
 
+  <!-- jQuery and Semantic UI JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
+  <script>
+    $('.ui.form')
+      .form({
+        fields: {
+          phone: {
+            identifier: 'phone',
+            rules: [{
+              type: 'minLength[10]',
+              prompt: 'Please enter a phone number in correct format xxx-xxx-xxxx'
+            }]
+          },
+          password: {
+            identifier: 'password',
+            rules: [{
+              type: 'empty',
+              prompt: 'Please enter a password'
+            }, {
+              type: 'minLength[6]',
+              prompt: 'Your password must be at least 6 characters'
+            }]
+          }
+        }
+      })
+  </script>
 
-
+</body>
 
 </html>
