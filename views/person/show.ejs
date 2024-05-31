@@ -57,6 +57,65 @@
     .ui.inverted.button {
       top: 0;
     }
+
+
+
+    /* Movie Carousel Button */
+    #movieCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+      /* margin-left: 3rem; */
+    }
+
+    #movieCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+      /* margin-right: 3rem; */
+    }
+
+    /* TV Carousel Button */
+    #tvCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+      /* margin-left: 3rem; */
+    }
+
+    #tvCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+      /* margin-right: 3rem; */
+    }
+
+    /* Images Carousel Button */
+    #imagesCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+      /* margin-right: 3rem; */
+    }
+
+    #imagesCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+      /* margin-right: 3rem; */
+    }
   </style>
 </head>
 
@@ -79,7 +138,7 @@
 
     <!-- Movie Carousel -->
     <h1 class='heading'>Movies</h1>
-    <div id="knownForCarousel" class="carousel slide mt-5" data-ride="carousel">
+    <div id="movieCarousel" class="carousel slide mt-5" data-ride="carousel">
       <div class="carousel-inner">
         <% if (movies.length > 0) { %>
         <div class="carousel-item active">
@@ -141,11 +200,11 @@
         <% } %>
         <% } %>
       </div>
-      <a class="carousel-control-prev" href="#knownForCarousel" role="button" data-slide="prev">
+      <a class="carousel-control-prev" href="#movieCarousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#knownForCarousel" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#movieCarousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -263,13 +322,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Semantic UI JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('.blurring.dimmable.image').dimmer({
-          on: 'hover'
-        });
-      });
-    </script>
+    <!-- Dim image on hover -->
+    <script src="/js/dimmableImage.js"></script>
 </body>
 
 </html>

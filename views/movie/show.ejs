@@ -39,6 +39,72 @@
       height: 400px;
     }
 
+    /* Video Carousel buttons */
+    #videoCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 4rem;
+      margin-right: 5rem;
+    }
+
+    #videoCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 4rem;
+      margin-left: 5rem;
+    }
+
+    #videoCarousel a.carousel-control-prev .carousel-control-prev-icon {
+      margin-right: .3rem;
+    }
+
+    /* Image Carousel Buttons*/
+    #imagesCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 4rem;
+      margin-right: 5rem;
+    }
+
+    #imagesCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 4rem;
+      margin-left: 5rem;
+    }
+
+    #imagesCarousel a.carousel-control-prev .carousel-control-prev-icon {
+      margin-right: .3rem;
+    }
+
+    /* Recommendations Carousel Buttons*/
+    #recommendationsCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+    }
+
+    #recommendationsCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 12.8rem;
+    }
+
+
+
+
     .ui card .content,
     .ui.cards .card .content.text {
       position: absolute;
@@ -204,7 +270,7 @@
 
     <!-- Image Carousel -->
     <h1 class='heading'>Images</h1>
-    <div id="imagessCarousel" class="carousel slide mt-5" data-ride="carousel" style='height: 15rem;'>
+    <div id="imagesCarousel" class="carousel slide mt-5" data-ride="carousel" style='height: 15rem;'>
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="d-flex justify-content-around">
@@ -230,11 +296,11 @@
         </div>
         <% } %>
       </div>
-      <a class="carousel-control-prev" href="#imagessCarousel" role="button" data-slide="prev">
+      <a class="carousel-control-prev" href="#imagesCarousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#imagessCarousel" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#imagesCarousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -321,13 +387,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Semantic UI JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('.blurring.dimmable.image').dimmer({
-        on: 'hover'
-      });
-    });
-  </script>
+  <!-- Dim image on hover -->
+  <script src="/js/dimmableImage.js"></script>
 
 </body>
 

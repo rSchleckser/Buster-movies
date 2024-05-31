@@ -63,7 +63,7 @@ app.get('/', async (req, res) => {
 
 const featured = response.data.results;
 
-    res.render('home/index', { featured });
+    res.status(200).render('home/index', { featured });
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
@@ -74,17 +74,35 @@ const featured = response.data.results;
 //import auth routes
 app.use('/auth', require('./controllers/auth'));
 
+//GET - Dashboard
+app.get('/dashboard', async(req,res)=>{
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/trending/all/week?language=en`,
+      options
+    );
+
+const featured = response.data.results;
+
+
+    res.status(200).render('dashboard', {featured})
+  } catch (error) {
+    console.error('Error fetching movie', error)
+    const { success, status_message } = error.response.data;
+    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+  }
+})
 
 //Go to user profile page
 app.get('/profile', isLoggedIn, (req, res) => {
   // res.send(req.user);
   const { name, email, phone } = req.user;
-  res.render('profile', { name, email, phone });
+  res.status(200).render('profile', { name, email, phone });
 });
 
 //Search Page
 app.get('/search', isLoggedIn, (req, res) => {
-  res.render('search/search');
+  res.status(200).render('search/search');
 });
 
 
@@ -132,7 +150,7 @@ const recommendations = recommendationsResponse.data.results;
 
 
 
-  res.render('movie/show', {details, images,videos, credits, reviews, recommendations})
+  res.status(200).render('movie/show', {details, images,videos, credits, reviews, recommendations})
 } catch (error) {
   console.error('Error fetching movie', error)
   const { success, status_message } = error.response.data;
@@ -159,7 +177,7 @@ app.get('/tv/:id', isLoggedIn, async (req,res)=>{
   const reviews = reviewsResponse.data.results;
   const recommendations = recommendationsResponse.data.results;
   
-    res.render('tvShow/show', {details, images, videos, credits, reviews, recommendations})
+    res.status(200).render('tvShow/show', {details, images, videos, credits, reviews, recommendations})
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
@@ -180,7 +198,7 @@ app.get('/tv/:id', isLoggedIn, async (req,res)=>{
       const movies = movieCreditsResponse.data.cast;
       const tvShows = tvCreditsResponse.data.cast;
 
-      res.render('person/show', {details, images, movies, tvShows})
+      res.status(200).render('person/show', {details, images, movies, tvShows})
 
     } catch (error) {
       console.error('Error fetching movie', error)
