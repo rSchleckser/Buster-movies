@@ -15,7 +15,7 @@
     }
 
     .masthead.segment {
-      min-height: 700px;
+      min-height: 800px;
       padding: 1em 0em;
     }
 
@@ -141,18 +141,18 @@
   <!-- Following Menu -->
   <div class="ui large top fixed hidden menu">
     <div class="ui container">
-      <a class="active item">Home</a>
-      <a class="item">
+      <a class="active item" href='/dashboard'>Home</a>
+      <a class="item" href='/search'>
         <i class="grid layout icon"></i> Browse
       </a>
-      <a class="item"><i class="film icon"></i>Movies</a>
-      <a class="item"><i class="film icon"></i>TV Shows</a>
+      <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
+      <a class="item" href='/tvShows'><i class="film icon"></i>TV Shows</a>
       <div class="right menu">
         <div class="item">
-          <a class="ui button">Log in</a>
+          <a class="ui button" href='/profile'>Profile</a>
         </div>
         <div class="item">
-          <a class="ui primary button">Sign Up</a>
+          <a class="ui primary button" href='/logout'>Log Out</a>
         </div>
       </div>
     </div>
@@ -164,8 +164,8 @@
     <a class="item" href='/search'>Browse</a>
     <a class="item" href='/movies'>Movies</a>
     <a class="item" href='/tvShows'>TV Shows</a>
-    <a class="item" href='/login'>Login</a>
-    <a class="item" href='/signup'>Signup</a>
+    <a class="item" href='/profile'>Profile</a>
+    <a class="item" href='/logout'>Log Out</a>
   </div>
 
 
@@ -179,15 +179,15 @@
             <i class="sidebar icon"></i>
           </a>
           <div class='item'><i class="ticket icon"></i>Buster Movies</div>
-          <a class="active item">Home</a>
+          <a class="active item" href='/dashboard'>Home</a>
           <a class="item" href='/search'>
             <i class="grid layout icon"></i> Browse
           </a>
           <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
-          <a class="item" href='/tvShows'><i class="film icon"></i>TV Shows</a>
+          <a class="item" href='/tvShows'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
-            <a class="ui inverted button">Log in</a>
-            <a class="ui inverted button">Sign Up</a>
+            <a class="item" href="/profile"><i class='user blue icon'></i>Profile</a>
+            <a class="item" href="/logout"><i class="sign out icon"></i></i>Log Out</a>
           </div>
         </div>
       </div>
@@ -367,4 +367,5 @@
     <script src="/js/navbarFade.js"></script>
 
 </body>
+
 </html>

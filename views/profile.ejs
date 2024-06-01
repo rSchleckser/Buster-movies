@@ -15,7 +15,7 @@
     }
 
     .masthead.segment {
-      min-height: 700px;
+      min-height: 100vh;
       padding: 1em 0em;
     }
 
@@ -104,7 +104,7 @@
       margin-top: 3rem;
     }
   </style>
-  <link rel="stylesheet" href="/css/style.css">
+  <!-- <link rel="stylesheet" href="/css/style.css"> -->
 </head>
 
 <body>
@@ -123,103 +123,78 @@
   <% } %>
 
 
-<!-- Following Menu -->
-<div class="ui large top fixed hidden menu">
-  <div class="ui container">
-    <a class="active item">Home</a>
-    <a class="item">
-      <i class="grid layout icon"></i> Browse
-    </a>
-    <a class="item"><i class="film icon"></i>Movies</a>
-    <a class="item"><i class="film icon"></i>TV Shows</a>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui button">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Sidebar Menu -->
-<div class="ui vertical inverted sidebar menu">
-  <a class="active item" href='/dashboard'>Home</a>
-  <a class="item" href='/search'>Browse</a>
-  <a class="item" href='/movies'>Movies</a>
-  <a class="item" href='/tvShows'>TV Shows</a>
-  <a class="item" href='/login'>Login</a>
-  <a class="item" href='/signup'>Signup</a>
-</div>
-
-
-<!-- Page Contents -->
-<div class="pusher">
-  <div class="ui inverted vertical masthead center aligned segment">
-
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
     <div class="ui container">
-      <div class="ui large secondary inverted pointing menu">
-        <a class="toc item">
-          <i class="sidebar icon"></i>
-        </a>
-        <div class='item'><i class="ticket icon"></i>Buster Movies</div>
-        <a class="active item">Home</a>
-        <a class="item" href='/search'>
-          <i class="grid layout icon"></i> Browse
-        </a>
-        <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
-        <a class="item" href='/tvShows'><i class="film icon"></i>TV Shows</a>
-        <div class="right item">
-          <a class="ui inverted button">Log in</a>
-          <a class="ui inverted button">Sign Up</a>
+      <a class="active item" href='/dashboard'>Home</a>
+      <a class="item" href='/search'>
+        <i class="grid layout icon"></i> Browse
+      </a>
+      <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
+      <a class="item" href='/tvShows'><i class="film icon"></i>TV Shows</a>
+      <div class="right menu">
+        <div class="item">
+          <a class="ui button" href='/profile'>Profile</a>
+        </div>
+        <div class="item">
+          <a class="ui primary button" href='/logout'>Log Out</a>
         </div>
       </div>
     </div>
-
-    <div class="ui text container">
-      <h1 class="ui inverted header">
-        Welcome <%= name %>!
-      </h1>
-      <h2>Find and enjoy your favorite Movies or TV Show</h2>
-      <div class="ui huge pink button"><i class="heart icon"></i></i> <a href="#" style='color: aliceblue;'>Favorites </a></div>
-      <div class="ui huge primary button"><a href="/profile" style='color: aliceblue;'>Profile</a><i class="right arrow icon"></i></div>
-      <div class="ui huge teal button"><i class="list layout icon"></i></i><a href="#" style='color: aliceblue;'>Watchlist</a></div>
-
-    </div>
   </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="active item" href='/dashboard'>Home</a>
+    <a class="item" href='/search'>Browse</a>
+    <a class="item" href='/movies'>Movies</a>
+    <a class="item" href='/tvShows'>TV Shows</a>
+    <a class="item" href='/profile'>Profile</a>
+    <a class="item" href='/logout'>Log Out</a>
   </div>
 
 
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <div class='item'><i class="ticket icon"></i>Buster Movies</div>
+          <a class="item" href='/dashboard'>Home</a>
+          <a class="item" href='/search'>
+            <i class="grid layout icon"></i> Browse
+          </a>
+          <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
+          <a class="item" href='/tvShows'><i class="tv icon"></i>TV Shows</a>
+          <div class="right item">
+            <a class="active item" href="/profile"><i class='user blue icon'></i>Profile</a>
+            <a class="red item" href="/logout"><i class="sign out icon"></i></i>Log Out</a>
+          </div>
+        </div>
+      </div>
 
+      <div class="ui text container">
+        <h1 class="ui inverted header">
+          Welcome <%= name %>!
+        </h1>
+        <h2>Find and enjoy your favorite Movies or TV Show</h2>
+        <div class="ui huge pink button"><i class="heart icon"></i></i> <a href="#" style='color: aliceblue;'>Favorites </a></div>
+        <div class="ui huge primary button"><a href="/profile" style='color: aliceblue;'>Profile</a><i class="right arrow icon"></i></div>
+        <div class="ui huge teal button"><i class="list layout icon"></i></i><a href="#" style='color: aliceblue;'>Watchlist</a></div>
 
-
-
-  <header>
-    <nav class="navbar">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <% if(!currentUser) { %>
-        <li><a href="/auth/signup">Signup</a></li>
-        <li><a href="/auth/login">Login</a></li>
-        <% } else { %>
-        <li><a href="/auth/logout">Logout</a></li>
-        <li><a href="/profile">Profile</a></li>
-        <% } %>
-      </ul>
-    </nav>
-  </header>
-
-  <section class="contact" id="contact">
-    <h2 class="heading">Welcome to your <span>Profile!</span></h2>
-    <div class="input-box">
-      <h3>Name <span><%= name %>!</h3>
-      <h3>Email <span><%= email %>! </h3>
-      <h3>Phone <span><%= phone %>! </h3>
+      </div>
     </div>
-  </section>
+  </div>
 
 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- jQuery and Semantic UI JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script src="/js/navbarFade.js"></script>
 </body>
 
 </html>

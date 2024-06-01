@@ -9,12 +9,95 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Semantic UI CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    /* Main container */
+    div.ui.inverted.vertical.masthead.center.aligned.segment {
+      background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+      min-height: 100vh;
+      min-width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    @keyframes filmstrip-scroll {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 100% 0;
+      }
+    }
+
+    div.filmstrip {
+      z-index: 1;
+      margin: 0;
+      padding: 0;
+      height: 12rem;
+      width: 100vw;
+      background: url('/img/filmstripLong.png');
+      position: absolute;
+      background-size: contain;
+      top: 0;
+      animation: filmstrip-scroll 30s linear infinite;
+    }
+
+    h1.ui.inverted.header {
+      color: rgb(255, 223, 186);
+    }
+
+    /* text container */
+    .ui.text.container {
+      z-index: 1;
+      position: absolute;
+      background: linear-gradient(60deg, rgba(0, 0, 0, 0.9) 11.2%, rgba(11, 132, 145, 0.9) 91.1%);
+      padding: 3rem;
+      border-radius: 2rem;
+      box-shadow: 10px 5px 5px rgb(0, 0, 0);
+    }
+
+    /* Header Buttons */
+    div.ui.big.inverted.teal.button {
+      margin-top: 1.5rem;
+    }
+
+    div.ui.big.inverted.teal.button a {
+      /* color: rgb(255, 223, 186); */
+      color: aliceblue;
+    }
+
+    div.ui.big.inverted.teal.button:hover a {
+      color: teal;
+    }
+
+
+    /* Carousel */
+    #featuredCarousel {
+      margin-bottom: 0px;
+    }
+
+    /* footer */
+    footer.ui.inverted.vertical.footer.segment {
+      position: absolute;
+      width: 100%;
+      text-align: left;
+      padding: 2rem;
+      margin-top: 0;
+      bottom: 0;
+    }
+  </style>
 </head>
 
 <body>
+
+
+
+
   <!-- Header -->
-  <div class="ui inverted vertical masthead center aligned segment bg">
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="filmstrip"></div>
     <div class="ui text container">
       <h1 class="ui inverted header">
         Welcome to Buster Movie Website
@@ -22,70 +105,73 @@
       <h2>
         Discover the latest blockbuster movies and TV shows
       </h2>
-      <div class="ui big inverted yellow button"><a href="/auth/signup">Get Started</a></div>
-      <div class="ui big inverted yellow button"><a href="/auth/login">Login</a></div>
+      <div class="ui big inverted teal button"><a href="/auth/signup">Get Started</a></div>
+      <div class="ui big inverted teal button"><a href="/auth/login">Login</a></div>
     </div>
-  </div>
 
-  <!-- Main Content Container -->
-  <div style="flex: 1;">
-    <!-- Featured -->
-    <h1 class="title">Featured this week</h1>
-    <div id="featuredCarousel" class="carousel slide mt-5" data-ride="carousel">
-      <div class="carousel-inner">
-        <% for(let i = 0; i < featured.length; i += 6) { %>
-        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-          <div class="d-flex justify-content-around">
-            <div class="ui link cards">
-              <% for(let j = i; j < i + 6 && j < featured.length; j++) { %>
-              <% let movie = featured[j]; %>
-              <div class="card reduced-card-size">
-                <div class="image">
-                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>" class="reduced-image-size" />
-                </div>
-                <% if (movie.media_type === 'movie') { %>
-                <div class="content">
-                  <div class="header"><%= movie.title %></div>
-                  <div class="meta">
-                    <span class="date"><%= movie.release_date %></span>
+    <!-- Main Content Container -->
+    <div style="flex: 1;">
+      <div id="featuredCarousel" class="carousel slide mt-5" data-ride="carousel">
+        <div class="carousel-inner">
+          <% for(let i = 0; i < featured.length; i += 6) { %>
+          <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+            <div class="d-flex justify-content-around">
+              <div class="ui cards">
+                <% for(let j = i; j < i + 6 && j < featured.length; j++) { %>
+                <% let movie = featured[j]; %>
+                <div class="card reduced-card-size">
+                  <div class="image">
+                    <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>" class="reduced-image-size" />
                   </div>
-                </div>
-                <% } else if(movie.media_type === 'tv'){ %>
-                <div class="content">
-                  <div class="header"><%= movie.name %></div>
-                  <div class="meta">
-                    <span class="date"><%= movie.first_air_date %></span>
+                  <% if (movie.media_type === 'movie') { %>
+                  <div class="content">
+                    <div class="header"><%= movie.title %></div>
+                    <div class="meta">
+                      <span class="date"><%= movie.release_date %></span>
+                    </div>
+                  </div>
+                  <% } else if(movie.media_type === 'tv'){ %>
+                  <div class="content">
+                    <div class="header"><%= movie.name %></div>
+                    <div class="meta">
+                      <span class="date"><%= movie.first_air_date %></span>
+                    </div>
+                  </div>
+                  <% } %>
+
+                  <div class="extra content">
+                    <span class="right floated">
+                      <i class="star icon"></i>
+                      <%= movie.vote_average.toFixed(1) %>
+                    </span>
+                    <span>
+                      <i class="users icon"></i>
+                      <%= movie.popularity.toFixed(2) %>
+                    </span>
                   </div>
                 </div>
                 <% } %>
-
-                <div class="extra content">
-                  <span class="right floated">
-                    <i class="star icon"></i>
-                    <%= movie.vote_average.toFixed(1) %>
-                  </span>
-                  <span>
-                    <i class="users icon"></i>
-                    <%= movie.popularity.toFixed(2) %>
-                  </span>
-                </div>
               </div>
-              <% } %>
             </div>
           </div>
+          <% } %>
         </div>
-        <% } %>
+        <a class="carousel-control-prev" href="#featuredCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#featuredCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-      <a class="carousel-control-prev" href="#featuredCarousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#featuredCarousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
+
+
+
+
   </div>
+
 
   <!-- Footer -->
   <footer class="ui inverted vertical footer segment">
