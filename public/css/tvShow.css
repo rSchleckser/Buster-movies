@@ -1,0 +1,117 @@
+.movie-poster {
+    max-width: 100%;
+  }
+
+  .movie-info {
+    padding-left: 20px;
+  }
+
+  h1.heading {
+    text-align: center;
+  }
+
+  .card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+  }
+
+
+  .carousel-inner {
+    height: 400px;
+  }
+
+  /* Video Carousel buttons */
+  #videoCarousel a.carousel-control-next {
+    background-color: rgba(19, 18, 18, 0.507);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 4rem;
+    margin-right: 5rem;
+  }
+
+  #videoCarousel a.carousel-control-prev {
+    background-color: rgba(19, 18, 18, 0.507);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 4rem;
+    margin-left: 5rem;
+  }
+
+  #videoCarousel a.carousel-control-prev .carousel-control-prev-icon {
+    margin-right: .3rem;
+  }
+
+  /* Image Carousel Buttons*/
+  #imagesCarousel a.carousel-control-next {
+    background-color: rgba(19, 18, 18, 0.507);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 4rem;
+    margin-right: 5rem;
+  }
+
+  #imagesCarousel a.carousel-control-prev {
+    background-color: rgba(19, 18, 18, 0.507);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 4rem;
+    margin-left: 5rem;
+  }
+
+  #imagesCarousel a.carousel-control-prev .carousel-control-prev-icon {
+    margin-right: .3rem;
+  }
+
+  /* Recommendations Carousel Buttons*/
+  #recommendationsCarousel a.carousel-control-next {
+    background-color: rgba(19, 18, 18, 0.507);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 12.8rem;
+  }
+
+  #recommendationsCarousel a.carousel-control-prev {
+    background-color: rgba(19, 18, 18, 0.507);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 12.8rem;
+  }
+
+
+  .ui card .content,
+  .ui.cards .card .content.text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+  }
+
+  .ui card .content,
+  .ui.cards .card .content.text .character-name {
+    color: rgb(152, 194, 194)
+  }
+
+  .ui.inverted.button {
+    top: 0;
+  }
+
+  .review {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }

@@ -1,0 +1,81 @@
+.hidden.menu {
+    display: none;
+  }
+
+  .masthead.segment {
+    min-height: 800px;
+    padding: 1em 0em;
+  }
+
+  .masthead .logo.item img {
+    margin-right: 1em;
+  }
+
+  .masthead .ui.menu .ui.button {
+    margin-left: 0.5em;
+  }
+
+
+  /* Header Container */
+  div.ui.inverted.vertical.masthead.center.aligned.segment {
+    background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+    height: 100vh;
+  }
+
+  /* Header Text Container*/
+  div.ui.text.container {
+    background-color: rgba(121, 121, 136, 0.212);
+    padding-bottom: 2rem;
+    border-radius: 1rem;
+  }
+
+  /* Header Text */
+  .masthead h1.ui.header {
+    padding-top: 1.2rem;
+    margin-top: 3em;
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+  }
+
+  .masthead h2 {
+    font-size: 1.7em;
+    font-weight: normal;
+  }
+
+
+  /* Form */
+  section.ui.middle.aligned.center.aligned.grid {
+    width: 25vw;
+    margin: auto;
+    padding-bottom: 5rem;
+  }
+
+  .ui.middle.aligned.center.aligned.grid {
+    height: 80%;
+  }
+
+  section.ui.middle.aligned.center.aligned.grid div.column {
+    background-color: rgba(255, 223, 186, 0.114);
+    border-radius: 1rem;
+    box-shadow: 5px 5px #000;
+  }
+
+  /* Navbar coral color */
+  /* div.ui.large.secondary.inverted.pointing.menu a.ui.inverted.button {
+    color: rgb(255, 223, 186);
+  }
+
+  div.ui.large.secondary.inverted.pointing.menu a.item {
+    color: rgb(255, 223, 186) !important;
+  } */
+
+  /* footer */
+  footer.ui.inverted.vertical.footer.segment {
+    z-index: 2;
+    padding: 3rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: left;
+  }

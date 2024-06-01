@@ -84,7 +84,6 @@ app.get('/dashboard', async(req,res)=>{
 
 const featured = response.data.results;
 
-
     res.status(200).render('dashboard', {featured})
   } catch (error) {
     console.error('Error fetching movie', error)

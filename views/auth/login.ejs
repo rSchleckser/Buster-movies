@@ -5,136 +5,128 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign In</title>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <!-- Semantic UI CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="style.css"> -->
-  <style>
-    body {
-      background-color: #DADADA;
-    }
-
-    section.ui.middle.aligned.center.aligned.grid {
-      width: 25vw;
-      margin: auto;
-      padding-bottom: 5rem;
-    }
-
-    .ui.middle.aligned.center.aligned.grid {
-      height: 100%;
-    }
-
-    .ui.column {
-      max-width: 450px;
-    }
-  </style>
-  <!-- <link rel="stylesheet" href="/css/style.css" /> -->
+  <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
+
+
   <% if (alerts.success) { %> <% alerts.success.forEach(msg => { %>
 
   <div class="alert alert-success"><%= msg %></div>
-  <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {%>
+  <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
+    %>
   <div class="alert alert-danger"><%= msg %></div>
-  <% }) %>
-  <% } %>
-
-
-  <header class="ui attached stackable menu">
-    <div class="ui container">
-      <% if(!currentUser) { %>
-      <a class="item" href='/'>
-        <i class="home icon"></i> Home
-      </a>
-      <div class="right item">
-        <a class="green item" href="/auth/signup"><i class='add user green icon'></i>Sign Up</a>
-      </div>
-      <% } else { %>
-      <a class="item" href='/'>
-        <i class="home icon"></i> Home
-      </a>
-      <div class="right item">
-        <a class="blue item" href="/profile"><i class='user blue icon'></i>Profile</a>
-        <a class="red item" href="/logout"><i class="sign out icon"></i></i>Log Out</a>
-      </div>
-      <% } %>
-    </div>
-  </header>
+  <% }) %> <% } %>
 
 
 
 
 
-  <section class="ui middle aligned center aligned grid">
-    <div class="column">
-      <h2 class="ui teal image header">
-        <div class="content">
-          Log-in to your account
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="active item" href='/dashboard'>Home</a>
+    <a class="item" href='/search'>Browse</a>
+    <a class="item" href='/movies'>Movies</a>
+    <a class="item" href='/tvShows'>TV Shows</a>
+    <a class="item" href='/profile'>Profile</a>
+    <a class="item" href='/logout'>Log Out</a>
+  </div>
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <div class='item'><a href='/'><i class="ticket icon"></i>Buster Movies</a></div>
+
+
+          <div class="right item">
+            <a class="item" href="/auth/signup"><i class='add user icon'></i>Sign Up</a>
+          </div>
         </div>
-      </h2>
+      </div>
 
-      <form action="/auth/login" class="ui form" method='post'>
-        <div class="ui stacked segment">
-          <div class="field">
-            <div class="ui left icon input">
-              <i class='user icon'></i>
-              <input type="text" name='email' placeholder='E-mail address'>
+
+
+      <!--Form -->
+      <section class=" ui middle aligned center aligned grid">
+        <div class="column">
+          <h2 class="ui teal image header">
+            <div class="content" style='color: rgb(255, 223, 186);'>
+              Login to your account
+            </div>
+          </h2>
+
+          <form action="/auth/login" class="ui form" method='post'>
+            <div class="ui stacked segment">
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class='user icon'></i>
+                  <input type="text" name='email' placeholder='E-mail address'>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class='lock icon'></i>
+                  <input type="password" name="password" placeholder='Password'>
+                </div>
+              </div>
+              <input type="submit" value="Login" class="ui fluid teal submit button" />
+            </div>
+            <div class="ui error message"></div>
+          </form>
+          <div class="ui message">
+            New to us? <a href="/auth/signup">Sign Up</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="ui inverted vertical footer segment">
+        <div class="ui container">
+          <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+              <h4 class="ui inverted header">About</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Contact Us</a>
+              </div>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui inverted header">Services</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Movies</a>
+                <a href="#" class="item">TV Shows</a>
+              </div>
+            </div>
+            <div class="seven wide column">
+              <h4 class="ui inverted header">Blockbuster Movie Website</h4>
+              <p>
+                A website for movie lovers to discover and watch the latest
+                blockbuster movies and TV shows.
+              </p>
             </div>
           </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class='lock icon'></i>
-              <input type="password" name="password" placeholder='Password'>
-            </div>
-          </div>
-          <input type="submit" value="Login" class="ui fluid teal submit button" />
         </div>
-        <div class="ui error message"></div>
-      </form>
-      <div class="ui message">
-        New to us? <a href="/auth/signup">Sign Up</a>
-      </div>
-    </div>
-  </section>
+      </footer>
 
 
 
 
-
-  <!-- jQuery and Semantic UI JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-  <script src="/js/loginValidation.js"></script>
+      <!-- jQuery and Semantic UI JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+      <script src="/js/loginValidation.js"></script>
+      <script src="/js/navbarFade.js"></script>
 
 </body>
 
 </html>
-
-
-<!-- <header class="ui attached stackable menu">
-  <div class="ui container">
-    <a class="item">
-      <i class="home icon"></i> Home
-    </a>
-    <a class="item">
-      <i class="grid layout icon"></i> Browse
-    </a>
-    <a class="item">
-      <i class="mail icon"></i> Messages
-    </a>
-    <div class="ui simple dropdown item">
-      More
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <a class="item"><i class="edit icon"></i> Edit Profile</a>
-        <a class="item"><i class="globe icon"></i> Choose Language</a>
-        <a class="item"><i class="settings icon"></i> Account Settings</a>
-      </div>
-    </div>
-    <div class="right item">
-      <a class='greenitem' href="/auth/signup"><i class='add user icon'></i>Sign Up</a>
-    </div>
-  </div> -->
