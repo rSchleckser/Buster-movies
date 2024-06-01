@@ -104,3 +104,10 @@
     margin-top: 12.8rem;
     /* margin-right: 3rem; */
   }
+
+
+    /* footer */
+    footer.ui.inverted.vertical.footer.segment {
+      padding: 3rem;
+      margin-top: 3rem;
+    }
