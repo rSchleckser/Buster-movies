@@ -9,10 +9,13 @@ const passport = require('./config/passport-config');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 
+
 //import models
 const movie_genre = require('./models/movieGenres');
 const tv_genre = require('./models/tvGenres')
 const { User } = require('./models');
+const { Review } = require('./models'); // Import the Review model
+
 
 //Middleware
 app.set('view engine', 'ejs');
@@ -83,9 +86,8 @@ app.get('/dashboard/:id', async(req,res)=>{
     );
     User.findOne({ _id: req.params.id })
     .then((user)=>{
-      console.log(user._id.toString())
-      const featured = response.data.results;
-
+  
+    const featured = response.data.results;
     res.status(200).render('dashboard', {featured, user})
     })
 
@@ -117,6 +119,8 @@ app.get('/profile/watchlist', (req,res)=>{
   
 })
 
+// ================================== Search Pages ===================================
+
 //Search Page
 app.get('/search', isLoggedIn, (req, res) => {
   res.status(200).render('search/search');
@@ -130,7 +134,6 @@ app.get('/search/results', isLoggedIn, async (req, res) => {
       `https://api.themoviedb.org/3/search/multi?query=${req.query.media}&language=en`,
       options
     );
-
 
 const medias = response.data.results;
 const query = req.query.media
@@ -147,6 +150,8 @@ User.findOne({name:'Richard Schleckser'})
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
   }
 });
+
+// ============================== Media Pages ==================================================
 
 // GET - Movie Show Page
 app.get('/movie/:id', isLoggedIn, async (req,res)=>{
@@ -175,7 +180,31 @@ const recommendations = recommendationsResponse.data.results;
   const { success, status_message } = error.response.data;
   res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
 }
+});
+
+// GET - Movie Review Page
+app.get('/movie/:id/reviews/:userId', async (req,res)=>{
+  const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
+  const details = detailsResponse.data;
+  const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/reviews`, options)
+  const reviews = reviewsResponse.data.results;
+
+  User.findOne({ _id: req.params.userId })
+  .then((user)=>{
+    console.log(user._id)
+    res.status(200).render('movie/reviews', {reviews, details, user})
+  })  
+});
+
+
+// POST - Submit a review for a movie
+app.post('/movie/:id/reviews/:userId', async (req, res) => {
+  console.log(req.body)
+  console.log(req.params.id, req.params.userId)
+  res.redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
 })
+
+
 
 // GET - TV Show Page
 app.get('/tv/:id', isLoggedIn, async (req,res)=>{
@@ -227,13 +256,13 @@ app.get('/tv/:id', isLoggedIn, async (req,res)=>{
   })
 
 
-  User.find({}, {name:1, _id:0})
-  .then((name)=>{
-    console.log(name)
-  })
-  .catch((error)=>{
-    console.log("error finding users, error")
-  })
+  // User.find({}, {name:1, _id:0})
+  // .then((name)=>{
+  //   console.log(name)
+  // })
+  // .catch((error)=>{
+  //   console.log("error finding users, error")
+  // })
 
   // User.findOneAndUpdate(
   //   { name: "Richard Schleckser" },

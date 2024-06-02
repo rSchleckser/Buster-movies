@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('../config/passport-config');
-const mongoose = require('mongoose');
-require('dotenv').config();
+
 
 
 //import user model
@@ -70,7 +69,7 @@ router.post('/signup', async (req, res) => {
 
 // Login user
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', async (err, user) => {
+  passport.authenticate('local', async (err, user,) => {
     if (err) {
       return next(err);
     }

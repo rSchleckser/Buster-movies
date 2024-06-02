@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
       Movie: String,
       id: Number
     }],
+   
   },
   { timestamps: true }
 );
@@ -39,5 +40,7 @@ userSchema.pre('save', function (next) {
 // create the model and export it
 const User = mongoose.model('User', userSchema);
 
+
 // make this model avaliable for the index file
 module.exports = User;
+
