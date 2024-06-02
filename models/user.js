@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const Review = require('./review')
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,7 +25,7 @@ const userSchema = new mongoose.Schema(
       Movie: String,
       id: Number
     }],
-   
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   },
   { timestamps: true }
 );

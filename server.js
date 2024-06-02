@@ -8,14 +8,14 @@ const session = require('express-session');
 const passport = require('./config/passport-config');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const SECRET_SESSION = process.env.SECRET_SESSION;
+const mongoose = require('mongoose')
 
 
 //import models
 const movie_genre = require('./models/movieGenres');
 const tv_genre = require('./models/tvGenres')
 const { User } = require('./models');
-const { Review } = require('./models'); // Import the Review model
-
+const  Review  = require('./models/review'); 
 
 //Middleware
 app.set('view engine', 'ejs');
@@ -191,7 +191,6 @@ app.get('/movie/:id/reviews/:userId', async (req,res)=>{
 
   User.findOne({ _id: req.params.userId })
   .then((user)=>{
-    console.log(user._id)
     res.status(200).render('movie/reviews', {reviews, details, user})
   })  
 });
@@ -199,9 +198,29 @@ app.get('/movie/:id/reviews/:userId', async (req,res)=>{
 
 // POST - Submit a review for a movie
 app.post('/movie/:id/reviews/:userId', async (req, res) => {
-  console.log(req.body)
-  console.log(req.params.id, req.params.userId)
-  res.redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
+  try {
+    const newReview = new Review({
+      movieId: req.params.id,
+      userId: req.params.userId,
+      author: req.body.user,
+      content: req.body.content,
+    });
+
+    //Save review in review database
+    await newReview.save();
+
+    //Save review in user database
+    const newComment = await User.findOneAndUpdate(
+      {_id: req.params.userId},
+      { $push: { reviews: newReview._id } },
+      { new: true })
+
+      console.log(newComment)
+      res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
+  } catch (error) {
+    console.error('Error submitting review', error);
+    res.status(500).send('Server Error');
+  } 
 })
 
 
@@ -264,10 +283,22 @@ app.get('/tv/:id', isLoggedIn, async (req,res)=>{
   //   console.log("error finding users, error")
   // })
 
+
+  // mongoose.connect('mongodb://localhost/blockBusterAuthentication', {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  //   useFindAndModify: false,
+  // });
+
+
   // User.findOneAndUpdate(
   //   { name: "Richard Schleckser" },
-  //   { $push: { watchlist: { Movie: "Iron Man", id: 1726 } } },
-  //   { new: true } // This option returns the modified document
+  //   { $push: { reviews: [{  movieId: '1726',
+  //     userId: mongoose.Types.ObjectId('6657fc5732511c6bc0dbd106'),
+  //     author: 'Richard Schleckser',
+  //     content: 'The Movie was Great!!!!!!!',
+  //     createdAt: Date.now()}] } },
+  //   { new: true }
   // )
   // .then((updatedUser) => {
   //   console.log("Updated user:", updatedUser);
