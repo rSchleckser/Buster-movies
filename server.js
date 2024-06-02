@@ -75,16 +75,20 @@ const featured = response.data.results;
 app.use('/auth', require('./controllers/auth'));
 
 //GET - Dashboard
-app.get('/dashboard', async(req,res)=>{
+app.get('/dashboard/:id', async(req,res)=>{
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/trending/all/week?language=en`,
       options
     );
+    User.findOne({ _id: req.params.id })
+    .then((user)=>{
+      console.log(user._id.toString())
+      const featured = response.data.results;
 
-const featured = response.data.results;
+    res.status(200).render('dashboard', {featured, user})
+    })
 
-    res.status(200).render('dashboard', {featured})
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
@@ -93,11 +97,25 @@ const featured = response.data.results;
 })
 
 //Go to user profile page
-app.get('/profile', isLoggedIn, (req, res) => {
-  // res.send(req.user);
-  const { name, email, phone } = req.user;
-  res.status(200).render('profile', { name, email, phone });
+app.get('/profile/:id', isLoggedIn, (req, res) => {
+
+  User.findOne({ _id: req.params.id })
+    .then((user)=>{
+      console.log(user._id.toString())
+
+      const { name, email, phone } = req.user;
+      res.status(200).render('profile', { name, email, phone, user });
+    })
 });
+
+//GET - Go to user watchlist page
+app.get('/profile/watchlist', (req,res)=>{
+  User.findOne({name:'Richard Schleckser'})
+  .then(user =>{
+    res.render('userPages/watchlist', {user})
+  })
+  
+})
 
 //Search Page
 app.get('/search', isLoggedIn, (req, res) => {
@@ -117,10 +135,12 @@ app.get('/search/results', isLoggedIn, async (req, res) => {
 const medias = response.data.results;
 const query = req.query.media
 
-    
-    res
-      .status(200)
-      .render('search/show', { medias, movie_genre: movie_genre.genres, tv_genre: tv_genre.genres, query});
+User.findOne({name:'Richard Schleckser'})
+.then((user)=>{
+  res
+  .status(200)
+  .render('search/show', { medias, movie_genre: movie_genre.genres, tv_genre: tv_genre.genres, query, user});
+})
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
@@ -205,6 +225,31 @@ app.get('/tv/:id', isLoggedIn, async (req,res)=>{
       res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
     }
   })
+
+
+  User.find({}, {name:1, _id:0})
+  .then((name)=>{
+    console.log(name)
+  })
+  .catch((error)=>{
+    console.log("error finding users, error")
+  })
+
+  // User.findOneAndUpdate(
+  //   { name: "Richard Schleckser" },
+  //   { $push: { watchlist: { Movie: "Iron Man", id: 1726 } } },
+  //   { new: true } // This option returns the modified document
+  // )
+  // .then((updatedUser) => {
+  //   console.log("Updated user:", updatedUser);
+  // })
+
+  // User.find({name: "Richard Schleckser"})
+  // .then((name)=>{
+  //   console.log(name[0])
+  // })
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

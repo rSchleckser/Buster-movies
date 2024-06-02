@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= user.name %>'s Watchlist</title>
+  <link rel="stylesheet" href="/path/to/your/css/styles.css">
+</head>
+
+<body>
+  <div class="watchlist-container">
+    <h1><%= user.name %>'s Watchlist</h1>
+    <ul>
+      <% user.watchlist.forEach(movie => { %>
+      <li>
+        <strong>Movie:</strong> <%= movie.Movie %> - <strong>ID:</strong> <%= movie.id %>
+      </li>
+      <% }); %>
+    </ul>
+    <div class="buttons">
+      <button class="ui button">
+        <a href="/profile">Back to Profile</a>
+      </button>
+    </div>
+  </div>
+</body>
+
+</html>

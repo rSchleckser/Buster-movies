@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema(
       },
       required: [true, 'Your phone is required'],
     },
+    watchlist: [{
+      Movie: String,
+      id: Number
+    }],
+    favorites: [{
+      Movie: String,
+      id: Number
+    }],
   },
   { timestamps: true }
 );

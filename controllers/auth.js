@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('../config/passport-config');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
 
 //import user model
 const { User } = require('../models');
@@ -35,6 +38,8 @@ router.post('/signup', async (req, res) => {
   // create the phone number error, then we can address a solution
   // search for the email in database (unique)
   try {
+
+
     const findUser = await User.findOne({ email: req.body.email });
     // if findUser is null, then we create user
     if (!findUser) {
@@ -47,7 +52,7 @@ router.post('/signup', async (req, res) => {
 
       // authenticate the user via passport
       passport.authenticate('local', {
-        successRedirect: '/profile',
+        successRedirect: `/profile/${newUser._id}`,
         successFlash: `Welcome ${newUser.name}! Account created.`,
       })(req, res);
     } else {
@@ -63,18 +68,24 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-//login user
-router.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/profile',
-    failureRedirect: '/auth/login',
-    successFlash: 'Welcome Back to your account',
-    failureFlash: 'Either email or password is incorrect. Please try again',
-  }),
-  (req, res) => {
-    // res.send(req.body);
-  }
-);
+// Login user
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', async (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      req.flash('error', 'Either email or password is incorrect. Please try again');
+      return res.redirect('/auth/login');
+    }
+    req.logIn(user, async (err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', 'Welcome Back to your account');
+      return res.redirect(`/profile/${user._id}`);
+    });
+  })(req, res, next);
+});
 
 module.exports = router;

@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (this.classList.contains('toggled')) {
           icon.className = 'check icon';
           this.childNodes[2].nodeValue = 'Added';
+          // console.log(medias)
+          // User.watchlist.contains
         } else {
           icon.className = 'add icon';
           this.childNodes[2].nodeValue = 'Add';

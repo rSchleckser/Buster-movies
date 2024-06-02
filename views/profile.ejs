@@ -32,7 +32,7 @@
   <!-- Following Menu -->
   <div class="ui large top fixed hidden menu">
     <div class="ui container">
-      <a class="active item" href='/dashboard'>Home</a>
+      <a class="active item" href='/dashboard/<%= user._id %>'>Home</a>
       <a class="item" href='/search'>
         <i class="grid layout icon"></i> Browse
       </a>
@@ -40,7 +40,7 @@
       <a class="item" href='/tvShows'><i class="film icon"></i>TV Shows</a>
       <div class="right menu">
         <div class="item">
-          <a class="ui button" href='/profile'>Profile</a>
+          <a class="ui button" href='/profile/<%= user._id %>'>Profile</a>
         </div>
         <div class="item">
           <a class="ui primary button" href='/auth/logout'>Log Out</a>
@@ -51,11 +51,11 @@
 
   <!-- Sidebar Menu -->
   <div class="ui vertical inverted sidebar menu">
-    <a class="active item" href='/dashboard'>Home</a>
+    <a class="active item" href='/dashboard/<%= user._id %>'>Home</a>
     <a class="item" href='/search'>Browse</a>
     <a class="item" href='/movies'>Movies</a>
     <a class="item" href='/tvShows'>TV Shows</a>
-    <a class="item" href='/profile'>Profile</a>
+    <a class="item" href='/profile/<%= user._id %>'>Profile</a>
     <a class="item" href='/auth/logout'>Log Out</a>
   </div>
 
@@ -69,14 +69,14 @@
             <i class="sidebar icon"></i>
           </a>
           <div class='item'><i class="ticket icon"></i>Buster Movies</div>
-          <a class="item" href='/dashboard'>Home</a>
+          <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
           <a class="item" href='/search'>
             <i class="grid layout icon"></i> Browse
           </a>
           <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
           <a class="item" href='/tvShows'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
-            <a class="active item" href="/profile"><i class='user blue icon'></i>Profile</a>
+            <a class="active item" href="/profile/<%= user._id %>"><i class='user blue icon'></i>Profile</a>
             <a class="red item" href="/auth/logout"><i class="sign out icon"></i></i>Log Out</a>
           </div>
         </div>
@@ -89,7 +89,7 @@
         <h2>Find and enjoy your favorite Movies or TV Show</h2>
         <div class="ui huge pink button"><i class="heart icon"></i></i> <a href="#" style='color: aliceblue;'>Favorites </a></div>
         <div class="ui huge primary button"><a href="/profile" style='color: aliceblue;'>Profile</a><i class="right arrow icon"></i></div>
-        <div class="ui huge teal button"><i class="list layout icon"></i></i><a href="#" style='color: aliceblue;'>Watchlist</a></div>
+        <div class="ui huge teal button"><i class="list layout icon"></i></i><a href="/profile/watchlist" style='color: aliceblue;'>Watchlist</a></div>
 
       </div>
     </div>
