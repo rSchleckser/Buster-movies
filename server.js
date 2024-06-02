@@ -184,15 +184,20 @@ const recommendations = recommendationsResponse.data.results;
 
 // GET - Movie Review Page
 app.get('/movie/:id/reviews/:userId', async (req,res)=>{
-  const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
-  const details = detailsResponse.data;
-  const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/reviews`, options)
-  const reviews = reviewsResponse.data.results;
+  try {
+    const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
+    const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/reviews`, options)
 
-  User.findOne({ _id: req.params.userId })
-  .then((user)=>{
-    res.status(200).render('movie/reviews', {reviews, details, user})
-  })  
+    const details = detailsResponse.data;
+    const reviews = reviewsResponse.data.results;
+    const user = await User.findOne({ _id: req.params.userId })
+    const newReviews = await Review.find({movieId: req.params.id})
+   
+    res.status(200).render('movie/reviews', {reviews, details, user, newReviews})
+  } catch (error) {
+    console.error('Error getting review', error);
+    res.status(500).send('Server Error');
+  }
 });
 
 
