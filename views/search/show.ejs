@@ -56,8 +56,8 @@
           <a class="active item" href='/search'>
             <i class="grid layout icon"></i> Browse
           </a>
-          <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
-          <a class="item" href='/tvShows'><i class="tv icon"></i>TV Shows</a>
+          <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
+          <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
             <a class="item" href="/profile/<%= user._id %>"><i class='user blue icon'></i>Profile</a>
             <a class="item" href="/auth/logout"><i class="sign out icon"></i></i>Log Out</a>
@@ -66,37 +66,7 @@
       </div>
     </div>
   </div>
-  <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-bottom: 2rem">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Buster Movies</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search" action="/search/results" method="get">
-          <input class="form-control me-2" type="search" name="media" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-    </div>
-  </nav> -->
 
-  <!-- <form class="d-flex" role="search" action="/search/results" method="get">
-    <input class="form-control me-2" type="search" name="media" placeholder="Search" aria-label="Search" />
-    <button class="btn btn-outline-success" type="submit">
-      Search
-    </button>
-  </form> -->
 
   <h1>Results for: <span class='resultQuery'><%=query%></span></h1>
 
@@ -109,11 +79,11 @@
           <div class="content">
             <div class="center">
               <% if(media.media_type === 'movie') { %>
-              <div class="ui inverted button"><a href="/movie/<%= media.id %>">View Page</a></div>
+              <div class="ui inverted button"><a href="/movie/<%= media.id %>/<%= user._id %>">View Page</a></div>
               <% } else if (media.media_type === 'tv') { %>
-              <div class="ui inverted button"><a href="/tv/<%= media.id %>">View Page</a></div>
+              <div class="ui inverted button"><a href="/tv/<%= media.id %>/<%= user._id %>">View Page</a></div>
               <% } else { %>
-              <div class="ui inverted button"><a href="/person/<%= media.id %>">View Page</a></div>
+              <div class="ui inverted button"><a href="/person/<%= media.id %>/<%= user._id %>">View Page</a></div>
               <% } %>
             </div>
           </div>

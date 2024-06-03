@@ -8,6 +8,7 @@ const session = require('express-session');
 const passport = require('./config/passport-config');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const SECRET_SESSION = process.env.SECRET_SESSION;
+const methodOverride = require('method-override');
 const mongoose = require('mongoose')
 
 
@@ -18,6 +19,7 @@ const { User } = require('./models');
 const  Review  = require('./models/review'); 
 
 //Middleware
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 app.use('/', express.static('public'));
 app.use(
@@ -99,9 +101,9 @@ app.get('/dashboard/:id', async(req,res)=>{
 })
 
 //Go to user profile page
-app.get('/profile/:id', isLoggedIn, (req, res) => {
+app.get('/profile/:userId', isLoggedIn, (req, res) => {
 
-  User.findOne({ _id: req.params.id })
+  User.findOne({ _id: req.params.userId })
     .then((user)=>{
       console.log(user._id.toString())
 
@@ -111,7 +113,7 @@ app.get('/profile/:id', isLoggedIn, (req, res) => {
 });
 
 //GET - Go to user watchlist page
-app.get('/profile/watchlist', (req,res)=>{
+app.get('/profile/:userId/watchlist', (req,res)=>{
   User.findOne({name:'Richard Schleckser'})
   .then(user =>{
     res.render('userPages/watchlist', {user})
@@ -128,7 +130,7 @@ app.get('/search', isLoggedIn, (req, res) => {
 
 
 //Search Results Page
-app.get('/search/results', isLoggedIn, async (req, res) => {
+app.get('/search/:userId/results', isLoggedIn, async (req, res) => {
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/search/multi?query=${req.query.media}&language=en`,
@@ -154,7 +156,7 @@ User.findOne({name:'Richard Schleckser'})
 // ============================== Media Pages ==================================================
 
 // GET - Movie Show Page
-app.get('/movie/:id', isLoggedIn, async (req,res)=>{
+app.get('/movie/:id/:userId', isLoggedIn, async (req,res)=>{
 try {
 const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
 const imagesResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/images`, options)
@@ -171,10 +173,14 @@ const videos = videoResponse.data.results;
 const credits = creditsResponse.data.cast;
 const reviews = reviewsResponse.data.results;
 const recommendations = recommendationsResponse.data.results;
+//Mongo Reviews
+const newReviews = await Review.find({movieId: req.params.id})
+// Mongo User
+const user = await User.findOne({ _id: req.params.userId })
 
 
 
-  res.status(200).render('movie/show', {details, images,videos, credits, reviews, recommendations})
+  res.status(200).render('movie/show', {details, images,videos, credits, reviews, recommendations, newReviews, user})
 } catch (error) {
   console.error('Error fetching movie', error)
   const { success, status_message } = error.response.data;
@@ -206,6 +212,7 @@ app.post('/movie/:id/reviews/:userId', async (req, res) => {
   try {
     const newReview = new Review({
       movieId: req.params.id,
+      mediaType: 'movie',
       userId: req.params.userId,
       author: req.body.user,
       content: req.body.content,
@@ -228,10 +235,23 @@ app.post('/movie/:id/reviews/:userId', async (req, res) => {
   } 
 })
 
+// DELETE - Delete a review for a movie
+app.delete('/movie/:id/reviews/:userId', async (req, res) => {
+  try {
+    const { reviewId } = req.body;  
+    await Review.deleteOne({ _id: reviewId, movieId: req.params.id });
+    res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
+  } catch (error) {
+    console.error('Error deleting Review', error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
 
 
 // GET - TV Show Page
-app.get('/tv/:id', isLoggedIn, async (req,res)=>{
+app.get('/tv/:id/:userId', isLoggedIn, async (req,res)=>{
   try {
   const detailsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}`, options);
   const imagesResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/images`, options)
@@ -258,7 +278,7 @@ app.get('/tv/:id', isLoggedIn, async (req,res)=>{
   })
 
   // GET - Person Show Page
-  app.get('/person/:id', isLoggedIn, async (req,res)=>{
+  app.get('/person/:id/:userId', isLoggedIn, async (req,res)=>{
     try {
       const detailsResponse = await axios.get(`https://api.themoviedb.org/3/person/${req.params.id}`, options);
       const imagesResponse = await axios.get(`https://api.themoviedb.org/3/person/${req.params.id}/images`, options)

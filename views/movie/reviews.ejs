@@ -7,22 +7,12 @@
   <title>Reviews</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
   <style>
-    .review-form {
-      margin-top: 2rem;
-    }
-
-    .review-list {
-      margin-top: 2rem;
-    }
-
-
-    /* Cards */
-    div.ui.special.cards {
-      justify-content: center;
+    /* Header Container */
+    div.ui.inverted.vertical.masthead.center.aligned.segment {
+      background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
     }
 
     h1.ui.header {
-
       padding-top: 2rem;
       font-size: 2.5rem;
     }
@@ -32,21 +22,74 @@
       color: rgb(11, 132, 145)
     }
 
-    .userReview {
+    /* User name color */
+    h4.ui.header.user {
       color: rgba(244, 123, 110, 0.721);
     }
 
-    .toggled {
-      background-color: #21ba45 !important;
-      color: white !important;
+
+    /* Body style */
+    .mt-5 {
+      margin-top: 5em !important;
     }
 
-
-
-    /* Header Container */
-    div.ui.inverted.vertical.masthead.center.aligned.segment {
-      background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+    .review-list .review-item {
+      margin-bottom: 2em;
+      padding: 1em;
     }
+
+    .review-list .review-item .header {
+      font-size: 1.2em;
+      margin-top: 0;
+    }
+
+    .review-list .review-item .meta .date {
+      font-size: 0.9em;
+      color: grey;
+      margin-bottom: 0.5em;
+    }
+
+    .review-list .review-item .description p {
+      font-size: 1.1em;
+      line-height: 1.5em;
+    }
+
+    .review-form {
+      margin-top: 3em;
+    }
+
+    .review-form .ui.form .field label {
+      font-size: 1.1em;
+    }
+
+    .review-form .ui.form .field input,
+    .review-form .ui.form .field textarea {
+      font-size: 1em;
+    }
+
+    .review-form .ui.button {
+      margin-top: 1em;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .button-group .ui.button {
+      margin-bottom: 0.5em;
+    }
+
+    .button-group .ui.button:last-child {
+      margin-bottom: 0;
+    }
+
 
     /* footer */
     footer.ui.inverted.vertical.footer.segment {
@@ -80,22 +123,30 @@
     </div>
   </div>
 
-  <div class="ui container">
-    <h1 class="ui header">Reviews for <span class='resultQuery '><%= details.title %></span></h1>
+  <div class="ui container mt-5">
+    <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.title %></span></h1>
 
-    <div class="ui divided items review-list">
+    <div class="review-list">
 
       <% newReviews.forEach(review => { %>
-      <div class="item">
+      <div class="ui segment review-item">
         <div class="content">
-          <% if (review.userId.toString() === user._id.toString()) { %>
-          <div class="ui right floated">
-            <button class="ui teal button">Edit</button>
-          </div>
-          <% } %>
-          <a class="header"><%= review.author %></a>
-          <div class="meta">
-            <span class="date">Posted on: <%= review.createdAt %></span>
+          <div class="review-header">
+            <div>
+              <h4 class="ui header user"><%= review.author %></h4>
+              <div class="meta">
+                <span class="date">Posted on: <%= review.createdAt %></span>
+              </div>
+            </div>
+            <% if (review.userId.toString() === user._id.toString()) { %>
+            <div>
+              <button class="ui small teal button">Edit</button>
+              <form action="/movie/<%= details.id %>/reviews/<%= user._id %>?_method=DELETE" method="POST" style="display: inline;">
+                <input type="hidden" name="reviewId" value="<%= review._id %>">
+                <button class="ui small red button" type="submit">Delete</button>
+              </form>
+            </div>
+            <% } %>
           </div>
           <div class="description">
             <p><%= review.content %></p>
@@ -104,13 +155,16 @@
       </div>
       <% }); %>
 
-
       <% reviews.forEach(review => { %>
-      <div class="item">
+      <div class="ui segment review-item">
         <div class="content">
-          <a class="header"><%= review.author %></a>
-          <div class="meta">
-            <span class="date">Posted on: <%= review.created_at %></span>
+          <div class="review-header">
+            <div>
+              <h4 class="ui header"><%= review.author %></h4>
+              <div class="meta">
+                <span class="date">Posted on: <%= review.created_at %></span>
+              </div>
+            </div>
           </div>
           <div class="description">
             <p><%= review.content %></p>
@@ -135,6 +189,9 @@
       </form>
     </div>
   </div>
+
+
+
 
   <!-- Footer -->
   <footer class="ui inverted vertical footer segment">
