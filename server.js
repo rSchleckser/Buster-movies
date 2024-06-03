@@ -159,6 +159,38 @@ User.findOne({name:'Richard Schleckser'})
 
 // ============================== Movies ==================================================
 
+// GET - ALL MOVIES
+app.get('/movies/:userId', async (req,res)=>{
+  try {
+    const trendingResponse = await axios.get(`https://api.themoviedb.org/3/trending/movie/day`, options);
+    const nowPlayingResponse = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`, options);
+    const popularResponse = await axios.get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`, options)
+    const topRatedResponse = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`, options)
+    const upcomingResponse = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1` ,options)
+
+    const trendingMovies = trendingResponse.data.results;
+    const nowPlayingMovies = nowPlayingResponse.data.results;
+    const popularMovies = popularResponse.data.results;
+    const topRatedMovies = topRatedResponse.data.results;
+    const upcomingMovies = upcomingResponse.data.results;
+    // Mongo User
+    const user = await User.findOne({ _id: req.params.userId })
+
+    
+
+
+
+
+     res.render('movie/allMovies', {user, trendingMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, movie_genre: movie_genre.genres})
+  } catch (error) {
+    const { success, status_message } = error.response.data;
+    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+  }
+})
+
+
+
+
 // GET - Movie Show Page
 app.get('/movie/:id/:userId', isLoggedIn, async (req,res)=>{
 try {
@@ -264,6 +296,28 @@ app.delete('/movie/:id/reviews/:userId', async (req, res) => {
 
 // =========================================== TV SHOWS ==============================================
 
+// GET - ALL TV SHOWS
+app.get('/tvShows:userId', async (req,res)=>{
+  try {
+    const trendingResponse = await axios.get(`https://api.themoviedb.org/3/trending/tv/day`,options)
+    const airingTodayResponse = await axios.get(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1`,options)
+    const onAirResponse = await axios.get(`https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1`,options)
+    const popularResponse = await axios.get(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=1`,options)
+    const topRatedResponse = await axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1`,options)
+
+    const trendingTv = trendingResponse.data.results;
+    const airingToday = airingTodayResponse.data.results;
+    const onAir = onAirResponse.data.results;
+    const popularTv = popularResponse.data.results;
+    const topRatedTv = topRatedResponse.data.results;
+
+
+    res.render('tvShow/allTvShows',{trendingTv, airingToday, onAir, popularTv, topRatedTv})
+  } catch (error) {
+    const { success, status_message } = error.response.data;
+    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+  }
+})
 
 // GET - TV Show Page
 app.get('/tv/:id/:userId', isLoggedIn, async (req,res)=>{

@@ -38,6 +38,7 @@
           <% for(let i = 0; i < featured.length; i += 6) { %>
           <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
             <div class="d-flex justify-content-around">
+
               <div class="ui cards">
                 <% for(let j = i; j < i + 6 && j < featured.length; j++) { %>
                 <% let movie = featured[j]; %>
