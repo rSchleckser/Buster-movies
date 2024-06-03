@@ -1,0 +1,99 @@
+ /* Header Container */
+ div.ui.inverted.vertical.masthead.center.aligned.segment {
+    background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+  }
+
+  h1.ui.header {
+    padding-top: 2rem;
+    font-size: 2.5rem;
+  }
+
+  /* Results header color */
+  .resultQuery {
+    color: rgb(11, 132, 145)
+  }
+
+  /* User name color */
+  h4.ui.header.user {
+    color: rgba(244, 123, 110, 0.721);
+  }
+
+   /* Go Back Button */
+  button.ui.teal.small.button {
+   margin-left: 2rem;
+  }
+  
+  button.ui.teal.small.button a {
+   color: aliceblue;
+  }
+
+  
+
+  /* Body style */
+  .mt-5 {
+    margin-top: 5em !important;
+  }
+
+  .review-list .review-item {
+    margin-bottom: 2em;
+    padding: 1em;
+  }
+
+  .review-list .review-item .header {
+    font-size: 1.2em;
+    margin-top: 0;
+  }
+
+  .review-list .review-item .meta .date {
+    font-size: 0.9em;
+    color: grey;
+    margin-bottom: 0.5em;
+  }
+
+  .review-list .review-item .description p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+
+  .review-form {
+    margin-top: 3em;
+  }
+
+  .review-form .ui.form .field label {
+    font-size: 1.1em;
+  }
+
+  .review-form .ui.form .field input,
+  .review-form .ui.form .field textarea {
+    font-size: 1em;
+  }
+
+  .review-form .ui.button {
+    margin-top: 1em;
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button-group .ui.button {
+    margin-bottom: 0.5em;
+  }
+
+  .button-group .ui.button:last-child {
+    margin-bottom: 0;
+  }
+
+
+  /* footer */
+  footer.ui.inverted.vertical.footer.segment {
+    padding: 3rem;
+    margin-top: 3rem;
+  }

@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= details.title %> Reviews</title>
+  <title><%= details.name %> Reviews</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
   <link rel="stylesheet" href="/css/reviews.css">
-
 </head>
 
 <body>
@@ -35,7 +34,7 @@
   </div>
 
   <div class="ui container mt-5">
-    <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.title %></span> <span><button class='ui teal small button'><a href="/movie/<%= details.id %>/<%= user._id %>"><i class="reply icon"></i>Go Back</a></button></span></h1>
+    <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.name %></span> <span><button class='ui teal small button'><a href="/tv/<%= details.id %>/<%= user._id %>"><i class="reply icon"></i>Go Back</a></button></span></h1>
 
     <div class="review-list">
 
@@ -52,7 +51,7 @@
             <% if (review.userId.toString() === user._id.toString()) { %>
             <div>
               <button class="ui small teal button">Edit</button>
-              <form action="/movie/<%= details.id %>/reviews/<%= user._id %>?_method=DELETE" method="POST" style="display: inline;">
+              <form action="/tv/<%= details.id %>/reviews/<%= user._id %>?_method=DELETE" method="POST" style="display: inline;">
                 <input type="hidden" name="reviewId" value="<%= review._id %>">
                 <button class="ui small red button" type="submit">Delete</button>
               </form>
@@ -87,7 +86,7 @@
 
     <div class="review-form">
       <h2 class="ui dividing header">Post a Review</h2>
-      <form class="ui form" action="/movie/<%= details.id %>/reviews/<%= user._id %>" method="POST">
+      <form class="ui form" action="/tv/<%= details.id %>/reviews/<%= user._id %>" method="POST">
         <div class="field">
           <label for="user">Your Name</label>
           <input type="text" id="user" name="user" required>
@@ -134,7 +133,6 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-
 </body>
 
 </html>

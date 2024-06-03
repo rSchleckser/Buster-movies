@@ -153,7 +153,7 @@ User.findOne({name:'Richard Schleckser'})
   }
 });
 
-// ============================== Media Pages ==================================================
+// ============================== Movies ==================================================
 
 // GET - Movie Show Page
 app.get('/movie/:id/:userId', isLoggedIn, async (req,res)=>{
@@ -235,6 +235,21 @@ app.post('/movie/:id/reviews/:userId', async (req, res) => {
   } 
 })
 
+// PUT - Update a review for a movie
+app.put('/movie/:id/reviews/:reviewId', async (req, res) => {
+  try {
+    const { reviewId } = req.params;
+    const { updatedContent } = req.body; // Extract updated review content
+    // Assuming you have a Review model and want to update the content field
+    await Review.findByIdAndUpdate(reviewId, { content: updatedContent });
+    res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
+  } catch (error) {
+    console.error('Error updating Review', error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
 // DELETE - Delete a review for a movie
 app.delete('/movie/:id/reviews/:userId', async (req, res) => {
   try {
@@ -247,7 +262,7 @@ app.delete('/movie/:id/reviews/:userId', async (req, res) => {
   }
 });
 
-
+// =========================================== TV SHOWS ==============================================
 
 
 // GET - TV Show Page
@@ -268,14 +283,81 @@ app.get('/tv/:id/:userId', isLoggedIn, async (req,res)=>{
   const credits = creditsResponse.data.cast;
   const reviews = reviewsResponse.data.results;
   const recommendations = recommendationsResponse.data.results;
+  //Mongo Reviews
+const newReviews = await Review.find({movieId: req.params.id})
+// Mongo User
+const user = await User.findOne({ _id: req.params.userId })
   
-    res.status(200).render('tvShow/show', {details, images, videos, credits, reviews, recommendations})
+    res.status(200).render('tvShow/show', {details, images, videos, credits, reviews, recommendations, newReviews, user})
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
   } 
   })
+
+  // GET - TV Show Review Page
+app.get('/tv/:id/reviews/:userId', async (req,res)=>{
+  try {
+    const detailsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}`, options);
+    const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/reviews`, options)
+
+    const details = detailsResponse.data;
+    const reviews = reviewsResponse.data.results;
+    const user = await User.findOne({ _id: req.params.userId })
+    const newReviews = await Review.find({movieId: req.params.id})
+   
+    res.status(200).render('tvShow/reviews', {reviews, details, user, newReviews})
+  } catch (error) {
+    console.error('Error getting review', error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+// POST - Submit a review for a TV Show
+app.post('/tv/:id/reviews/:userId', async (req, res) => {
+  try {
+    const newReview = new Review({
+      movieId: req.params.id,
+      mediaType: 'tv',
+      userId: req.params.userId,
+      author: req.body.user,
+      content: req.body.content,
+    });
+
+    //Save review in review database
+    await newReview.save();
+
+    //Save review in user database
+    const newComment = await User.findOneAndUpdate(
+      {_id: req.params.userId},
+      { $push: { reviews: newReview._id } },
+      { new: true })
+
+      console.log(newComment)
+      res.status(200).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
+  } catch (error) {
+    console.error('Error submitting review', error);
+    res.status(500).send('Server Error');
+  } 
+})
+
+// DELETE - Delete a review for a movie
+app.delete('/tv/:id/reviews/:userId', async (req, res) => {
+  try {
+    const { reviewId } = req.body;  
+    await Review.deleteOne({ _id: reviewId, movieId: req.params.id });
+    res.status(200).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
+  } catch (error) {
+    console.error('Error deleting Review', error);
+    res.status(500).send('Server Error');
+  }
+});
+
+  
+// ============================================ Person =========================================================
+
 
   // GET - Person Show Page
   app.get('/person/:id/:userId', isLoggedIn, async (req,res)=>{
@@ -300,42 +382,9 @@ app.get('/tv/:id/:userId', isLoggedIn, async (req,res)=>{
   })
 
 
-  // User.find({}, {name:1, _id:0})
-  // .then((name)=>{
-  //   console.log(name)
-  // })
-  // .catch((error)=>{
-  //   console.log("error finding users, error")
-  // })
 
 
-  // mongoose.connect('mongodb://localhost/blockBusterAuthentication', {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  //   useFindAndModify: false,
-  // });
-
-
-  // User.findOneAndUpdate(
-  //   { name: "Richard Schleckser" },
-  //   { $push: { reviews: [{  movieId: '1726',
-  //     userId: mongoose.Types.ObjectId('6657fc5732511c6bc0dbd106'),
-  //     author: 'Richard Schleckser',
-  //     content: 'The Movie was Great!!!!!!!',
-  //     createdAt: Date.now()}] } },
-  //   { new: true }
-  // )
-  // .then((updatedUser) => {
-  //   console.log("Updated user:", updatedUser);
-  // })
-
-  // User.find({name: "Richard Schleckser"})
-  // .then((name)=>{
-  //   console.log(name[0])
-  // })
-
-
-
+// Server
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });

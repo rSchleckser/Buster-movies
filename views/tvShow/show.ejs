@@ -10,6 +10,7 @@
   <!-- Semantic UI CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/css/tvShow.css">
+
 </head>
 
 <body>
@@ -201,17 +202,40 @@
 
 
     <!-- Top Reviews -->
-    <h1 class='heading'>Reviews</h1>
+    <h1 class="ui header">Reviews</h1>
     <div class="ui segment mt-5">
+
       <h2 class="ui header">Top Reviews</h2>
-      <% for( let i = 0; i < (reviews.length > 2 ? 3 : reviews.length); i++ ) { %>
-      <div class="review">
-        <h4>Author: <%= reviews[i].author %></h4>
-        <h6>Content:</h6>
+
+      <div class="ui right floated">
+        <button class="ui teal button"><a href="/tv/<%= details.id %>/reviews/<%= user._id %>">View All</a></button>
+      </div>
+
+      <% for( let i = 0; i < 3; i++ ) { %>
+      <!-- Reviews from database -->
+      <% if (newReviews.length >= 3 || i+1 <= newReviews.length) { %>
+      <div class="ui segment review">
+        <h4 class="ui header">Author: <%= newReviews[i].author %></h4>
+        <h6 class="ui sub header">Content:</h6>
+        <p><%=newReviews[i].content %></p>
+      </div>
+      <% } else if(reviews.length >= i+1) {%>
+      <!-- Reviews from Api -->
+      <div class="ui segment review">
+        <h4 class="ui header">Author: <%= reviews[i].author %></h4>
+        <h6 class="ui sub header">Content:</h6>
         <p><%=reviews[i].content %></p>
       </div>
+      <% } else {%>
+      <% i= 3 %>
+      <h2 class="ui header">There are no reviews...</h2>
+      <% } %>
       <% } %>
     </div>
+
+
+
+
 
     <!-- Recommendations Carousel -->
     <h1 class='heading'>Recommendations</h1>
