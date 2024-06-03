@@ -438,8 +438,11 @@ app.delete('/tv/:id/reviews/:userId', async (req, res) => {
       const images = imagesResponse.data.profiles;
       const movies = movieCreditsResponse.data.cast;
       const tvShows = tvCreditsResponse.data.cast;
+      // Mongo User
+      const user = await User.findOne({ _id: req.params.userId })
+  
 
-      res.status(200).render('person/show', {details, images, movies, tvShows})
+      res.status(200).render('person/show', {details, images, movies, tvShows, user})
 
     } catch (error) {
       console.error('Error fetching movie', error)

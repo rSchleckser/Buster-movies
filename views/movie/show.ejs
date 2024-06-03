@@ -93,7 +93,7 @@
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
-                        <button class="ui inverted button"> <a href="/person/<%= cast.id %>">More Info</a></button>
+                        <button class="ui inverted button"> <a href="/person/<%= cast.id %>/<%= user._id %>">More Info</a></button>
                       </div>
                     </div>
                   </div>
@@ -120,7 +120,7 @@
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
-                        <button class="ui inverted button"> <a href="/person/<%= cast.id %>">More Info</a></button>
+                        <button class="ui inverted button"> <a href="/person/<%= cast.id %>/<%= user._id %>">More Info</a></button>
                       </div>
                     </div>
                   </div>
@@ -238,7 +238,7 @@
                     <div class="content">
                       <div class="center">
                         <% if (typeof recommend !== 'undefined' && recommend.id && recommend.id.length !== 0) { %>
-                        <button class="ui inverted button"> <a href="/movie/<%= recommend.id %>">View Movie</a></button>
+                        <button class="ui inverted button"> <a href="/movie/<%= recommend.id %>/<%= user._id %>">View Movie</a></button>
                         <%  } %>
                       </div>
                     </div>
@@ -265,7 +265,7 @@
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
-                        <button class="ui inverted button"> <a href="/movie/<%= recommend.id %>">View Movie</a></button>
+                        <button class="ui inverted button"> <a href="/movie/<%= recommend.id %> /<%= user._id %> ">View Movie</a></button>
                       </div>
                     </div>
                   </div>
