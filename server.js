@@ -227,7 +227,6 @@ app.post('/movie/:id/reviews/:userId', async (req, res) => {
       { $push: { reviews: newReview._id } },
       { new: true })
 
-      console.log(newComment)
       res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error submitting review', error);
@@ -238,11 +237,9 @@ app.post('/movie/:id/reviews/:userId', async (req, res) => {
 // PUT - Update a review for a movie
 app.put('/movie/:id/reviews/:reviewId', async (req, res) => {
   try {
-    const { reviewId } = req.params;
-    const { updatedContent } = req.body; // Extract updated review content
-    // Assuming you have a Review model and want to update the content field
-    await Review.findByIdAndUpdate(reviewId, { content: updatedContent });
-    res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
+    const user = await Review.findOne({ _id: req.params.reviewId })
+    await Review.updateOne({ _id: req.params.reviewId }, { content: req.body.updatedContent });
+    res.status(200).redirect(`/movie/${req.params.id}/reviews/${user.userId}`);
   } catch (error) {
     console.error('Error updating Review', error);
     res.status(500).send('Server Error');
@@ -253,8 +250,7 @@ app.put('/movie/:id/reviews/:reviewId', async (req, res) => {
 // DELETE - Delete a review for a movie
 app.delete('/movie/:id/reviews/:userId', async (req, res) => {
   try {
-    const { reviewId } = req.body;  
-    await Review.deleteOne({ _id: reviewId, movieId: req.params.id });
+    await Review.deleteOne({ _id: req.body.reviewId, movieId: req.params.id });
     res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error deleting Review', error);
