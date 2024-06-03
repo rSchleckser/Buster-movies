@@ -51,7 +51,7 @@
             </div>
             <% if (review.userId.toString() === user._id.toString()) { %>
             <div>
-              <button class="ui small teal button">Edit</button>
+              <button class="ui small teal button" onclick="showEditForm('<%= review._id %>')">Edit</button>
               <form action="/movie/<%= details.id %>/reviews/<%= user._id %>?_method=DELETE" method="POST" style="display: inline;">
                 <input type="hidden" name="reviewId" value="<%= review._id %>">
                 <button class="ui small red button" type="submit">Delete</button>
@@ -61,6 +61,17 @@
           </div>
           <div class="description">
             <p><%= review.content %></p>
+          </div>
+
+          <!-- edit form -->
+          <div id="editForm_<%= review._id %>" style="display: none;">
+            <form class="ui form" action="/movie/<%= details.id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
+              <div class="field">
+                <label>Edit Review</label>
+                <textarea name="updatedContent" rows='3'><%= review.content %></textarea>
+              </div>
+              <button class="ui small blue button" type="submit">Save</button>
+            </form>
           </div>
         </div>
       </div>
@@ -133,7 +144,8 @@
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>\
+  <script src="/js/showEditForm.js"></script>
 
 </body>
 

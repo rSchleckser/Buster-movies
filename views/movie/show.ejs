@@ -50,7 +50,7 @@
           <div class="d-flex justify-content-around">
             <% for(let i = 0; i < Math.min(3, videos.length); i++) { %>
             <% let video = videos[i]; %>
-            <iframe src="https://www.youtube.com/embed/<%= video.key %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/<%= video.key %>" frameborder="0" width="350" height="200" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <% } %>
           </div>
         </div>
@@ -61,7 +61,7 @@
           <div class="d-flex justify-content-around">
             <% for(let j = 0; j < 3 && (i + j) < videos.length; j++) { %>
             <% let video = videos[i + j]; %>
-            <iframe src="https://www.youtube.com/embed/<%= video.key %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/<%= video.key %>" frameborder="0" width="350" height="200" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <% } %>
           </div>
         </div>
