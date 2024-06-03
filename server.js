@@ -168,19 +168,17 @@ app.get('/movies/:userId', async (req,res)=>{
     const topRatedResponse = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`, options)
     const upcomingResponse = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1` ,options)
 
+
     const trendingMovies = trendingResponse.data.results;
     const nowPlayingMovies = nowPlayingResponse.data.results;
     const popularMovies = popularResponse.data.results;
     const topRatedMovies = topRatedResponse.data.results;
     const upcomingMovies = upcomingResponse.data.results;
+;
     // Mongo User
     const user = await User.findOne({ _id: req.params.userId })
 
-    
-
-
-
-
+  
      res.render('movie/allMovies', {user, trendingMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, movie_genre: movie_genre.genres})
   } catch (error) {
     const { success, status_message } = error.response.data;
@@ -297,7 +295,7 @@ app.delete('/movie/:id/reviews/:userId', async (req, res) => {
 // =========================================== TV SHOWS ==============================================
 
 // GET - ALL TV SHOWS
-app.get('/tvShows:userId', async (req,res)=>{
+app.get('/tvShows/:userId', async (req,res)=>{
   try {
     const trendingResponse = await axios.get(`https://api.themoviedb.org/3/trending/tv/day`,options)
     const airingTodayResponse = await axios.get(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1`,options)
@@ -310,9 +308,11 @@ app.get('/tvShows:userId', async (req,res)=>{
     const onAir = onAirResponse.data.results;
     const popularTv = popularResponse.data.results;
     const topRatedTv = topRatedResponse.data.results;
+    // Mongo User
+    const user = await User.findOne({ _id: req.params.userId })
 
 
-    res.render('tvShow/allTvShows',{trendingTv, airingToday, onAir, popularTv, topRatedTv})
+    res.render('tvShow/allTvShows',{user, trendingTv, airingToday, onAir, popularTv, topRatedTv, tv_genre: tv_genre.genres})
   } catch (error) {
     const { success, status_message } = error.response.data;
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)

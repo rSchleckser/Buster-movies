@@ -15,6 +15,51 @@
       background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
     }
 
+    .hidden.menu {
+      display: none;
+    }
+
+    .masthead.segment {
+      min-height: 800px;
+      padding: 1em 0em;
+    }
+
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+
+    /* Header Text Container*/
+    div.ui.text.container {
+      background-color: rgba(121, 121, 136, 0.212);
+      padding-bottom: 2rem;
+      border-radius: 1rem;
+    }
+
+    /* Header Text */
+    .masthead h1.ui.header {
+      padding-top: 1.2rem;
+      margin-top: 3em;
+      margin-bottom: 0.5rem;
+      font-size: 4em;
+      font-weight: normal;
+    }
+
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+
+    /* input Search */
+    input.prompt {
+      width: 500px;
+    }
+
     /* Cards */
     div.ui.special.cards {
       justify-content: center;
@@ -46,6 +91,15 @@
       margin: 0;
     }
 
+    div.carousel.slide {
+      margin-bottom: 3rem;
+    }
+
+    div.carousel.slide.ui.segment {
+      /* background: linear-gradient(deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%); */
+      box-shadow: 10px 5px 5px black;
+    }
+
     /* Carousel Buttons */
     div#trendingCarousel {
       margin-left: 7rem;
@@ -56,6 +110,22 @@
       margin-left: 7rem;
       width: 90%;
     }
+
+    div#popularCarousel {
+      margin-left: 7rem;
+      width: 90%;
+    }
+
+    div#topRatedCarousel {
+      margin-left: 7rem;
+      width: 90%;
+    }
+
+    div#upcomingMoviesCarousel {
+      margin-left: 7rem;
+      width: 90%;
+    }
+
 
     /* Trending Carousel Buttons*/
     #trendingCarousel a.carousel-control-next {
@@ -91,6 +161,57 @@
       margin-top: 17.8rem;
     }
 
+    /* Popular Carousel Buttons*/
+    #popularCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 17.8rem;
+    }
+
+    #popularCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 17.8rem;
+    }
+
+    /* Top Rated Carousel Buttons*/
+    #topRatedCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 17.8rem;
+    }
+
+    #topRatedCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 17.8rem;
+    }
+
+    /* UpComing Carousel Buttons*/
+    #upcomingMoviesCarousel a.carousel-control-next {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 17.8rem;
+    }
+
+    #upcomingMoviesCarousel a.carousel-control-prev {
+      background-color: rgba(19, 18, 18, 0.507);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin-top: 17.8rem;
+    }
+
     /* footer */
     footer.ui.inverted.vertical.footer.segment {
       padding: 3rem;
@@ -100,18 +221,46 @@
 </head>
 
 <body>
-  <!-- Navbar -->
+
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a class="active item" href='/dashboard/<%= user._id %>'>Home</a>
+      <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
+      <a class="item" href='/tvShows/<%= user._id %>'><i class="film icon"></i>TV Shows</a>
+      <div class="right menu">
+        <div class="item">
+          <a class="ui button" href='/profile/<%= user._id %>'>Profile</a>
+        </div>
+        <div class="item">
+          <a class="ui primary button" href='/auth/logout'>Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="active item" href='/dashboard/<%= user._id %>'>Home</a>
+    <a class="item" href='/movies/<%= user._id %>'>Movies</a>
+    <a class="item" href='/tvShows/<%= user._id %>'>TV Shows</a>
+    <a class="item" href='/profile/<%= user._id %>'>Profile</a>
+    <a class="item" href='/auth/logout'>Log Out</a>
+  </div>
+
+
+  <!-- Page Contents -->
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
 
-      <div class="ui container" style='width: 1400px;'>
+      <div class="ui container">
         <div class="ui large secondary inverted pointing menu">
-
-          <div class='item'><i class="ticket icon"></i>Buster Movies</div>
-          <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
-          <a class="item" href='/search'>
-            <i class="grid layout icon"></i> Browse
+          <a class="toc item">
+            <i class="sidebar icon"></i>
           </a>
+          <div class='item'><i class="ticket icon"></i>Buster Movies</div>
+          <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
+
           <a class="active item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
           <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
@@ -120,165 +269,370 @@
           </div>
         </div>
       </div>
+
+      <div class="ui text container">
+        <h1 class="ui inverted header">
+          Movies
+        </h1>
+        <h2>Find and enjoy your favorite Movies</h2>
+
+        <form class="ui fluid category search" action="/search/<%= user._id %>/results" method="get" style='margin-bottom: 2rem;'>
+          <div class="ui icon input">
+            <input class="prompt" type="search" name="media" placeholder="Search Movies..." aria-label="Search">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </form>
+      </div>
     </div>
-  </div>
 
 
+    <!-- Divider -->
+    <div class="ui horizontal divider">
+      <h1 class='heading'>Top Rated Movies</h1>
+    </div>
 
-  <!-- Trending Carousel -->
-  <h1 class='heading'>Trending Movies</h1>
-  <div id="trendingCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <% for(let i = 0; i < trendingMovies.length; i += 7) { %>
-      <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-        <div class="d-flex justify-content-around">
-          <div class="ui special cards">
-            <% for(let j = i; j < i + 7 && j < trendingMovies.length; j++) { %>
-            <% let movie = trendingMovies[j]; %>
-            <div class="card">
-              <div class="blurring dimmable image">
-                <div class="ui dimmer">
-                  <div class="content">
-                    <div class="center">
-                      <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+    <!-- Top Rated Carousel -->
+    <div id="topRatedCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% for(let i = 0; i < topRatedMovies.length; i += 7) { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+          <div class="d-flex justify-content-around">
+            <div class="ui special cards">
+              <% for(let j = i; j < i + 7 && j < topRatedMovies.length; j++) { %>
+              <% let movie = topRatedMovies[j]; %>
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                      </div>
                     </div>
                   </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
                 </div>
-                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
-              </div>
-              <div class="content">
-                <a class="header"><%= movie.title %></a>
-                <div class="meta">
-                  <% const genreNames = movie.genre_ids.map(genreId => {%>
-                  <% const genre = movie_genre.find(g => g.id === genreId);%>
-                  <%  return genre ? genre.name : '';%>
-                  <%  }).filter(name => name).join(', ');%>
-                  <span><%= genreNames %></span>
-                  <div class="description">Release Date: <%= movie.release_date %></div>
-                </div>
-              </div>
-              <div class="ui two bottom attached buttons">
-                <div class="ui toggle button">
-                  <i class="add icon"></i> Add
-                </div>
-                <div class="ui teal favorite button">
-                  <i class="add icon"></i> Favorite
-                </div>
-              </div>
-            </div>
-            <% } %>
-          </div>
-        </div>
-      </div>
-      <% } %>
-    </div>
-    <a class="carousel-control-prev" href="#trendingCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#trendingCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-
-  <!-- nowPlaying Carousel -->
-  <h1 class='heading'>Now Playing Movies</h1>
-  <div id="nowPlayingCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <% for(let i = 0; i < nowPlayingMovies.length; i += 7) { %>
-      <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-        <div class="d-flex justify-content-around">
-          <div class="ui special cards">
-            <% for(let j = i; j < i + 7 && j < nowPlayingMovies.length; j++) { %>
-            <% let movie = nowPlayingMovies[j]; %>
-            <div class="card">
-              <div class="blurring dimmable image">
-                <div class="ui dimmer">
-                  <div class="content">
-                    <div class="center">
-                      <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
-                    </div>
+                <div class="content">
+                  <a class="header"><%= movie.title %></a>
+                  <div class="meta">
+                    <% const genreNames = movie.genre_ids.map(genreId => {%>
+                    <% const genre = movie_genre.find(g => g.id === genreId);%>
+                    <%  return genre ? genre.name : '';%>
+                    <%  }).filter(name => name).join(', ');%>
+                    <span><%= genreNames %></span>
+                    <div class="description">Release Date: <%= movie.release_date %></div>
                   </div>
                 </div>
-                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
-              </div>
-              <div class="content">
-                <a class="header"><%= movie.title %></a>
-                <div class="meta">
-                  <% const genreNames = movie.genre_ids.map(genreId => {%>
-                  <% const genre = movie_genre.find(g => g.id === genreId);%>
-                  <%  return genre ? genre.name : '';%>
-                  <%  }).filter(name => name).join(', ');%>
-                  <span><%= genreNames %></span>
-                  <div class="description">Release Date: <%= movie.release_date %></div>
+                <div class="ui two bottom attached buttons">
+                  <div class="ui toggle button">
+                    <i class="add icon"></i> Add
+                  </div>
+                  <div class="ui teal favorite button">
+                    <i class="add icon"></i> Favorite
+                  </div>
                 </div>
               </div>
-              <div class="ui two bottom attached buttons">
-                <div class="ui toggle button">
-                  <i class="add icon"></i> Add
-                </div>
-                <div class="ui teal favorite button">
-                  <i class="add icon"></i> Favorite
-                </div>
-              </div>
+              <% } %>
             </div>
-            <% } %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <a class="carousel-control-prev" href="#topRatedCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#topRatedCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="ui horizontal divider">
+      <h1 class='heading'>Trending Movies</h1>
+    </div>
+
+    <!-- Trending Carousel -->
+    <div id="trendingCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% for(let i = 0; i < trendingMovies.length; i += 7) { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+          <div class="d-flex justify-content-around">
+            <div class="ui special cards">
+              <% for(let j = i; j < i + 7 && j < trendingMovies.length; j++) { %>
+              <% let movie = trendingMovies[j]; %>
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
+                </div>
+                <div class="content">
+                  <a class="header"><%= movie.title %></a>
+                  <div class="meta">
+                    <% const genreNames = movie.genre_ids.map(genreId => {%>
+                    <% const genre = movie_genre.find(g => g.id === genreId);%>
+                    <%  return genre ? genre.name : '';%>
+                    <%  }).filter(name => name).join(', ');%>
+                    <span><%= genreNames %></span>
+                    <div class="description">Release Date: <%= movie.release_date %></div>
+                  </div>
+                </div>
+                <div class="ui two bottom attached buttons">
+                  <div class="ui toggle button">
+                    <i class="add icon"></i> Add
+                  </div>
+                  <div class="ui teal favorite button">
+                    <i class="add icon"></i> Favorite
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <a class="carousel-control-prev" href="#trendingCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#trendingCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+    <!-- Divider -->
+    <div class="ui horizontal divider">
+      <h1 class='heading'>Now Playing</h1>
+    </div>
+
+    <!-- nowPlaying Carousel -->
+    <div id="nowPlayingCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% for(let i = 0; i < nowPlayingMovies.length; i += 7) { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+          <div class="d-flex justify-content-around">
+            <div class="ui special cards">
+              <% for(let j = i; j < i + 7 && j < nowPlayingMovies.length; j++) { %>
+              <% let movie = nowPlayingMovies[j]; %>
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
+                </div>
+                <div class="content">
+                  <a class="header"><%= movie.title %></a>
+                  <div class="meta">
+                    <% const genreNames = movie.genre_ids.map(genreId => {%>
+                    <% const genre = movie_genre.find(g => g.id === genreId);%>
+                    <%  return genre ? genre.name : '';%>
+                    <%  }).filter(name => name).join(', ');%>
+                    <span><%= genreNames %></span>
+                    <div class="description">Release Date: <%= movie.release_date %></div>
+                  </div>
+                </div>
+                <div class="ui two bottom attached buttons">
+                  <div class="ui toggle button">
+                    <i class="add icon"></i> Add
+                  </div>
+                  <div class="ui teal favorite button">
+                    <i class="add icon"></i> Favorite
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <a class="carousel-control-prev" href="#nowPlayingCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#nowPlayingCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="ui horizontal divider">
+      <h1 class='heading'>Popular Movies</h1>
+    </div>
+
+    <!-- Popular Carousel -->
+    <div id="popularCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% for(let i = 0; i < popularMovies.length; i += 7) { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+          <div class="d-flex justify-content-around">
+            <div class="ui special cards">
+              <% for(let j = i; j < i + 7 && j < popularMovies.length; j++) { %>
+              <% let movie = popularMovies[j]; %>
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
+                </div>
+                <div class="content">
+                  <a class="header"><%= movie.title %></a>
+                  <div class="meta">
+                    <% const genreNames = movie.genre_ids.map(genreId => {%>
+                    <% const genre = movie_genre.find(g => g.id === genreId);%>
+                    <%  return genre ? genre.name : '';%>
+                    <%  }).filter(name => name).join(', ');%>
+                    <span><%= genreNames %></span>
+                    <div class="description">Release Date: <%= movie.release_date %></div>
+                  </div>
+                </div>
+                <div class="ui two bottom attached buttons">
+                  <div class="ui toggle button">
+                    <i class="add icon"></i> Add
+                  </div>
+                  <div class="ui teal favorite button">
+                    <i class="add icon"></i> Favorite
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <a class="carousel-control-prev" href="#popularCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#popularCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+    <!-- Divider -->
+    <div class="ui horizontal divider">
+      <h1 class='heading'>Upcoming Movies</h1>
+    </div>
+
+    <!-- Upcoming Movies Carousel -->
+    <div id="upcomingMoviesCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% for(let i = 0; i < upcomingMovies.length; i += 7) { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+          <div class="d-flex justify-content-around">
+            <div class="ui special cards">
+              <% for(let j = i; j < i + 7 && j < upcomingMovies.length; j++) { %>
+              <% let movie = upcomingMovies[j]; %>
+              <div class="card">
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <div class="ui inverted button"><a href="/movie/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
+                </div>
+                <div class="content">
+                  <a class="header"><%= movie.title %></a>
+                  <div class="meta">
+                    <% const genreNames = movie.genre_ids.map(genreId => {%>
+                    <% const genre = movie_genre.find(g => g.id === genreId);%>
+                    <%  return genre ? genre.name : '';%>
+                    <%  }).filter(name => name).join(', ');%>
+                    <span><%= genreNames %></span>
+                    <div class="description">Release Date: <%= movie.release_date %></div>
+                  </div>
+                </div>
+                <div class="ui two bottom attached buttons">
+                  <div class="ui toggle button">
+                    <i class="add icon"></i> Add
+                  </div>
+                  <div class="ui teal favorite button">
+                    <i class="add icon"></i> Favorite
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <a class="carousel-control-prev" href="#upcomingMoviesCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#upcomingMoviesCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Contact Us</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Services</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Movies</a>
+              <a href="#" class="item">TV Shows</a>
+            </div>
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">Blockbuster Movie Website</h4>
+            <p>
+              A website for movie lovers to discover and watch the latest
+              blockbuster movies and TV shows.
+            </p>
           </div>
         </div>
       </div>
-      <% } %>
-    </div>
-    <a class="carousel-control-prev" href="#nowPlayingCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#nowPlayingCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
+    </footer>
 
-
-
-
-
-  <!-- Footer -->
-  <footer class="ui inverted vertical footer segment">
-    <div class="ui container">
-      <div class="ui stackable inverted divided equal height stackable grid">
-        <div class="three wide column">
-          <h4 class="ui inverted header">About</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Contact Us</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Services</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Movies</a>
-            <a href="#" class="item">TV Shows</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui inverted header">Blockbuster Movie Website</h4>
-          <p>
-            A website for movie lovers to discover and watch the latest
-            blockbuster movies and TV shows.
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Semantic UI JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-  <script src="/js/dimmableImage.js"></script>
-  <script src="/js/addToWatchList.js"></script>
-  <script src="/js/addToFavorites.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Semantic UI JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="/js/navbarFade.js"></script>
+    <script src="/js/dimmableImage.js"></script>
+    <script src="/js/addToWatchList.js"></script>
+    <script src="/js/addToFavorites.js"></script>
 </body>
 
 </html>

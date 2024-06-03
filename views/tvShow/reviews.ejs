@@ -19,11 +19,9 @@
 
           <div class=' item'><i class="ticket icon"></i>Buster Movies</div>
           <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
-          <a class="active item" href='/search'>
-            <i class="grid layout icon"></i> Browse
-          </a>
-          <a class="item" href='/movies'><i class="film icon"></i>Movies</a>
-          <a class="item" href='/tvShows'><i class="tv icon"></i>TV Shows</a>
+
+          <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
+          <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
             <a class="item" href="/profile/<%= user._id %>"><i class='user blue icon'></i>Profile</a>
             <a class="item" href="/auth/logout"><i class="sign out icon"></i></i>Log Out</a>
