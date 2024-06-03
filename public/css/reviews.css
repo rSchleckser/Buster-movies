@@ -3,6 +3,10 @@
     background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
   }
 
+  div.ui.container {
+    width: 1400px;
+  }
+
   h1.ui.header {
     padding-top: 2rem;
     font-size: 2.5rem;

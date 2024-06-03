@@ -76,6 +76,10 @@ const featured = response.data.results;
   }
 });
 
+
+
+
+
 //import auth routes
 app.use('/auth', require('./controllers/auth'));
 
@@ -105,7 +109,7 @@ app.get('/profile/:userId', isLoggedIn, (req, res) => {
 
   User.findOne({ _id: req.params.userId })
     .then((user)=>{
-      console.log(user._id.toString())
+      
 
       const { name, email, phone } = req.user;
       res.status(200).render('profile', { name, email, phone, user });
@@ -331,13 +335,26 @@ app.post('/tv/:id/reviews/:userId', async (req, res) => {
       { $push: { reviews: newReview._id } },
       { new: true })
 
-      console.log(newComment)
+    
       res.status(200).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error submitting review', error);
     res.status(500).send('Server Error');
   } 
 })
+
+// PUT - Update a review for a TV Show
+app.put('/tv/:id/reviews/:reviewId', async (req, res) => {
+  try {
+    const user = await Review.findOne({ _id: req.params.reviewId })
+    await Review.updateOne({ _id: req.params.reviewId }, { content: req.body.updatedContent });
+    res.status(200).redirect(`/tv/${req.params.id}/reviews/${user.userId}`);
+  } catch (error) {
+    console.error('Error updating Review', error);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 // DELETE - Delete a review for a movie
 app.delete('/tv/:id/reviews/:userId', async (req, res) => {
@@ -377,8 +394,10 @@ app.delete('/tv/:id/reviews/:userId', async (req, res) => {
     }
   })
 
-
-
+// 404 Middleware
+  app.use((req, res, next) => {
+    res.status(404).render('404');
+  });
 
 // Server
 app.listen(PORT, () => {
