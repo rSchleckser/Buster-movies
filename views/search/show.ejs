@@ -81,9 +81,33 @@
         </div>
       </div>
       <div class="ui two bottom attached buttons">
-        <div class="ui toggle button">
-          <i class="add icon"></i> Add
-        </div>
+
+        <% 
+        const watchList = user.watchlist.find((movieId) => movieId.id === media.id); 
+        %>
+
+        <% if (watchList) { %>
+        <form action="/search/<%= user._id %>/results?_method=PUT" method='post'>
+          <input type="hidden" name="movieId" value="<%= watchList._id %>">
+          <input type="hidden" name="query" value="<%= query %>">
+          <button class="ui toggled button" type="submit">
+            <i class="check icon"></i> Added
+          </button>
+        </form>
+
+        <% } else { %>
+        <form action="/search/<%= user._id %>/results" method="post">
+          <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
+          <input type="hidden" name="mediaType" value="<%= media.media_type %>">
+          <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
+          <input type="hidden" name="id" value="<%= media.id %>">
+          <input type="hidden" name="query" value="<%= query %>">
+          <button class="ui toggle button" type="submit" onclick='addToWatchList(this)'>
+            <i class="add icon"></i> Add
+          </button>
+        </form>
+        <% } %>
+
         <div class="ui teal favorite button">
           <i class="add icon"></i> Favorite
         </div>

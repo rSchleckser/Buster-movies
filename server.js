@@ -77,9 +77,6 @@ const featured = response.data.results;
 });
 
 
-
-
-
 //import auth routes
 app.use('/auth', require('./controllers/auth'));
 
@@ -103,6 +100,8 @@ app.get('/dashboard/:id', async(req,res)=>{
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
   }
 })
+
+
 
 //Go to user profile page
 app.get('/profile/:userId', isLoggedIn, (req, res) => {
@@ -141,21 +140,60 @@ app.get('/search/:userId/results', isLoggedIn, async (req, res) => {
       options
     );
 
-const medias = response.data.results;
-const query = req.query.media
+    const medias = response.data.results;
+    const query = req.query.media
 
-User.findOne({name:'Richard Schleckser'})
-.then((user)=>{
+   // Mongo User
+   const user = await User.findOne({ _id: req.params.userId })
+
   res
   .status(200)
   .render('search/show', { medias, movie_genre: movie_genre.genres, tv_genre: tv_genre.genres, query, user});
-})
+
   } catch (error) {
     console.error('Error fetching movie', error)
     const { success, status_message } = error.response.data;
     res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
   }
 });
+
+//POST - add to watchlist
+app.post('/search/:userId/results', async (req,res)=>{
+  try {
+    const movie = {
+      movie: req.body.movie,  
+      id: req.body.id,  
+      mediaType: req.body.mediaType, 
+      releaseDate: req.body.releaseDate     
+    };
+
+    const addMovie = await User.findByIdAndUpdate(
+      req.params.userId,
+      { $push: { watchlist: movie } }, 
+      { new: true } 
+    );
+
+    res.status(201).redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`)
+  } catch (error) {
+    console.error('Error adding media to watchlist', error);
+    res.status(500).send('Server Error');
+}
+})
+
+// PUT - Remove Movie from watchlist
+app.put('/search/:userId/results', async (req,res)=>{
+  try {
+    await User.findByIdAndUpdate(
+      req.params.userId,
+      { $pull: { watchlist: { _id: req.body.movieId } } },  
+      { new: true }
+    );
+    res.redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`)
+  } catch (error) {
+    console.error('Error removing media from watchlist', error);
+    res.status(500).send('Server Error');
+  }
+})
 
 // ============================== Movies ==================================================
 
@@ -390,7 +428,7 @@ app.post('/tv/:id/reviews/:userId', async (req, res) => {
       { new: true })
 
     
-      res.status(200).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
+      res.status(201).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error submitting review', error);
     res.status(500).send('Server Error');
@@ -455,6 +493,12 @@ app.delete('/tv/:id/reviews/:userId', async (req, res) => {
   app.use((req, res, next) => {
     res.status(404).render('404');
   });
+
+// 500 Middleware
+  app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).render('404')
+  })
 
 // Server
 app.listen(PORT, () => {

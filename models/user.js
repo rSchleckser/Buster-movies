@@ -19,11 +19,15 @@ const userSchema = new mongoose.Schema(
     },
     watchlist: [{
       Movie: String,
-      id: Number
+      id: Number,
+      mediaType: String,
+      releaseDate: String
     }],
     favorites: [{
       Movie: String,
-      id: Number
+      id: Number,
+      mediaType: String,
+      releaseDate: String
     }],
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   },
