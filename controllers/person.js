@@ -1,7 +1,6 @@
 const { User } = require('../models');
 const axios = require('axios');
 
-
 const options = {
     method: 'GET',
     headers: {
@@ -10,7 +9,6 @@ const options = {
     },
   };
 
-  
   
   // @desc GET - Person Show Page
   const getPersonShowPage = async (req,res)=>{

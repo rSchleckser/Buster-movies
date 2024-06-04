@@ -1,12 +1,10 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
-const axios = require('axios');
 require('dotenv').config();
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('./config/passport-config');
-const isLoggedIn = require('./middleware/isLoggedIn');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const methodOverride = require('method-override');
 
@@ -14,15 +12,12 @@ const methodOverride = require('method-override');
 const home = require('./route/home')
 const dashboard = require('./route/dashboard')
 const profile = require('./route/profile')
-// import controllers
-
-
-
-const {getSearchResults, postToSearchList, updateSearchList } = require('./controllers/search')
-const {getAllMovies, postMoviesToList, updateMoviesList, getMovieShowPage, getMovieReviewPage, postMovieReview, updateMovieReview, deleteMovieReview } = require('./controllers/movies')
-const {getAllTvShows,postTvShowsList, updateTvShowsList, getTvShowPage, getTvShowsReviewPage, postTvShowReview, updateTvShowReview, deleteTvShowReview} = require('./controllers/tv')
-const {getPersonShowPage} = require('./controllers/person')
-
+const search = require('./route/search')
+const movies = require('./route/movies')
+const movie = require('./route/movie')
+const tvShows = require('./route/tvShows')
+const tvShow = require('./route/tvShow')
+const person = require('./route/person')
 
 //Middleware
 app.use(methodOverride('_method'));
@@ -63,85 +58,37 @@ app.use('/', home);
 //import auth routes
 app.use('/auth', require('./controllers/auth'));
 
-// =============================== Dashboard ============================================
+// =============================== Dashboard =============================================
 //GET - Dashboard
 app.use('/', dashboard)
 
-// =============================== User Pages ====================================
-
+// =============================== User Pages ============================================
 //Go to user profile page
 app.use('/profile', profile);
 
-// ================================== Search Pages ===================================
-
- 
+// ============================== Search Pages ===========================================
 //Search Results Page
-app.get('/search/:userId/results', isLoggedIn, getSearchResults);
+app.use('/search', search);
 
-//POST - add to watchlist/favorites
-app.post('/search/:userId/results', isLoggedIn, postToSearchList);
-
-// PUT - Remove Movie from watchlist/favorites
-app.put('/search/:userId/results', isLoggedIn, updateSearchList);
-
-
-// ============================== Movies ==================================================
-
+// ============================== Movies =================================================
 // GET - ALL MOVIES
-app.get('/movies/:userId', isLoggedIn, getAllMovies)
+app.use('/movies', movies)
 
-//POST - add Movie to watchlist/favorites
-app.post('/movies/:userId', isLoggedIn, postMoviesToList);
+// ============================== Movie ==================================================
+// GET - Single Movie Page
+app.use('/movie', movie);
 
-// PUT - Remove Movie from watchlist/favorites
-app.put('/movies/:userId', isLoggedIn, updateMoviesList);
-
-// GET - Movie Show Page
-app.get('/movie/:id/:userId', isLoggedIn, getMovieShowPage);
-
-// GET - Movie Review Page
-app.get('/movie/:id/reviews/:userId', isLoggedIn, getMovieReviewPage);
-
-// POST - Submit a review for a movie
-app.post('/movie/:id/reviews/:userId', isLoggedIn, postMovieReview)
-
-// PUT - Update a review for a movie
-app.put('/movie/:id/reviews/:reviewId', updateMovieReview);
-
-// DELETE - Delete a review for a movie
-app.delete('/movie/:id/reviews/:userId', isLoggedIn, deleteMovieReview);
-
-// =========================================== TV SHOWS ==============================================
-
+// ============================== TV SHOWS ================================================
 // GET - ALL TV SHOWS
-app.get('/tvShows/:userId', isLoggedIn, getAllTvShows)
+app.get('/tvShows', tvShows)
 
-//POST - add Movie to watchlist/favorites
-app.post('/tvShows/:userId', isLoggedIn, postTvShowsList);
-
-// PUT - Remove Movie from watchlist/favorites
-app.put('/tvShows/:userId', isLoggedIn, updateTvShowsList);
-
+// =============================== TV SHOW ================================================
 // GET - TV Show Page
-app.get('/tv/:id/:userId', isLoggedIn, getTvShowPage)
+app.get('/tv', tvShow)
 
-  // GET - TV Show Review Page
-app.get('/tv/:id/reviews/:userId',isLoggedIn, getTvShowsReviewPage);
-
-// POST - Submit a review for a TV Show
-app.post('/tv/:id/reviews/:userId', isLoggedIn, postTvShowReview)
-
-// PUT - Update a review for a TV Show
-app.put('/tv/:id/reviews/:reviewId', isLoggedIn, updateTvShowReview);
-
-// DELETE - Delete a review for a movie
-app.delete('/tv/:id/reviews/:userId', isLoggedIn, deleteTvShowReview);
-
-  
-// ============================================ Person =========================================================
-
-  // GET - Person Show Page
-  app.get('/person/:id/:userId', isLoggedIn, getPersonShowPage)
+// =============================== Person ==================================================
+// GET - Person Show Page
+app.get('/person', person)
 
 // 404 Middleware
   app.use((req, res, next) => {
