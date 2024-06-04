@@ -71,6 +71,20 @@
         background-color: #e03997 !important;
         color: white !important;
       }
+
+      /* button style */
+      .button-container {
+        display: flex;
+      }
+      
+      .equal-width-form {
+        flex: 1;
+      }
+      
+      .equal-width-button {
+        width: 100%;
+      }
+      
   
   
       /* Carousels */
