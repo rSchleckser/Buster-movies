@@ -65,14 +65,11 @@ app.get('/', async (req, res) => {
       `https://api.themoviedb.org/3/trending/all/week?language=en`,
       options
     );
-
-const featured = response.data.results;
+    const featured = response.data.results;
 
     res.status(200).render('home/index', { featured });
   } catch (error) {
-    console.error('Error fetching movie', error)
-    const { success, status_message } = error.response.data;
-    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    res.status(404).render('404');
   }
 });
 
@@ -87,51 +84,56 @@ app.get('/dashboard/:id', async(req,res)=>{
       `https://api.themoviedb.org/3/trending/all/week?language=en`,
       options
     );
-    User.findOne({ _id: req.params.id })
-    .then((user)=>{
-  
+    const user = await User.findOne({ _id: req.params.id })
     const featured = response.data.results;
-    res.status(200).render('dashboard', {featured, user})
-    })
 
+    res.status(200).render('dashboard', {featured, user})
   } catch (error) {
     console.error('Error fetching movie', error)
-    const { success, status_message } = error.response.data;
-    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    res.status(404).render('404');
   }
 })
 
 
 
 //Go to user profile page
-app.get('/profile/:userId', isLoggedIn, (req, res) => {
-
-  User.findOne({ _id: req.params.userId })
-    .then((user)=>{
-      
-
-      const { name, email, phone } = req.user;
-      res.status(200).render('profile', { name, email, phone, user });
-    })
+app.get('/profile/:userId', isLoggedIn, async(req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.userId })
+    const { name, email, phone } = req.user;
+    res.status(200).render('profile', { name, email, phone, user });
+  } catch (error) {
+    console.error('Error getting profile page', error);
+    res.status(404).render('404');
+  }
 });
 
+// =============================== User Pages ====================================
 //GET - Go to user watchlist page
-app.get('/profile/:userId/watchlist', (req,res)=>{
-  User.findOne({name:'Richard Schleckser'})
-  .then(user =>{
-    res.render('userPages/watchlist', {user})
-  })
-  
+app.get('/profile/:userId/watchlist', isLoggedIn, async (req,res)=>{
+  try {
+    const user = await User.findOne({_id: req.params.userId})
+    res.status(200).render('userPages/watchlist', {user})
+  } catch (error) {
+    console.error('Error getting Users watchlist', error)
+    res.status(404).render('404');
+  }
+});
+
+// Get - Go to user favorite page
+app.get('/profile/:userID/favorites', isLoggedIn, async (req,res)=>{
+  try {
+    const user = await User.findOne({_id: req.params.userId});
+    res.status(200).render('userPages/favorites', {user})
+  } catch (error) {
+    console.error('Error getting Users favorites page', error)
+    res.status(404).render('404');
+  }
 })
 
 // ================================== Search Pages ===================================
 
-//Search Page
-app.get('/search', isLoggedIn, (req, res) => {
-  res.status(200).render('search/search');
-});
-
-
+ 
 //Search Results Page
 app.get('/search/:userId/results', isLoggedIn, async (req, res) => {
   try {
@@ -140,9 +142,8 @@ app.get('/search/:userId/results', isLoggedIn, async (req, res) => {
       options
     );
 
-    const medias = response.data.results;
-    const query = req.query.media
-
+   const medias = response.data.results;
+   const query = req.query.media
    // Mongo User
    const user = await User.findOne({ _id: req.params.userId })
 
@@ -152,13 +153,12 @@ app.get('/search/:userId/results', isLoggedIn, async (req, res) => {
 
   } catch (error) {
     console.error('Error fetching movie', error)
-    const { success, status_message } = error.response.data;
-    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    res.status(404).render('404');
   }
 });
 
 //POST - add to watchlist/favorites
-app.post('/search/:userId/results', async (req, res) => {
+app.post('/search/:userId/results', isLoggedIn, async (req, res) => {
   try {
 
     const movie = {
@@ -167,7 +167,6 @@ app.post('/search/:userId/results', async (req, res) => {
       mediaType: req.body.mediaType, 
       releaseDate: req.body.releaseDate     
     };
-
 
     if (req.body.watchlist) {
       await User.findByIdAndUpdate(
@@ -186,7 +185,7 @@ app.post('/search/:userId/results', async (req, res) => {
     res.status(201).redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`);
   } catch (error) {
     console.error('Error adding media to watchlist or favorites', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
@@ -207,10 +206,10 @@ app.put('/search/:userId/results', async (req, res) => {
       );
     }
 
-    res.redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`);
+    res.status(200).redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`);
   } catch (error) {
     console.error('Error removing media from watchlist or favorites', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
@@ -218,7 +217,7 @@ app.put('/search/:userId/results', async (req, res) => {
 // ============================== Movies ==================================================
 
 // GET - ALL MOVIES
-app.get('/movies/:userId', async (req,res)=>{
+app.get('/movies/:userId', isLoggedIn, async (req,res)=>{
   try {
     const trendingResponse = await axios.get(`https://api.themoviedb.org/3/trending/movie/day`, options);
     const nowPlayingResponse = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`, options);
@@ -237,15 +236,15 @@ app.get('/movies/:userId', async (req,res)=>{
     const user = await User.findOne({ _id: req.params.userId })
 
   
-     res.render('movie/allMovies', {user, trendingMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, movie_genre: movie_genre.genres})
+     res.status(200).render('movie/allMovies', {user, trendingMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, movie_genre: movie_genre.genres})
   } catch (error) {
-    const { success, status_message } = error.response.data;
-    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    console.error('Error getting Movies', error);
+    res.status(404).render('404');
   }
 })
 
 //POST - add Movie to watchlist/favorites
-app.post('/movies/:userId', async (req, res) => {
+app.post('/movies/:userId', isLoggedIn, async (req, res) => {
   try {
     
     const movie = {
@@ -273,12 +272,12 @@ app.post('/movies/:userId', async (req, res) => {
     res.status(201).redirect(`/movies/${req.params.userId}`);
   } catch (error) {
     console.error('Error adding media to watchlist or favorites', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
 // PUT - Remove Movie from watchlist/favorites
-app.put('/movies/:userId', async (req, res) => {
+app.put('/movies/:userId', isLoggedIn, async (req, res) => {
   try {
     if (req.body.favorite) {
       await User.findByIdAndUpdate(
@@ -294,10 +293,10 @@ app.put('/movies/:userId', async (req, res) => {
       );
     }
 
-    res.redirect(`/movies/${req.params.userId}`);
+    res.status(200).redirect(`/movies/${req.params.userId}`);
   } catch (error) {
     console.error('Error removing media from watchlist or favorites', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
@@ -327,18 +326,15 @@ const newReviews = await Review.find({movieId: req.params.id})
 // Mongo User
 const user = await User.findOne({ _id: req.params.userId })
 
-
-
   res.status(200).render('movie/show', {details, images,videos, credits, reviews, recommendations, newReviews, user})
 } catch (error) {
   console.error('Error fetching movie', error)
-  const { success, status_message } = error.response.data;
-  res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+  res.status(404).render('404');
 }
 });
 
 // GET - Movie Review Page
-app.get('/movie/:id/reviews/:userId', async (req,res)=>{
+app.get('/movie/:id/reviews/:userId', isLoggedIn, async (req,res)=>{
   try {
     const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
     const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/reviews`, options)
@@ -357,7 +353,7 @@ app.get('/movie/:id/reviews/:userId', async (req,res)=>{
 
 
 // POST - Submit a review for a movie
-app.post('/movie/:id/reviews/:userId', async (req, res) => {
+app.post('/movie/:id/reviews/:userId', isLoggedIn, async (req, res) => {
   try {
     const newReview = new Review({
       movieId: req.params.id,
@@ -376,10 +372,10 @@ app.post('/movie/:id/reviews/:userId', async (req, res) => {
       { $push: { reviews: newReview._id } },
       { new: true })
 
-      res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
+    res.status(201).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error submitting review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   } 
 })
 
@@ -391,26 +387,26 @@ app.put('/movie/:id/reviews/:reviewId', async (req, res) => {
     res.status(200).redirect(`/movie/${req.params.id}/reviews/${user.userId}`);
   } catch (error) {
     console.error('Error updating Review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
 
 // DELETE - Delete a review for a movie
-app.delete('/movie/:id/reviews/:userId', async (req, res) => {
+app.delete('/movie/:id/reviews/:userId', isLoggedIn, async (req, res) => {
   try {
     await Review.deleteOne({ _id: req.body.reviewId, movieId: req.params.id });
     res.status(200).redirect(`/movie/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error deleting Review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
 // =========================================== TV SHOWS ==============================================
 
 // GET - ALL TV SHOWS
-app.get('/tvShows/:userId', async (req,res)=>{
+app.get('/tvShows/:userId', isLoggedIn, async (req,res)=>{
   try {
     const trendingResponse = await axios.get(`https://api.themoviedb.org/3/trending/tv/day`,options)
     const airingTodayResponse = await axios.get(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1`,options)
@@ -427,16 +423,16 @@ app.get('/tvShows/:userId', async (req,res)=>{
     const user = await User.findOne({ _id: req.params.userId })
 
 
-    res.render('tvShow/allTvShows',{user, trendingTv, airingToday, onAir, popularTv, topRatedTv, tv_genre: tv_genre.genres})
+    res.status(200).render('tvShow/allTvShows',{user, trendingTv, airingToday, onAir, popularTv, topRatedTv, tv_genre: tv_genre.genres})
   } catch (error) {
-    const { success, status_message } = error.response.data;
-    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    console.error('Error getting all tv shows', error)
+    res.status(404).render('404');
   }
 })
 
 
 //POST - add Movie to watchlist/favorites
-app.post('/tvShows/:userId', async (req, res) => {
+app.post('/tvShows/:userId', isLoggedIn, async (req, res) => {
   try {
     
     const movie = {
@@ -464,12 +460,12 @@ app.post('/tvShows/:userId', async (req, res) => {
     res.status(201).redirect(`/tvShows/${req.params.userId}`);
   } catch (error) {
     console.error('Error adding media to watchlist or favorites', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
 // PUT - Remove Movie from watchlist/favorites
-app.put('/tvShows/:userId', async (req, res) => {
+app.put('/tvShows/:userId', isLoggedIn, async (req, res) => {
   try {
     if (req.body.favorite) {
       await User.findByIdAndUpdate(
@@ -485,10 +481,10 @@ app.put('/tvShows/:userId', async (req, res) => {
       );
     }
 
-    res.redirect(`/tvShows/${req.params.userId}`);
+    res.status(200).redirect(`/tvShows/${req.params.userId}`);
   } catch (error) {
     console.error('Error removing media from watchlist or favorites', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
@@ -521,13 +517,12 @@ const user = await User.findOne({ _id: req.params.userId })
     res.status(200).render('tvShow/show', {details, images, videos, credits, reviews, recommendations, newReviews, user})
   } catch (error) {
     console.error('Error fetching movie', error)
-    const { success, status_message } = error.response.data;
-    res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+    res.status(404).render('404');
   } 
   })
 
   // GET - TV Show Review Page
-app.get('/tv/:id/reviews/:userId', async (req,res)=>{
+app.get('/tv/:id/reviews/:userId',isLoggedIn, async (req,res)=>{
   try {
     const detailsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}`, options);
     const reviewsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/reviews`, options)
@@ -540,13 +535,13 @@ app.get('/tv/:id/reviews/:userId', async (req,res)=>{
     res.status(200).render('tvShow/reviews', {reviews, details, user, newReviews})
   } catch (error) {
     console.error('Error getting review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
 
 // POST - Submit a review for a TV Show
-app.post('/tv/:id/reviews/:userId', async (req, res) => {
+app.post('/tv/:id/reviews/:userId', isLoggedIn, async (req, res) => {
   try {
     const newReview = new Review({
       movieId: req.params.id,
@@ -566,35 +561,35 @@ app.post('/tv/:id/reviews/:userId', async (req, res) => {
       { new: true })
 
     
-      res.status(201).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
+    res.status(201).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error submitting review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   } 
 })
 
 // PUT - Update a review for a TV Show
-app.put('/tv/:id/reviews/:reviewId', async (req, res) => {
+app.put('/tv/:id/reviews/:reviewId', isLoggedIn, async (req, res) => {
   try {
     const user = await Review.findOne({ _id: req.params.reviewId })
     await Review.updateOne({ _id: req.params.reviewId }, { content: req.body.updatedContent });
     res.status(200).redirect(`/tv/${req.params.id}/reviews/${user.userId}`);
   } catch (error) {
     console.error('Error updating Review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
 
 // DELETE - Delete a review for a movie
-app.delete('/tv/:id/reviews/:userId', async (req, res) => {
+app.delete('/tv/:id/reviews/:userId', isLoggedIn, async (req, res) => {
   try {
     const { reviewId } = req.body;  
     await Review.deleteOne({ _id: reviewId, movieId: req.params.id });
     res.status(200).redirect(`/tv/${req.params.id}/reviews/${req.params.userId}`);
   } catch (error) {
     console.error('Error deleting Review', error);
-    res.status(500).send('Server Error');
+    res.status(404).render('404');
   }
 });
 
@@ -616,14 +611,12 @@ app.delete('/tv/:id/reviews/:userId', async (req, res) => {
       const tvShows = tvCreditsResponse.data.cast;
       // Mongo User
       const user = await User.findOne({ _id: req.params.userId })
-  
 
       res.status(200).render('person/show', {details, images, movies, tvShows, user})
 
     } catch (error) {
       console.error('Error fetching movie', error)
-      const { success, status_message } = error.response.data;
-      res.status(500).send(`Error fetching movie <br> ${error} <br> Able to retrieve data from API: ${success} <br> Status: ${status_message}`)
+      res.status(404).render('404');
     }
   })
 

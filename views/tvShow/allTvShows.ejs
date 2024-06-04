@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Movies</title>
+  <title>All TV Shows</title>
   <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Semantic UI CSS -->
@@ -105,14 +105,14 @@
                   <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
                 </div>
                 <div class="content">
-                  <a class="header"><%= movie.title %></a>
+                  <a class="header"><%= movie.name %></a>
                   <div class="meta">
                     <% const genreNames = movie.genre_ids.map(genreId => {%>
                     <% const genre = tv_genre.find(g => g.id === genreId);%>
                     <%  return genre ? genre.name : '';%>
                     <%  }).filter(name => name).join(', ');%>
                     <span><%= genreNames %></span>
-                    <div class="description">Release Date: <%= movie.release_date %></div>
+                    <div class="description">Release Date: <%= movie.first_air_date %></div>
                   </div>
                 </div>
                 <div class="ui two bottom attached buttons button-container">
@@ -208,14 +208,14 @@
                   <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
                 </div>
                 <div class="content">
-                  <a class="header"><%= movie.title %></a>
+                  <a class="header"><%= movie.name %></a>
                   <div class="meta">
                     <% const genreNames = movie.genre_ids.map(genreId => {%>
                     <% const genre = tv_genre.find(g => g.id === genreId);%>
                     <%  return genre ? genre.name : '';%>
                     <%  }).filter(name => name).join(', ');%>
                     <span><%= genreNames %></span>
-                    <div class="description">Release Date: <%= movie.release_date %></div>
+                    <div class="description">Release Date: <%= movie.first_air_date %></div>
                   </div>
                 </div>
                 <div class="ui two bottom attached buttons button-container">
@@ -312,14 +312,14 @@
                   <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
                 </div>
                 <div class="content">
-                  <a class="header"><%= movie.title %></a>
+                  <a class="header"><%= movie.name %></a>
                   <div class="meta">
                     <% const genreNames = movie.genre_ids.map(genreId => {%>
                     <% const genre = tv_genre.find(g => g.id === genreId);%>
                     <%  return genre ? genre.name : '';%>
                     <%  }).filter(name => name).join(', ');%>
                     <span><%= genreNames %></span>
-                    <div class="description">Release Date: <%= movie.release_date %></div>
+                    <div class="description">Release Date: <%= movie.first_air_date %></div>
                   </div>
                 </div>
                 <div class="ui two bottom attached buttons button-container">
@@ -415,14 +415,14 @@
                   <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
                 </div>
                 <div class="content">
-                  <a class="header"><%= movie.title %></a>
+                  <a class="header"><%= movie.name %></a>
                   <div class="meta">
                     <% const genreNames = movie.genre_ids.map(genreId => {%>
                     <% const genre = tv_genre.find(g => g.id === genreId);%>
                     <%  return genre ? genre.name : '';%>
                     <%  }).filter(name => name).join(', ');%>
                     <span><%= genreNames %></span>
-                    <div class="description">Release Date: <%= movie.release_date %></div>
+                    <div class="description">Release Date: <%= movie.first_air_date %></div>
                   </div>
                 </div>
                 <div class="ui two bottom attached buttons button-container">
@@ -519,14 +519,14 @@
                   <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.media_type %>" />
                 </div>
                 <div class="content">
-                  <a class="header"><%= movie.title %></a>
+                  <a class="header"><%= movie.name %></a>
                   <div class="meta">
                     <% const genreNames = movie.genre_ids.map(genreId => {%>
                     <% const genre = tv_genre.find(g => g.id === genreId);%>
                     <%  return genre ? genre.name : '';%>
                     <%  }).filter(name => name).join(', ');%>
                     <span><%= genreNames %></span>
-                    <div class="description">Release Date: <%= movie.release_date %></div>
+                    <div class="description">Release Date: <%= movie.first_air_date %></div>
                   </div>
                 </div>
                 <div class="ui two bottom attached buttons button-container">
