@@ -40,6 +40,35 @@
       .equal-width-button {
         width: 100%;
       }
+      .watchlist-container {
+        padding: 50px 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+  
+      .watchlist-container h1 {
+        margin-bottom: 30px;
+      }
+  
+      .watchlist-container ul {
+        list-style: none;
+        padding: 0;
+      }
+  
+      .watchlist-container li {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+  
+      .buttons {
+        margin-top: 20px;
+      }
+  
+      .buttons .ui.button a {
+        color: white;
+      }
+
   
       /* footer */
       footer.ui.inverted.vertical.footer.segment {
