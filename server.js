@@ -10,11 +10,14 @@ const isLoggedIn = require('./middleware/isLoggedIn');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const methodOverride = require('method-override');
 
-
+//import routes
+const home = require('./route/home')
+const dashboard = require('./route/dashboard')
+const profile = require('./route/profile')
 // import controllers
-const {getHomePage} = require('./controllers/home')
-const {getDashboard} = require('./controllers/dashboard')
-const {getProfile, getWatchlist, getFavorites} = require('./controllers/profile')
+
+
+
 const {getSearchResults, postToSearchList, updateSearchList } = require('./controllers/search')
 const {getAllMovies, postMoviesToList, updateMoviesList, getMovieShowPage, getMovieReviewPage, postMovieReview, updateMovieReview, deleteMovieReview } = require('./controllers/movies')
 const {getAllTvShows,postTvShowsList, updateTvShowsList, getTvShowPage, getTvShowsReviewPage, postTvShowReview, updateTvShowReview, deleteTvShowReview} = require('./controllers/tv')
@@ -52,27 +55,22 @@ app.use((req, res, next) => {
 });
 
 
-// ==================================================================================
+// =============================== Home Page ============================================
 //GET - Home Page
-app.get('/', getHomePage);
+app.use('/', home);
 
-// ==================================================================================
+// =============================== Auth Route ============================================
 //import auth routes
 app.use('/auth', require('./controllers/auth'));
 
+// =============================== Dashboard ============================================
 //GET - Dashboard
-app.get('/dashboard/:id', isLoggedIn, getDashboard)
+app.use('/', dashboard)
 
 // =============================== User Pages ====================================
 
 //Go to user profile page
-app.get('/profile/:userId', isLoggedIn, getProfile);
-
-//GET - Go to user watchlist page
-app.get('/profile/:userId/watchlist', isLoggedIn, getWatchlist);
-
-// Get - Go to user favorite page
-app.get('/profile/:userID/favorites', isLoggedIn, getFavorites)
+app.use('/profile', profile);
 
 // ================================== Search Pages ===================================
 
