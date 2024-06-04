@@ -1,3 +1,8 @@
+      /* Header Container */
+      div.ui.inverted.vertical.masthead.center.aligned.segment {
+        background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+      }    
+    
     /* Cards */
     div.ui.special.cards {
         justify-content: center;
@@ -12,7 +17,7 @@
       .resultQuery {
         color: rgb(11, 132, 145)
       }
-  
+     /* toggle buttons */
       .toggled {
         background-color: #21ba45 !important;
         color: white !important;
@@ -22,11 +27,18 @@
         background-color: #e03997 !important;
         color: white !important;
       }
+
+      /* adjust width of buttons */
+      .button-container {
+        display: flex;
+      }
   
+      .equal-width-form {
+        flex: 1;
+      }
   
-      /* Header Container */
-      div.ui.inverted.vertical.masthead.center.aligned.segment {
-        background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+      .equal-width-button {
+        width: 100%;
       }
   
       /* footer */

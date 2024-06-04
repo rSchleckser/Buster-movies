@@ -15,7 +15,6 @@ function addToWatchList(button) {
   } else {
       icon.className = 'add icon';
       button.childNodes[2].nodeValue = 'Add';
-      
-      console.log('Removed from watchlist');
+
   }
 }

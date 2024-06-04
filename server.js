@@ -157,8 +157,8 @@ app.get('/search/:userId/results', isLoggedIn, async (req, res) => {
   }
 });
 
-//POST - add to watchlist
-app.post('/search/:userId/results', async (req,res)=>{
+//POST - add to watchlist/favorites
+app.post('/search/:userId/results', async (req, res) => {
   try {
     const movie = {
       movie: req.body.movie,  
@@ -167,33 +167,51 @@ app.post('/search/:userId/results', async (req,res)=>{
       releaseDate: req.body.releaseDate     
     };
 
-    const addMovie = await User.findByIdAndUpdate(
-      req.params.userId,
-      { $push: { watchlist: movie } }, 
-      { new: true } 
-    );
+    if (req.body.watchlist) {
+      await User.findByIdAndUpdate(
+        req.params.userId,
+        { $push: { watchlist: movie } }, 
+        { new: true }
+      );
+    } else if (req.body.favorite) {
+      await User.findByIdAndUpdate(
+        req.params.userId,
+        { $push: { favorites: movie } }, 
+        { new: true }
+      );
+    }
 
-    res.status(201).redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`)
+    res.status(201).redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`);
   } catch (error) {
-    console.error('Error adding media to watchlist', error);
-    res.status(500).send('Server Error');
-}
-})
-
-// PUT - Remove Movie from watchlist
-app.put('/search/:userId/results', async (req,res)=>{
-  try {
-    await User.findByIdAndUpdate(
-      req.params.userId,
-      { $pull: { watchlist: { _id: req.body.movieId } } },  
-      { new: true }
-    );
-    res.redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`)
-  } catch (error) {
-    console.error('Error removing media from watchlist', error);
+    console.error('Error adding media to watchlist or favorites', error);
     res.status(500).send('Server Error');
   }
-})
+});
+
+// PUT - Remove Movie from watchlist/favorites
+app.put('/search/:userId/results', async (req, res) => {
+  try {
+    if (req.body.favorite) {
+      await User.findByIdAndUpdate(
+        req.params.userId,
+        { $pull: { favorites: { id: req.body.movieId } } },  
+        { new: true }
+      );
+    } else if (req.body.watchlist) {
+      await User.findByIdAndUpdate(
+        req.params.userId,
+        { $pull: { watchlist: { id: req.body.movieId } } },  
+        { new: true }
+      );
+    }
+
+    res.redirect(`/search/${req.params.userId}/results?media=${encodeURIComponent(req.body.query)}`);
+  } catch (error) {
+    console.error('Error removing media from watchlist or favorites', error);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 // ============================== Movies ==================================================
 
