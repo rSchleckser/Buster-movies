@@ -1,3 +1,9 @@
+    /* Header Container */
+    div.ui.inverted.vertical.masthead.center.aligned.segment {
+      background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
+    }
+
+
 .profile-pic {
     max-width: 100%;
   }
@@ -109,5 +115,5 @@
     /* footer */
     footer.ui.inverted.vertical.footer.segment {
       padding: 3rem;
-      margin-top: 3rem;
+      margin-top: 15rem;
     }

@@ -99,4 +99,5 @@
   footer.ui.inverted.vertical.footer.segment {
     padding: 3rem;
     margin-top: 3rem;
+    bottom: 0;
   }

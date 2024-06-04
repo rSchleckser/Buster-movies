@@ -10,10 +10,32 @@
   <!-- Semantic UI CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/css/movieShow.css">
-
 </head>
 
 <body>
+
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+
+      <div class="ui container" style='width: 1400px;'>
+        <div class="ui large secondary inverted pointing menu">
+
+          <div class='item'><i class="ticket icon"></i>Buster Movies</div>
+          <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
+
+          <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
+          <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
+          <div class="right item">
+            <a class="item" href="/profile/<%= user._id %>"><i class='user blue icon'></i>Profile</a>
+            <a class="item" href="/auth/logout"><i class="sign out icon"></i></i>Log Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <div class="ui container mt-5">
     <!-- Movie Poster and Info -->
     <div class="ui grid backdrop">
