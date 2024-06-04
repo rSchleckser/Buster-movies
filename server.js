@@ -80,15 +80,15 @@ app.use('/movie', movie);
 
 // ============================== TV SHOWS ================================================
 // GET - ALL TV SHOWS
-app.get('/tvShows', tvShows)
+app.use('/tvShows', tvShows)
 
 // =============================== TV SHOW ================================================
 // GET - TV Show Page
-app.get('/tv', tvShow)
+app.use('/tv', tvShow)
 
 // =============================== Person ==================================================
 // GET - Person Show Page
-app.get('/person', person)
+app.use('/person', person)
 
 // 404 Middleware
   app.use((req, res, next) => {

@@ -18,16 +18,18 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Your phone is required'],
     },
     watchlist: [{
-      Movie: String,
+      movie: String,
       id: Number,
       mediaType: String,
-      releaseDate: String
+      releaseDate: String,
+      img: String
     }],
     favorites: [{
-      Movie: String,
+      movie: String,
       id: Number,
       mediaType: String,
-      releaseDate: String
+      releaseDate: String,
+      img: String
     }],
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   },

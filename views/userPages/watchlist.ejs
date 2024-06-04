@@ -14,7 +14,7 @@
     <ul>
       <% user.watchlist.forEach(movie => { %>
       <li>
-        <strong>Movie:</strong> <%= movie.Movie %> - <strong>ID:</strong> <%= movie.id %>
+        <strong>Movie:</strong> <%= movie.movie %> - <strong>ID:</strong> <%= movie.id %> - <%= movie.releaseDate %>
       </li>
       <% }); %>
     </ul>

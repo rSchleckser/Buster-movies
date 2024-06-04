@@ -30,7 +30,7 @@
 
   <h1>Results for: <span class='resultQuery'><%= query %></span></h1>
 
-  <div class="ui special cards">
+  <div class="ui special link cards">
     <% medias.forEach(media => { %>
     <div class="card">
       <div class="blurring dimmable image">
@@ -89,6 +89,7 @@
         <form action="/search/<%= user._id %>/results" method="post" class="equal-width-form">
           <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
           <input type="hidden" name="mediaType" value="<%= media.media_type %>">
+          <input type="hidden" name="img" value="<%= media.poster_path %>">
           <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
           <input type="hidden" name="id" value="<%= media.id %>">
           <input type="hidden" name="query" value="<%= query %>">
@@ -113,6 +114,7 @@
           <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
           <input type="hidden" name="favorite" value="favorite">
           <input type="hidden" name="mediaType" value="<%= media.media_type %>">
+          <input type="hidden" name="img" value="<%= media.poster_path %>">
           <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
           <input type="hidden" name="id" value="<%= media.id %>">
           <input type="hidden" name="query" value="<%= query %>">

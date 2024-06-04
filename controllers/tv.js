@@ -46,7 +46,8 @@ const postTvShowsList = async (req, res) => {
         movie: req.body.movie,  
         id: req.body.id,  
         mediaType: req.body.mediaType, 
-        releaseDate: req.body.releaseDate     
+        releaseDate: req.body.releaseDate,
+        img: req.body.img         
       };
   
   
