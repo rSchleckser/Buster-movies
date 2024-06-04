@@ -115,13 +115,55 @@
                     <div class="description">Release Date: <%= movie.release_date %></div>
                   </div>
                 </div>
-                <div class="ui two bottom attached buttons">
-                  <div class="ui toggle button">
-                    <i class="add icon"></i> Add
-                  </div>
-                  <div class="ui teal favorite button">
-                    <i class="add icon"></i> Favorite
-                  </div>
+                <div class="ui two bottom attached buttons button-container">
+
+                  <% 
+                  const watchList = user.watchlist.find((media) => media.id === movie.id); 
+                  const favorites = user.favorites.find((media) => media.id === movie.id); 
+                  %>
+                  <% if (watchList) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <input type="hidden" name="movieId" value="<%= watchList.id %>">
+                    <button class="ui toggled button equal-width-button" type="submit">
+                      <i class="check icon"></i> Added
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
+                      <i class="add icon"></i> Add
+                    </button>
+                  </form>
+                  <% } %>
+
+                  <% if (favorites) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="movieId" value="<%= favorites.id %>">
+                    <button class="ui teal favorited button equal-width-button" type='submit'>
+                      <i class="heart icon"></i> Favorited
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
+                      <i class="add icon"></i> Favorite
+                    </button>
+                  </form>
+                  <% } %>
+
+
                 </div>
               </div>
               <% } %>
@@ -176,13 +218,55 @@
                     <div class="description">Release Date: <%= movie.release_date %></div>
                   </div>
                 </div>
-                <div class="ui two bottom attached buttons">
-                  <div class="ui toggle button">
-                    <i class="add icon"></i> Add
-                  </div>
-                  <div class="ui teal favorite button">
-                    <i class="add icon"></i> Favorite
-                  </div>
+                <div class="ui two bottom attached buttons button-container">
+
+                  <% 
+                  const watchList = user.watchlist.find((media) => media.id === movie.id); 
+                  const favorites = user.favorites.find((media) => media.id === movie.id); 
+                  %>
+                  <% if (watchList) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <input type="hidden" name="movieId" value="<%= watchList.id %>">
+                    <button class="ui toggled button equal-width-button" type="submit">
+                      <i class="check icon"></i> Added
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
+                      <i class="add icon"></i> Add
+                    </button>
+                  </form>
+                  <% } %>
+
+                  <% if (favorites) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="movieId" value="<%= favorites.id %>">
+                    <button class="ui teal favorited button equal-width-button" type='submit'>
+                      <i class="heart icon"></i> Favorited
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
+                      <i class="add icon"></i> Favorite
+                    </button>
+                  </form>
+                  <% } %>
+
+
                 </div>
               </div>
               <% } %>
@@ -238,13 +322,55 @@
                     <div class="description">Release Date: <%= movie.release_date %></div>
                   </div>
                 </div>
-                <div class="ui two bottom attached buttons">
-                  <div class="ui toggle button">
-                    <i class="add icon"></i> Add
-                  </div>
-                  <div class="ui teal favorite button">
-                    <i class="add icon"></i> Favorite
-                  </div>
+                <div class="ui two bottom attached buttons button-container">
+
+                  <% 
+                  const watchList = user.watchlist.find((media) => media.id === movie.id); 
+                  const favorites = user.favorites.find((media) => media.id === movie.id); 
+                  %>
+                  <% if (watchList) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <input type="hidden" name="movieId" value="<%= watchList.id %>">
+                    <button class="ui toggled button equal-width-button" type="submit">
+                      <i class="check icon"></i> Added
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
+                      <i class="add icon"></i> Add
+                    </button>
+                  </form>
+                  <% } %>
+
+                  <% if (favorites) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="movieId" value="<%= favorites.id %>">
+                    <button class="ui teal favorited button equal-width-button" type='submit'>
+                      <i class="heart icon"></i> Favorited
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
+                      <i class="add icon"></i> Favorite
+                    </button>
+                  </form>
+                  <% } %>
+
+
                 </div>
               </div>
               <% } %>
@@ -299,13 +425,55 @@
                     <div class="description">Release Date: <%= movie.release_date %></div>
                   </div>
                 </div>
-                <div class="ui two bottom attached buttons">
-                  <div class="ui toggle button">
-                    <i class="add icon"></i> Add
-                  </div>
-                  <div class="ui teal favorite button">
-                    <i class="add icon"></i> Favorite
-                  </div>
+                <div class="ui two bottom attached buttons button-container">
+
+                  <% 
+                  const watchList = user.watchlist.find((media) => media.id === movie.id); 
+                  const favorites = user.favorites.find((media) => media.id === movie.id); 
+                  %>
+                  <% if (watchList) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <input type="hidden" name="movieId" value="<%= watchList.id %>">
+                    <button class="ui toggled button equal-width-button" type="submit">
+                      <i class="check icon"></i> Added
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
+                      <i class="add icon"></i> Add
+                    </button>
+                  </form>
+                  <% } %>
+
+                  <% if (favorites) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="movieId" value="<%= favorites.id %>">
+                    <button class="ui teal favorited button equal-width-button" type='submit'>
+                      <i class="heart icon"></i> Favorited
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
+                      <i class="add icon"></i> Favorite
+                    </button>
+                  </form>
+                  <% } %>
+
+
                 </div>
               </div>
               <% } %>
@@ -361,13 +529,55 @@
                     <div class="description">Release Date: <%= movie.release_date %></div>
                   </div>
                 </div>
-                <div class="ui two bottom attached buttons">
-                  <div class="ui toggle button">
-                    <i class="add icon"></i> Add
-                  </div>
-                  <div class="ui teal favorite button">
-                    <i class="add icon"></i> Favorite
-                  </div>
+                <div class="ui two bottom attached buttons button-container">
+
+                  <% 
+                  const watchList = user.watchlist.find((media) => media.id === movie.id); 
+                  const favorites = user.favorites.find((media) => media.id === movie.id); 
+                  %>
+                  <% if (watchList) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <input type="hidden" name="movieId" value="<%= watchList.id %>">
+                    <button class="ui toggled button equal-width-button" type="submit">
+                      <i class="check icon"></i> Added
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="watchlist" value="watchlist">
+                    <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
+                      <i class="add icon"></i> Add
+                    </button>
+                  </form>
+                  <% } %>
+
+                  <% if (favorites) { %>
+                  <form action="/tvShows/<%= user._id %>?_method=PUT" method='post' class="equal-width-form">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="movieId" value="<%= favorites.id %>">
+                    <button class="ui teal favorited button equal-width-button" type='submit'>
+                      <i class="heart icon"></i> Favorited
+                    </button>
+                  </form>
+                  <% } else { %>
+                  <form action="/tvShows/<%= user._id %>" method="post" class="equal-width-form">
+                    <input type="hidden" name="movie" value="<%= movie.title ? movie.title : movie.name %>">
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="hidden" name="mediaType" value="<%= movie.media_type %>">
+                    <input type="hidden" name="releaseDate" value="<%= movie.release_date ? movie.release_date : movie.first_air_date %>">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
+                      <i class="add icon"></i> Favorite
+                    </button>
+                  </form>
+                  <% } %>
+
+
                 </div>
               </div>
               <% } %>
