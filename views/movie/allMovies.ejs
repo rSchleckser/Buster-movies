@@ -87,11 +87,11 @@
     <!-- Top Rated Carousel -->
     <div id="topRatedCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% for(let i = 0; i < topRatedMovies.length; i += 7) { %>
+        <% for(let i = 0; i < topRatedMovies.length; i += 5) { %>
         <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
           <div class="d-flex justify-content-around">
             <div class="ui special cards">
-              <% for(let j = i; j < i + 7 && j < topRatedMovies.length; j++) { %>
+              <% for(let j = i; j < i + 5 && j < topRatedMovies.length; j++) { %>
               <% let movie = topRatedMovies[j]; %>
               <div class="card">
                 <div class="blurring dimmable image">
@@ -192,11 +192,11 @@
     <!-- Trending Carousel -->
     <div id="trendingCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% for(let i = 0; i < trendingMovies.length; i += 7) { %>
+        <% for(let i = 0; i < trendingMovies.length; i += 5) { %>
         <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
           <div class="d-flex justify-content-around">
             <div class="ui special cards">
-              <% for(let j = i; j < i + 7 && j < trendingMovies.length; j++) { %>
+              <% for(let j = i; j < i + 5 && j < trendingMovies.length; j++) { %>
               <% let movie = trendingMovies[j]; %>
               <div class="card">
                 <div class="blurring dimmable image">
@@ -298,11 +298,11 @@
     <!-- nowPlaying Carousel -->
     <div id="nowPlayingCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% for(let i = 0; i < nowPlayingMovies.length; i += 7) { %>
+        <% for(let i = 0; i < nowPlayingMovies.length; i += 5) { %>
         <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
           <div class="d-flex justify-content-around">
             <div class="ui special cards">
-              <% for(let j = i; j < i + 7 && j < nowPlayingMovies.length; j++) { %>
+              <% for(let j = i; j < i + 5 && j < nowPlayingMovies.length; j++) { %>
               <% let movie = nowPlayingMovies[j]; %>
               <div class="card">
                 <div class="blurring dimmable image">
@@ -403,11 +403,11 @@
     <!-- Popular Carousel -->
     <div id="popularCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% for(let i = 0; i < popularMovies.length; i += 7) { %>
+        <% for(let i = 0; i < popularMovies.length; i += 5) { %>
         <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
           <div class="d-flex justify-content-around">
             <div class="ui special cards">
-              <% for(let j = i; j < i + 7 && j < popularMovies.length; j++) { %>
+              <% for(let j = i; j < i + 5 && j < popularMovies.length; j++) { %>
               <% let movie = popularMovies[j]; %>
               <div class="card">
                 <div class="blurring dimmable image">
@@ -509,11 +509,11 @@
     <!-- Upcoming Movies Carousel -->
     <div id="upcomingMoviesCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% for(let i = 0; i < upcomingMovies.length; i += 7) { %>
+        <% for(let i = 0; i < upcomingMovies.length; i += 5) { %>
         <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
           <div class="d-flex justify-content-around">
             <div class="ui special cards">
-              <% for(let j = i; j < i + 7 && j < upcomingMovies.length; j++) { %>
+              <% for(let j = i; j < i + 5 && j < upcomingMovies.length; j++) { %>
               <% let movie = upcomingMovies[j]; %>
               <div class="card">
                 <div class="blurring dimmable image">
