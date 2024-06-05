@@ -9,23 +9,18 @@
   <link rel="stylesheet" href="/css/reviews.css">
 </head>
 
-
 <body>
-
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
-
       <div class="ui container">
         <div class="ui large secondary inverted pointing menu">
-
-          <div class=' item'><i class="ticket icon"></i>Buster Movies</div>
-          <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
-
+          <div class="item"><i class="ticket icon"></i>Buster Movies</div>
+          <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
           <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
           <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
             <a class="item" href="/profile/<%= user._id %>"><i class='user blue icon'></i>Profile</a>
-            <a class="item" href="/auth/logout"><i class="sign out icon"></i></i>Log Out</a>
+            <a class="item" href="/auth/logout"><i class="sign out icon"></i>Log Out</a>
           </div>
         </div>
       </div>
@@ -33,10 +28,15 @@
   </div>
 
   <div class="ui container mt-5">
-    <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.name %></span> <span><button class='ui teal small button'><a href="/tv/<%= details.id %>/<%= user._id %>"><i class="reply icon"></i>Go Back</a></button></span></h1>
+    <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.name %></span>
+      <span>
+        <button class='ui teal small button'>
+          <a href="/tv/<%= details.id %>/<%= user._id %>"><i class="reply icon"></i>Go Back</a>
+        </button>
+      </span>
+    </h1>
 
     <div class="review-list">
-
       <% newReviews.forEach(review => { %>
       <div class="ui segment review-item">
         <div class="content">
@@ -109,9 +109,6 @@
     </div>
   </div>
 
-
-
-
   <!-- Footer -->
   <footer class="ui inverted vertical footer segment">
     <div class="ui container">
@@ -131,10 +128,7 @@
         </div>
         <div class="seven wide column">
           <h4 class="ui inverted header">Blockbuster Movie Website</h4>
-          <p>
-            A website for movie lovers to discover and watch the latest
-            blockbuster movies and TV shows.
-          </p>
+          <p>A website for movie lovers to discover and watch the latest blockbuster movies and TV shows.</p>
         </div>
       </div>
     </div>
