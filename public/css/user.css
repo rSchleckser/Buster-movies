@@ -2,7 +2,19 @@
       div.ui.inverted.vertical.masthead.center.aligned.segment {
         background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
       }    
-    
+
+        body.pushable div.pusher{
+          margin: 0;
+        }
+
+    div.ui.container{
+      margin-bottom: 2rem;
+    }
+
+    div.ui.special.link.cards{
+      background-color: #F0F0F0;
+      
+    }
     /* Cards */
     div.ui.special.cards {
         justify-content: center;
@@ -40,11 +52,18 @@
       .equal-width-button {
         width: 100%;
       }
+
+      div.watchlist-container{
+        margin-bottom: 0;
+        background: linear-gradient(60deg, rgb(59, 58, 58) 11.2%, rgb(102, 119, 121) 91.1%);
+      }
+
       .watchlist-container {
         padding: 50px 20px;
         background-color: #f9f9f9;
         text-align: center;
         margin-bottom: 2rem;
+        
       }
   
       .watchlist-container h1 {
@@ -76,5 +95,4 @@
         width: 100%;
         bottom: 0;
         padding: 3rem;
-        margin-top: 3rem;
       }

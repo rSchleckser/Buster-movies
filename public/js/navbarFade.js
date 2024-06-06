@@ -1,6 +1,5 @@
 $(document)
         .ready(function() {
-
           // fix menu when passed
           $('.masthead')
             .visibility({

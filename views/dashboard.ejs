@@ -10,7 +10,6 @@
   <!-- Semantic UI CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/dashboard.css">
-  <style></style>
 </head>
 
 
@@ -20,7 +19,7 @@
     <div class="ui container">
       <a class="active item" href='/dashboard/<%= user._id %>'>Home</a>
       <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
-      <a class="item" href='/tvShows/<%= user._id %>'><i class="film icon"></i>TV Shows</a>
+      <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
       <div class="right menu">
         <div class="item">
           <a class="ui button" href='/profile/<%= user._id %>'>Profile</a>
@@ -83,8 +82,6 @@
 
     <!-- Main Content Container -->
     <div style="flex: 1;">
-      <!-- Featured -->
-
 
       <!-- Favorites Carousel -->
       <div id="favoritesCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
@@ -143,13 +140,11 @@
         </a>
       </div>
 
-
       <!-- Divider -->
       <div class="ui horizontal divider">Your WatchList</div>
 
       <!-- Second carousel -->
       <div style="flex: 1;">
-
 
         <!-- Watchlist Carousel -->
         <div id="watchlistCarousel" class="carousel slide ui segment" data-bs-ride="carousel">
@@ -239,18 +234,17 @@
             </div>
           </div>
         </footer>
+      </div>
 
 
-
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- Semantic UI JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-        <script src="/js/dimmableImage.js"></script>
-        <script src="/js/addToWatchList.js"></script>
-        <script src="/js/addToFavorites.js"></script>
-
-
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- Semantic UI JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+      <script src="/js/navbarFade.js"></script>
+      <script src="/js/dimmableImage.js"></script>
+      <script src="/js/addToWatchList.js"></script>
+      <script src="/js/addToFavorites.js"></script>
 
 </body>
 
