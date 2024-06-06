@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 5000;
 require('dotenv').config();
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('./config/passport-config');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const methodOverride = require('method-override');
+const PORT = process.env.PORT || 5000;
 
 //import routes
 const home = require('./route/home')
@@ -49,45 +49,36 @@ app.use((req, res, next) => {
   next(); // going to said route
 });
 
+// ==================== Routes ============================
 
-// =============================== Home Page ============================================
-//GET - Home Page
+//HOME PAGE
 app.use('/', home);
 
-// =============================== Auth Route ============================================
-//import auth routes
+//AUTH ROUTES
 app.use('/auth', require('./controllers/auth'));
 
-// =============================== Dashboard =============================================
-//GET - Dashboard
+//DASHBOARD
 app.use('/', dashboard)
 
-// =============================== User Pages ============================================
-//Go to user profile page
+//USER PROFILE
 app.use('/profile', profile);
 
-// ============================== Search Pages ===========================================
-//Search Results Page
+//SEARCH RESULTS
 app.use('/search', search);
 
-// ============================== Movies =================================================
-// GET - ALL MOVIES
+//ALL MOVIES
 app.use('/movies', movies)
 
-// ============================== Movie ==================================================
-// GET - Single Movie Page
+//SINGLE MOVIE
 app.use('/movie', movie);
 
-// ============================== TV SHOWS ================================================
-// GET - ALL TV SHOWS
+//ALL TV SHOWS
 app.use('/tvShows', tvShows)
 
-// =============================== TV SHOW ================================================
-// GET - TV Show Page
+//TV Show Page
 app.use('/tv', tvShow)
 
-// =============================== Person ==================================================
-// GET - Person Show Page
+//Person Show Page
 app.use('/person', person)
 
 // 404 Middleware
