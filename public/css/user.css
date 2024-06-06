@@ -5,6 +5,7 @@
 
         body.pushable div.pusher{
           margin: 0;
+          background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
         }
 
     div.ui.container{
@@ -13,7 +14,7 @@
 
     div.ui.special.link.cards{
       background-color: #F0F0F0;
-      
+
     }
     /* Cards */
     div.ui.special.cards {
@@ -91,8 +92,27 @@
   
       /* footer */
       footer.ui.inverted.vertical.footer.segment {
-        /* position: absolute; */
+        position: relative;
         width: 100%;
-        bottom: 0;
-        padding: 3rem;
+        bottom: auto;
+        padding: 2rem;
+      }
+
+      /* Media Queries */
+
+      @media (max-width: 1000px) {
+        div.ui.large.secondary.inverted.pointing.menu div.item{
+          display: none;
+        }
+
+        div.ui.large.secondary.inverted.pointing.menu a.toc.item{
+          display: flex;
+        }
+
+      }
+
+      @media (max-width: 420px) {
+        div.ui.large.secondary.inverted.pointing.menu a.item{
+          display: none;
+        }
       }
