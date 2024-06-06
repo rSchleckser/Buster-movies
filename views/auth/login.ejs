@@ -13,29 +13,19 @@
 
 <body>
 
-
   <% if (alerts.success) { %> <% alerts.success.forEach(msg => { %>
-
   <div class="alert alert-success"><%= msg %></div>
   <% }) %> <% } %> <% if (alerts.error) { %> <% alerts.error.forEach(msg => {
     %>
   <div class="alert alert-danger"><%= msg %></div>
   <% }) %> <% } %>
 
-
-
-
-
   <!-- Sidebar Menu -->
   <div class="ui vertical inverted sidebar menu">
-    <a class="active item" href='/dashboard'>Home</a>
-    <a class="item" href='/search'>Browse</a>
-    <a class="item" href='/movies'>Movies</a>
-    <a class="item" href='/tvShows'>TV Shows</a>
-    <a class="item" href='/profile'>Profile</a>
-    <a class="item" href='/logout'>Log Out</a>
+    <a class="item" href='/'>Home</a>
+    <a class="item" href='/auth/signup'>SignUp</a>
+    <a class="active item" href='/auth/login'>Login</a>
   </div>
-
 
   <!-- Page Contents -->
   <div class="pusher">
@@ -47,17 +37,14 @@
           </a>
           <div class='item'><a href='/'><i class="ticket icon"></i>Buster Movies</a></div>
 
-
           <div class="right item">
             <a class="item" href="/auth/signup"><i class='add user icon'></i>Sign Up</a>
           </div>
         </div>
       </div>
 
-
-
       <!--Form -->
-      <section class=" ui middle aligned center aligned grid">
+      <section class="ui middle aligned center aligned grid">
         <div class="column">
           <h2 class="ui teal image header">
             <div class="content" style='color: rgb(255, 223, 186);'>
@@ -94,13 +81,13 @@
       <footer class="ui inverted vertical footer segment">
         <div class="ui container">
           <div class="ui stackable inverted divided equal height stackable grid">
-            <div class="three wide column">
+            <div class="three wide column about-column">
               <h4 class="ui inverted header">About</h4>
               <div class="ui inverted link list">
                 <a href="#" class="item">Contact Us</a>
               </div>
             </div>
-            <div class="three wide column">
+            <div class="three wide column services-column">
               <h4 class="ui inverted header">Services</h4>
               <div class="ui inverted link list">
                 <a href="#" class="item">Movies</a>
@@ -118,7 +105,20 @@
         </div>
       </footer>
 
-
+      <!-- Footer -->
+      <footer id='mobile' class="ui inverted vertical footer segment">
+        <div class="ui container">
+          <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="seven wide column">
+              <h4 class="ui inverted header">Blockbuster Movie Website</h4>
+              <p>
+                A website for movie lovers to discover and watch the latest
+                blockbuster movies and TV shows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
 
 
       <!-- jQuery and Semantic UI JS -->
