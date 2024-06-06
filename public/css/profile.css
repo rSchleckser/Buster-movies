@@ -91,3 +91,27 @@
     padding: 3rem;
     margin-top: 3rem;
   }
+
+          /* Media Queries */
+
+          @media (max-width: 1000px) {
+            div.ui.large.secondary.inverted.pointing.menu div.item{
+              display: none;
+            }
+    
+            div.ui.large.secondary.inverted.pointing.menu a.toc.item{
+              display: flex;
+            }
+    
+          }
+  
+
+          @media (max-width: 420px) {
+            div.ui.large.secondary.inverted.pointing.menu a.item{
+              display: none;
+            }
+
+            h1.ui.inverted.header{
+              margin-top: 5rem;
+            }
+          }
