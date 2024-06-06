@@ -11,10 +11,23 @@
 </head>
 
 <body>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
+    <a class="item" href='/movies/<%= user._id %>'>Movies</a>
+    <a class="item" href='/tvShows/<%= user._id %>'>TV Shows</a>
+    <a class="item" href='/profile/<%= user._id %>'>Profile</a>
+    <a class="item" href='/auth/logout'>Log Out</a>
+  </div>
+
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
       <div class="ui container" style='width: 1400px;'>
         <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
           <div class='item'><i class="ticket icon"></i>Buster Movies</div>
           <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
           <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
@@ -26,107 +39,109 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <h1>Results for: <span class='resultQuery'><%= query %></span></h1>
+    <h1>Results for: <span class='resultQuery'><%= query %></span></h1>
 
-  <div class="ui special link cards">
-    <% medias.forEach(media => { %>
-    <div class="card">
-      <div class="blurring dimmable image">
-        <div class="ui dimmer">
-          <div class="content">
-            <div class="center">
-              <% if(media.media_type === 'movie') { %>
-              <div class="ui inverted button"><a href="/movie/<%= media.id %>/<%= user._id %>">View Page</a></div>
-              <% } else if (media.media_type === 'tv') { %>
-              <div class="ui inverted button"><a href="/tv/<%= media.id %>/<%= user._id %>">View Page</a></div>
-              <% } else { %>
-              <div class="ui inverted button"><a href="/person/<%= media.id %>/<%= user._id %>">View Page</a></div>
-              <% } %>
+    <div class="ui special link cards">
+      <% medias.forEach(media => { %>
+      <div class="card">
+        <div class="blurring dimmable image">
+          <div class="ui dimmer">
+            <div class="content">
+              <div class="center">
+                <% if(media.media_type === 'movie') { %>
+                <div class="ui inverted button"><a href="/movie/<%= media.id %>/<%= user._id %>">View Page</a></div>
+                <% } else if (media.media_type === 'tv') { %>
+                <div class="ui inverted button"><a href="/tv/<%= media.id %>/<%= user._id %>">View Page</a></div>
+                <% } else { %>
+                <div class="ui inverted button"><a href="/person/<%= media.id %>/<%= user._id %>">View Page</a></div>
+                <% } %>
+              </div>
             </div>
           </div>
+          <img <% if (media.media_type === 'person') { %> src="https://image.tmdb.org/t/p/w500/<%= media.profile_path %>" <% }
+          else { %> src="https://image.tmdb.org/t/p/w500/<%= media.poster_path %>" <% } %> class="card-img-top" alt=" <%= media.media_type %> " />
         </div>
-        <img <% if (media.media_type === 'person') { %> src="https://image.tmdb.org/t/p/w500/<%= media.profile_path %>" <% }
-        else { %> src="https://image.tmdb.org/t/p/w500/<%= media.poster_path %>" <% } %> class="card-img-top" alt=" <%= media.media_type %> " />
-      </div>
-      <div class="content">
-        <% if (media.media_type === 'movie') { %>
-        <a class="header"><%= media.title %></a>
-        <% } else if (media.media_type === 'tv') { %>
-        <a class="header"><%= media.name %></a>
-        <% } else if (media.media_type === 'person') { %>
-        <a class="header"><%= media.original_name %></a>
-        <% } %>
-        <div class="meta">
-          <span><%= media.media_type.toUpperCase() %></span>
-          <% if(media.media_type !== 'person'){ %>
-          <div class="description">Release Date:
-            <% if(media.media_type === 'movie') { %>
-            <%= media.release_date %>
-            <% } else if (media.media_type === 'tv') {%>
-            <%= media.first_air_date %>
+        <div class="content">
+          <% if (media.media_type === 'movie') { %>
+          <a class="header"><%= media.title %></a>
+          <% } else if (media.media_type === 'tv') { %>
+          <a class="header"><%= media.name %></a>
+          <% } else if (media.media_type === 'person') { %>
+          <a class="header"><%= media.original_name %></a>
+          <% } %>
+          <div class="meta">
+            <span><%= media.media_type.toUpperCase() %></span>
+            <% if(media.media_type !== 'person'){ %>
+            <div class="description">Release Date:
+              <% if(media.media_type === 'movie') { %>
+              <%= media.release_date %>
+              <% } else if (media.media_type === 'tv') {%>
+              <%= media.first_air_date %>
+              <% } %>
+            </div>
             <% } %>
           </div>
+        </div>
+        <div class="ui two bottom attached buttons button-container">
+          <% 
+          const watchList = user.watchlist.find((movie) => movie.id === media.id); 
+          const favorites = user.favorites.find((movie) => movie.id === media.id); 
+          %>
+          <% if (watchList) { %>
+          <form action="/search/<%= user._id %>/results?_method=PUT" method='post' class="equal-width-form">
+            <input type="hidden" name="watchlist" value="watchlist">
+            <input type="hidden" name="movieId" value="<%= watchList.id %>">
+            <input type="hidden" name="query" value="<%= query %>">
+            <button class="ui toggled button equal-width-button" type="submit">
+              <i class="check icon"></i> Added
+            </button>
+          </form>
+          <% } else { %>
+          <form action="/search/<%= user._id %>/results" method="post" class="equal-width-form">
+            <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
+            <input type="hidden" name="mediaType" value="<%= media.media_type %>">
+            <input type="hidden" name="img" value="<%= media.poster_path %>">
+            <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
+            <input type="hidden" name="id" value="<%= media.id %>">
+            <input type="hidden" name="query" value="<%= query %>">
+            <input type="hidden" name="watchlist" value="watchlist">
+            <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
+              <i class="add icon"></i> Add
+            </button>
+          </form>
+          <% } %>
+
+          <% if (favorites) { %>
+          <form action="/search/<%= user._id %>/results?_method=PUT" method='post' class="equal-width-form">
+            <input type="hidden" name="favorite" value="favorite">
+            <input type="hidden" name="movieId" value="<%= favorites.id %>">
+            <input type="hidden" name="query" value="<%= query %>">
+            <button class="ui teal favorited button equal-width-button" type='submit'>
+              <i class="heart icon"></i> Favorited
+            </button>
+          </form>
+          <% } else { %>
+          <form action="/search/<%= user._id %>/results" method="post" class="equal-width-form">
+            <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
+            <input type="hidden" name="favorite" value="favorite">
+            <input type="hidden" name="mediaType" value="<%= media.media_type %>">
+            <input type="hidden" name="img" value="<%= media.poster_path %>">
+            <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
+            <input type="hidden" name="id" value="<%= media.id %>">
+            <input type="hidden" name="query" value="<%= query %>">
+            <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
+              <i class="add icon"></i> Favorite
+            </button>
+          </form>
           <% } %>
         </div>
       </div>
-      <div class="ui two bottom attached buttons button-container">
-        <% 
-        const watchList = user.watchlist.find((movie) => movie.id === media.id); 
-        const favorites = user.favorites.find((movie) => movie.id === media.id); 
-        %>
-        <% if (watchList) { %>
-        <form action="/search/<%= user._id %>/results?_method=PUT" method='post' class="equal-width-form">
-          <input type="hidden" name="watchlist" value="watchlist">
-          <input type="hidden" name="movieId" value="<%= watchList.id %>">
-          <input type="hidden" name="query" value="<%= query %>">
-          <button class="ui toggled button equal-width-button" type="submit">
-            <i class="check icon"></i> Added
-          </button>
-        </form>
-        <% } else { %>
-        <form action="/search/<%= user._id %>/results" method="post" class="equal-width-form">
-          <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
-          <input type="hidden" name="mediaType" value="<%= media.media_type %>">
-          <input type="hidden" name="img" value="<%= media.poster_path %>">
-          <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
-          <input type="hidden" name="id" value="<%= media.id %>">
-          <input type="hidden" name="query" value="<%= query %>">
-          <input type="hidden" name="watchlist" value="watchlist">
-          <button class="ui toggle button equal-width-button" type="submit" onclick='addToWatchList(this)'>
-            <i class="add icon"></i> Add
-          </button>
-        </form>
-        <% } %>
-
-        <% if (favorites) { %>
-        <form action="/search/<%= user._id %>/results?_method=PUT" method='post' class="equal-width-form">
-          <input type="hidden" name="favorite" value="favorite">
-          <input type="hidden" name="movieId" value="<%= favorites.id %>">
-          <input type="hidden" name="query" value="<%= query %>">
-          <button class="ui teal favorited button equal-width-button" type='submit'>
-            <i class="heart icon"></i> Favorited
-          </button>
-        </form>
-        <% } else { %>
-        <form action="/search/<%= user._id %>/results" method="post" class="equal-width-form">
-          <input type="hidden" name="movie" value="<%= media.title ? media.title : media.name %>">
-          <input type="hidden" name="favorite" value="favorite">
-          <input type="hidden" name="mediaType" value="<%= media.media_type %>">
-          <input type="hidden" name="img" value="<%= media.poster_path %>">
-          <input type="hidden" name="releaseDate" value="<%= media.release_date ? media.release_date : media.first_air_date %>">
-          <input type="hidden" name="id" value="<%= media.id %>">
-          <input type="hidden" name="query" value="<%= query %>">
-          <button class="ui teal favorite button equal-width-button" type="submit" onclick='addTofavorites(this)'>
-            <i class="add icon"></i> Favorite
-          </button>
-        </form>
-        <% } %>
-      </div>
+      <% }); %>
     </div>
-    <% }); %>
   </div>
+
+
 
   <!-- Footer -->
   <footer class="ui inverted vertical footer segment">
@@ -158,6 +173,7 @@
   <!-- Semantic UI JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <script src="/js/dimmableImage.js"></script>
+  <script src="/js/navbarFade.js"></script>
   <script src="/js/addToWatchList.js"></script>
   <script src="/js/addToFavorites.js"></script>
 </body>

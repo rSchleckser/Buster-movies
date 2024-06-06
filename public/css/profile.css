@@ -15,6 +15,11 @@
     margin-left: 0.5em;
   }
 
+    /* side bar */
+    div.ui.large.secondary.inverted.pointing.menu a.toc.item{
+      display: none;
+    }
+
   /* DARK: background: linear-gradient(180deg, rgba(255, 255, 255, 0.329) 1.2%, rgb(244, 123, 110) 91.1%); */
   /* background: linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%); */
   /* background: linear-gradient(109.6deg, rgb(255, 255, 255) 11.2%, rgb(244, 123, 110) 91.1%); */
