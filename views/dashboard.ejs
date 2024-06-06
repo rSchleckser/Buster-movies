@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 
-
 <body>
   <!-- Following Menu -->
   <div class="ui large top fixed hidden menu">
@@ -39,7 +38,6 @@
     <a class="item" href='/profile/<%= user._id %>'>Profile</a>
     <a class="item" href='/auth/logout'>Log Out</a>
   </div>
-
 
   <!-- Page Contents -->
   <div class="pusher">
@@ -70,7 +68,7 @@
         <form class="ui fluid category search" action="/search/<%= user._id %>/results" method="get" style='margin-bottom: 2rem;'>
           <div class="ui icon input">
             <input class="prompt" type="search" name="media" placeholder="Search Person, Movie, or TV Show" aria-label="Search">
-            <i class="search icon"></i>
+            <i class="inverted circular search link icon"></i>
           </div>
           <div class="results"></div>
         </form>
@@ -203,10 +201,6 @@
           </a>
         </div>
 
-
-
-
-
         <!-- Footer -->
         <footer class="ui inverted vertical footer segment">
           <div class="ui container">
@@ -243,9 +237,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
       <script src="/js/navbarFade.js"></script>
       <script src="/js/dimmableImage.js"></script>
+      <script src="/js/formSubmission.js"></script>
       <script src="/js/addToWatchList.js"></script>
       <script src="/js/addToFavorites.js"></script>
-
 </body>
 
 </html>
