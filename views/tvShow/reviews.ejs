@@ -10,10 +10,25 @@
 </head>
 
 <body>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
+    <a class="item" href='/movies/<%= user._id %>'>Movies</a>
+    <a class="item" href='/tvShows/<%= user._id %>'>TV Shows</a>
+    <a class="item" href='/profile/<%= user._id %>'>Profile</a>
+    <a class="item" href='/auth/logout'>Log Out</a>
+  </div>
+
+
+  <!-- Main Navbar -->
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
       <div class="ui container">
         <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
           <div class="item"><i class="ticket icon"></i>Buster Movies</div>
           <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
           <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
@@ -25,118 +40,134 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="ui container mt-5">
-    <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.name %></span>
-      <span>
-        <button class='ui teal small button'>
-          <a href="/tv/<%= details.id %>/<%= user._id %>"><i class="reply icon"></i>Go Back</a>
-        </button>
-      </span>
-    </h1>
-
-    <div class="review-list">
-      <% newReviews.forEach(review => { %>
-      <div class="ui segment review-item">
-        <div class="content">
-          <div class="review-header">
-            <div>
-              <h4 class="ui header user"><%= review.author %></h4>
-              <div class="meta">
-                <span class="date">Posted on: <%= review.createdAt %></span>
+    <div class="ui container mt-5">
+      <h1 class="ui header">Reviews for <span class='resultQuery'><%= details.name %></span>
+        <span>
+          <button class='ui teal small button'>
+            <a href="/tv/<%= details.id %>/<%= user._id %>"><i class="reply icon"></i>Go Back</a>
+          </button>
+        </span>
+      </h1>
+  
+      <div class="review-list">
+        <% newReviews.forEach(review => { %>
+        <div class="ui segment review-item">
+          <div class="content">
+            <div class="review-header">
+              <div>
+                <h4 class="ui header user"><%= review.author %></h4>
+                <div class="meta">
+                  <span class="date">Posted on: <%= review.createdAt %></span>
+                </div>
               </div>
+              <% if (review.userId.toString() === user._id.toString()) { %>
+              <div>
+                <button class="ui small teal button" onclick="showEditForm('<%= review._id %>')">Edit</button>
+                <form action="/tv/<%= details.id %>/reviews/<%= user._id %>?_method=DELETE" method="POST" style="display: inline;">
+                  <input type="hidden" name="reviewId" value="<%= review._id %>">
+                  <button class="ui small red button" type="submit">Delete</button>
+                </form>
+              </div>
+              <% } %>
             </div>
-            <% if (review.userId.toString() === user._id.toString()) { %>
-            <div>
-              <button class="ui small teal button" onclick="showEditForm('<%= review._id %>')">Edit</button>
-              <form action="/tv/<%= details.id %>/reviews/<%= user._id %>?_method=DELETE" method="POST" style="display: inline;">
-                <input type="hidden" name="reviewId" value="<%= review._id %>">
-                <button class="ui small red button" type="submit">Delete</button>
+            <!-- Read More / Read less -->
+            <div class="description" data-full-content="<%= review.content %>">
+              <p class="short-content"></p>
+              <a href="#" class="view-more" onclick="toggleFullReview(event, this)">View More</a>
+            </div>
+
+            <!-- edit form -->
+            <div id="editForm_<%= review._id %>" style="display: none;">
+              <form class="ui form" action="/tv/<%= details.id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
+                <div class="field">
+                  <label>Edit Review</label>
+                  <textarea name="updatedContent" rows='3'><%= review.content %></textarea>
+                </div>
+                <button class="ui small blue button" type="submit">Save</button>
               </form>
             </div>
-            <% } %>
-          </div>
-          <div class="description">
-            <p><%= review.content %></p>
-          </div>
-          <!-- edit form -->
-          <div id="editForm_<%= review._id %>" style="display: none;">
-            <form class="ui form" action="/tv/<%= details.id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
-              <div class="field">
-                <label>Edit Review</label>
-                <textarea name="updatedContent" rows='3'><%= review.content %></textarea>
-              </div>
-              <button class="ui small blue button" type="submit">Save</button>
-            </form>
           </div>
         </div>
-      </div>
-      <% }); %>
+        <% }); %>
 
-      <% reviews.forEach(review => { %>
-      <div class="ui segment review-item">
-        <div class="content">
-          <div class="review-header">
-            <div>
-              <h4 class="ui header"><%= review.author %></h4>
-              <div class="meta">
-                <span class="date">Posted on: <%= review.created_at %></span>
+        <!-- Reviews -->
+        <% reviews.forEach(review => { %>
+        <div class="ui segment review-item">
+          <div class="content">
+            <div class="review-header">
+              <div>
+                <h4 class="ui header"><%= review.author %></h4>
+                <div class="meta">
+                  <div class="ui star rating" data-rating="<%= review.author_details.rating %>" data-max-rating='10'></div>
+                  <div>Rating: <%= review.author_details.rating %>/10</div>
+                  <span class="date">Posted on: <%= review.created_at %></span>
+                </div>
               </div>
             </div>
+            <!-- Read More / Read less -->
+            <div class="description" data-full-content="<%= review.content %>">
+              <p class="short-content"></p>
+              <a href="#" class="view-more" onclick="toggleFullReview(event, this)">View More</a>
+            </div>
           </div>
-          <div class="description">
-            <p><%= review.content %></p>
+        </div>
+        <% }); %>
+      </div>
+  
+      <!-- Post Review -->
+      <div class="review-form">
+        <h2 class="ui dividing header">Post a Review</h2>
+        <form class="ui form" action="/tv/<%= details.id %>/reviews/<%= user._id %>" method="POST">
+          <div class="field">
+            <label for="user">Your Name</label>
+            <input type="text" id="user" name="user" required>
+          </div>
+          <div class="field">
+            <label for="content">Your Review</label>
+            <textarea id="content" name="content" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="ui primary button">Submit Review</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Contact Us</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Services</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Movies</a>
+              <a href="#" class="item">TV Shows</a>
+            </div>
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">Blockbuster Movie Website</h4>
+            <p>A website for movie lovers to discover and watch the latest blockbuster movies and TV shows.</p>
           </div>
         </div>
       </div>
-      <% }); %>
-    </div>
+    </footer>
 
-    <div class="review-form">
-      <h2 class="ui dividing header">Post a Review</h2>
-      <form class="ui form" action="/tv/<%= details.id %>/reviews/<%= user._id %>" method="POST">
-        <div class="field">
-          <label for="user">Your Name</label>
-          <input type="text" id="user" name="user" required>
-        </div>
-        <div class="field">
-          <label for="content">Your Review</label>
-          <textarea id="content" name="content" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="ui primary button">Submit Review</button>
-      </form>
-    </div>
+
   </div>
 
-  <!-- Footer -->
-  <footer class="ui inverted vertical footer segment">
-    <div class="ui container">
-      <div class="ui stackable inverted divided equal height stackable grid">
-        <div class="three wide column">
-          <h4 class="ui inverted header">About</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Contact Us</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Services</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Movies</a>
-            <a href="#" class="item">TV Shows</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui inverted header">Blockbuster Movie Website</h4>
-          <p>A website for movie lovers to discover and watch the latest blockbuster movies and TV shows.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+ 
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <script src="/js/showEditForm.js"></script>
+  <script src="/js/navbarFade.js"></script>
+  <script src="/js/displayRating.js"></script>
+  <script src="/js/toggleReviews.js"></script>
 </body>
 
 </html>
