@@ -156,6 +156,7 @@ const postTvShowReview = async (req, res) => {
         mediaType: 'tv',
         userId: req.params.userId,
         author: req.body.user,
+        rating: req.body.rating,
         content: req.body.content,
       });
   

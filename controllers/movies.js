@@ -172,6 +172,7 @@ const options = {
             mediaType: 'movie',
             userId: req.params.userId,
             author: req.body.user,
+            rating: req.body.rating,
             content: req.body.content,
           });
       

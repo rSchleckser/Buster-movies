@@ -6,6 +6,7 @@ const ReviewSchema = new mongoose.Schema({
   mediaType: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   author: { type: String, required: true },
+  rating: {type: Number, required: true},
   content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });

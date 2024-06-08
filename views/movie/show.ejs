@@ -212,7 +212,7 @@
 
 
     <!-- Top Reviews -->
-    <h1 class="ui header">Reviews</h1>
+    <h1 class="ui header" style="z-index: 2; text-align: center;">Reviews</h1>
     <div class="ui segment mt-5">
 
       <h2 class="ui header">Top Reviews</h2>
@@ -226,15 +226,27 @@
       <% if (newReviews.length >= 3 || i+1 <= newReviews.length) { %>
       <div class="ui segment review">
         <h4 class="ui header">Author: <%= newReviews[i].author %></h4>
-        <h6 class="ui sub header">Content:</h6>
-        <p><%=newReviews[i].content %></p>
+        <div class="ui star rating" data-rating="<%= reviews[i].author_details.rating %>" data-max-rating='10'></div>
+        <div>Rating: <%= reviews[i].author_details.rating %>/10</div>
+        <div class="ui divider"></div>
+        <!-- Read More / Read less -->
+        <div class="description" data-full-content="<%= newReviews[i].content %>">
+          <p class="short-content"></p>
+          <a href="#" class="view-more" onclick="toggleFullReview(event, this)">View More</a>
+        </div>
       </div>
       <% } else if(reviews.length >= i+1) {%>
       <!-- Reviews from Api -->
       <div class="ui segment review">
         <h4 class="ui header">Author: <%= reviews[i].author %></h4>
-        <h6 class="ui sub header">Content:</h6>
-        <p><%=reviews[i].content %></p>
+        <div class="ui star rating" data-rating="<%= reviews[i].author_details.rating %>" data-max-rating='10'></div>
+        <div>Rating: <%= reviews[i].author_details.rating %>/10</div>
+        <div class="ui divider"></div>
+        <!-- Read More / Read less -->
+        <div class="description" data-full-content="<%= reviews[i].content %>">
+          <p class="short-content"></p>
+          <a href="#" class="view-more" onclick="toggleFullReview(event, this)">View More</a>
+        </div>
       </div>
       <% } else {%>
       <% i= 3 %>
@@ -348,6 +360,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <!-- Dim image on hover -->
   <script src="/js/dimmableImage.js"></script>
+  <script src="/js/displayRating.js"></script>
+  <script src="/js/toggleReviews.js"></script>
 
 </body>
 
