@@ -226,8 +226,8 @@
       <% if (newReviews.length >= 3 || i+1 <= newReviews.length) { %>
       <div class="ui segment review">
         <h4 class="ui header">Author: <%= newReviews[i].author %></h4>
-        <div class="ui star rating" data-rating="<%= reviews[i].author_details.rating %>" data-max-rating='10'></div>
-        <div>Rating: <%= reviews[i].author_details.rating %>/10</div>
+        <div class="ui star rating" data-rating="<%= newReviews[i].rating %>" data-max-rating='10'></div>
+        <div>Rating: <%= newReviews[i].rating %>/10</div>
         <div class="ui divider"></div>
         <!-- Read More / Read less -->
         <div class="description" data-full-content="<%= newReviews[i].content %>">
