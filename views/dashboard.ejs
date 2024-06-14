@@ -95,7 +95,7 @@
                     <div class="ui dimmer">
                       <div class="content">
                         <div class="center">
-                          <div class="ui inverted button"><a href="/tv/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                          <div class="ui inverted button"><a href="/<%= movie.mediaType %>/<%= movie.id %>/<%= user._id %>">View Page</a></div>
                         </div>
                       </div>
                     </div>
@@ -130,11 +130,11 @@
         </div>
         <a class="carousel-control-prev" href="#favoritesCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
+          <span class="sr-only"></span>
         </a>
         <a class="carousel-control-next" href="#favoritesCarousel" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
+          <span class="sr-only"></span>
         </a>
       </div>
 
@@ -158,7 +158,7 @@
                       <div class="ui dimmer">
                         <div class="content">
                           <div class="center">
-                            <div class="ui inverted button"><a href="/tv/<%= movie.id %>/<%= user._id %>">View Page</a></div>
+                            <div class="ui inverted button"><a href="/<%= movie.mediaType %>/<%= movie.id %>/<%= user._id %>">View Page</a></div>
                           </div>
                         </div>
                       </div>
@@ -193,11 +193,11 @@
           </div>
           <a class="carousel-control-prev" href="#watchlistCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only"></span>
           </a>
           <a class="carousel-control-next" href="#watchlistCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only"></span>
           </a>
         </div>
 
@@ -233,6 +233,8 @@
 
       <!-- jQuery -->
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
       <!-- Semantic UI JS -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
       <script src="/js/navbarFade.js"></script>

@@ -67,21 +67,44 @@ input.prompt {
   width: 500px;
 }
 
+
 /* Carousel buttons */
-#featuredCarousel a.carousel-control-next {
+#favoritesCarousel a.carousel-control-next {
   background-color: rgba(19, 18, 18, 0.507);
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   margin-top: 17rem;
+  margin-right: 30rem;
 }
 
-#featuredCarousel a.carousel-control-prev {
+#favoritesCarousel a.carousel-control-prev {
   background-color: rgba(19, 18, 18, 0.507);
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   margin-top: 17rem;
+  margin-left: 30rem;
+
+}
+
+#watchlistCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin-top: 17rem;
+  margin-right: 30rem;
+}
+
+#watchlistCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin-top: 17rem;
+  margin-left: 30rem;
+
 }
 
 /* Navbar coral color */
