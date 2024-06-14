@@ -13,16 +13,24 @@
 </head>
 
 <body>
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
+    <a class="item" href='/movies/<%= user._id %>'>Movies</a>
+    <a class="active item" href='/tvShows/<%= user._id %>'>TV Shows</a>
+    <a class="item" href='/profile/<%= user._id %>'>Profile</a>
+    <a class="item" href='/auth/logout'>Log Out</a>
+  </div>
 
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
-
       <div class="ui container" style='width: 1400px;'>
         <div class="ui large secondary inverted pointing menu">
-
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
           <div class='item'><i class="ticket icon"></i>Buster Movies</div>
           <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
-
           <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
           <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
@@ -359,6 +367,7 @@
   <!-- Semantic UI JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <!-- Dim image on hover -->
+  <script src="/js/navbarFade.js"></script>
   <script src="/js/dimmableImage.js"></script>
   <script src="/js/displayRating.js"></script>
   <script src="/js/toggleReviews.js"></script>
