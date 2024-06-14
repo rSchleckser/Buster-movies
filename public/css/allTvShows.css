@@ -1,220 +1,298 @@
-    /* NavBar Container */
-    div.ui.inverted.vertical.masthead.center.aligned.segment {
-        background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
-      }
-  
-      .hidden.menu {
-        display: none;
-      }
-  
-      .masthead.segment {
-        min-height: 800px;
-        padding: 1em 0em;
-      }
-  
-      .masthead .logo.item img {
-        margin-right: 1em;
-      }
-  
-      .masthead .ui.menu .ui.button {
-        margin-left: 0.5em;
-      }
-  
-      /* Header Text Container*/
-      div.ui.text.container {
-        background-color: rgba(121, 121, 136, 0.212);
-        padding-bottom: 2rem;
-        border-radius: 1rem;
-      }
-  
-      /* Header Text */
-      .masthead h1.ui.header {
-        padding-top: 1.2rem;
-        margin-top: 3em;
-        margin-bottom: 0.5rem;
-        font-size: 4em;
-        font-weight: normal;
-      }
-  
-      .masthead h2 {
-        font-size: 1.7em;
-        font-weight: normal;
-        margin-top: 0;
-        margin-bottom: 2rem;
-      }
-  
-      /* input Search */
-      input.prompt {
-        width: 500px;
-      }
-  
-      /* Cards */
-      div.ui.special.cards {
-        justify-content: center;
-      }
-  
-      /* H1 header color */
-      .heading {
-        color: rgb(11, 132, 145);
-        text-align: center;
-        margin-left: 2rem;
-        font-size: 2.5rem;
-      }
-  
-      /* toggle buttons */
-      .toggled {
-        background-color: #21ba45 !important;
-        color: white !important;
-      }
-  
-      .favorited {
-        background-color: #e03997 !important;
-        color: white !important;
-      }
+/* NavBar Container */
+div.ui.inverted.vertical.masthead.center.aligned.segment {
+  background: linear-gradient(
+    60deg,
+    rgb(0, 0, 0) 11.2%,
+    rgb(11, 132, 145) 91.1%
+  );
+}
 
-      /* button style */
-      .button-container {
-        display: flex;
-      }
-      
-      .equal-width-form {
-        flex: 1;
-      }
-      
-      .equal-width-button {
-        width: 100%;
-      }
-  
-  
-      /* Carousels */
-      div.d-flex.justify-content-around {
-        padding: 0;
-        margin: 0;
-      }
-  
-      div.carousel.slide {
-        margin-bottom: 3rem;
-      }
-  
-      div.carousel.slide.ui.segment {
-        /* background: linear-gradient(deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%); */
-        box-shadow: 10px 5px 5px black;
-      }
-  
-      /* Carousel Buttons */
-      div#trendingCarousel {
-        margin-left: 7rem;
-        width: 90%;
-      }
-  
-      div#nowPlayingCarousel {
-        margin-left: 7rem;
-        width: 90%;
-      }
-  
-      div#popularCarousel {
-        margin-left: 7rem;
-        width: 90%;
-      }
-  
-      div#topRatedCarousel {
-        margin-left: 7rem;
-        width: 90%;
-      }
-  
-      div#upcomingMoviesCarousel {
-        margin-left: 7rem;
-        width: 90%;
-      }
-  
-  
-      /* Trending Carousel Buttons*/
-      #trendingCarousel a.carousel-control-next {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      #trendingCarousel a.carousel-control-prev {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      /* Now Playing Carousel Buttons*/
-      #nowPlayingCarousel a.carousel-control-next {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      #nowPlayingCarousel a.carousel-control-prev {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      /* Popular Carousel Buttons*/
-      #popularCarousel a.carousel-control-next {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      #popularCarousel a.carousel-control-prev {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      /* Top Rated Carousel Buttons*/
-      #topRatedCarousel a.carousel-control-next {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      #topRatedCarousel a.carousel-control-prev {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      /* UpComing Carousel Buttons*/
-      #upcomingMoviesCarousel a.carousel-control-next {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      #upcomingMoviesCarousel a.carousel-control-prev {
-        background-color: rgba(19, 18, 18, 0.507);
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        margin-top: 17.8rem;
-      }
-  
-      /* footer */
-      footer.ui.inverted.vertical.footer.segment {
-        padding: 3rem;
-        margin-top: 3rem;
-      }
+.hidden.menu {
+  display: none;
+}
+
+.masthead.segment {
+  min-height: 800px;
+  padding: 1em 0em;
+}
+
+.masthead .logo.item img {
+  margin-right: 1em;
+}
+
+.masthead .ui.menu .ui.button {
+  margin-left: 0.5em;
+}
+
+/* side bar */
+div.ui.large.secondary.inverted.pointing.menu a.toc.item {
+  display: none;
+}
+
+/* Header Text Container*/
+div.ui.text.container {
+  background-color: rgba(121, 121, 136, 0.212);
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+/* Header Text */
+.masthead h1.ui.header {
+  padding-top: 1.2rem;
+  margin-top: 3em;
+  margin-bottom: 0.5rem;
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+/* input Search */
+input.prompt {
+  width: 500px;
+}
+
+/* Cards */
+div.ui.special.cards {
+  justify-content: center;
+}
+
+/* H1 header color */
+.heading {
+  color: rgb(11, 132, 145);
+  text-align: center;
+  margin-left: 2rem;
+  font-size: 2.5rem;
+}
+
+/* toggle buttons */
+.toggled {
+  background-color: #21ba45 !important;
+  color: white !important;
+}
+
+.favorited {
+  background-color: #e03997 !important;
+  color: white !important;
+}
+
+/* button style */
+.button-container {
+  display: flex;
+}
+
+.equal-width-form {
+  flex: 1;
+}
+
+.equal-width-button {
+  width: 100%;
+}
+
+/* Carousels */
+div.d-flex.justify-content-around {
+  padding: 0;
+  margin: 0;
+}
+
+div.carousel.slide {
+  margin-bottom: 3rem;
+}
+
+div.carousel.slide.ui.segment {
+  /* background: linear-gradient(deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%); */
+  box-shadow: 10px 5px 5px black;
+}
+
+/* Carousel Buttons */
+div#trendingCarousel {
+  margin-left: 7rem;
+  width: 90%;
+}
+
+div#nowPlayingCarousel {
+  margin-left: 7rem;
+  width: 90%;
+}
+
+div#popularCarousel {
+  margin-left: 7rem;
+  width: 90%;
+}
+
+div#topRatedCarousel {
+  margin-left: 7rem;
+  width: 90%;
+}
+
+div#upcomingMoviesCarousel {
+  margin-left: 7rem;
+  width: 90%;
+}
+
+/* Trending Carousel Buttons*/
+#trendingCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+#trendingCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+div#trendingCarousel{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Now Playing Carousel Buttons*/
+#nowPlayingCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+#nowPlayingCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+div#nowPlayingCarousel{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Popular Carousel Buttons*/
+#popularCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+#popularCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+div#popularCarousel{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Top Rated Carousel Buttons*/
+#topRatedCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+#topRatedCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+div#topRatedCarousel{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* UpComing Carousel Buttons*/
+#upcomingMoviesCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+#upcomingMoviesCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 17.8rem;
+}
+
+div#upcomingMoviesCarousel{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* footer */
+footer.ui.inverted.vertical.footer.segment {
+  padding: 3rem;
+  margin-top: 3rem;
+}
+
+/* Media Queries */
+
+@media (max-width: 1000px) {
+  div.ui.large.secondary.inverted.pointing.menu div.item {
+    display: none;
+  }
+
+  div.ui.large.secondary.inverted.pointing.menu a.toc.item {
+    display: flex;
+  }
+}
+
+@media (max-width: 620px) {
+  div.ui.special.cards {
+    justify-content: center;
+  }
+
+  /* input Search */
+  input.prompt {
+    width: 420px;
+  }
+}
+
+@media (max-width: 570px) {
+  div.ui.large.top.fixed.menu.transition.visible div.ui.container {
+    display: none;
+  }
+}
+
+@media (max-width: 530px) {
+  /* input Search */
+  input.prompt {
+    width: 350px;
+  }
+}
+
+@media (max-width: 420px) {
+  div.ui.large.secondary.inverted.pointing.menu a.item {
+    display: none;
+  }
+
+  input.prompt {
+    width: 300px;
+  }
+}

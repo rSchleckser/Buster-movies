@@ -114,6 +114,13 @@
   }
 }
 
+@media (max-width: 650px){
+  div.content div.review-header div button{
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
 @media (max-width: 620px) {
   div.ui.special.cards {
     justify-content: center;

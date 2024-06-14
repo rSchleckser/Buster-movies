@@ -14,15 +14,25 @@
 
 <body>
 
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="item" href='/dashboard/<%= user._id %>'>Home</a>
+    <a class="item" href='/movies/<%= user._id %>'>Movies</a>
+    <a class="active item" href='/tvShows/<%= user._id %>'>TV Shows</a>
+    <a class="item" href='/profile/<%= user._id %>'>Profile</a>
+    <a class="item" href='/auth/logout'>Log Out</a>
+  </div>
+
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
-
       <div class="ui container" style='width: 1400px;'>
         <div class="ui large secondary inverted pointing menu">
-
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
           <div class='item'><i class="ticket icon"></i>Buster Movies</div>
           <a class=" item" href='/dashboard/<%= user._id %>'>Home</a>
-
           <a class="item" href='/movies/<%= user._id %>'><i class="film icon"></i>Movies</a>
           <a class="item" href='/tvShows/<%= user._id %>'><i class="tv icon"></i>TV Shows</a>
           <div class="right item">
@@ -41,16 +51,16 @@
         </div>
         <div class="twelve wide column">
           <div class="movie-info">
-  
+
             <% const media_type = 'tv'%>
-  
+
             <h1 class="ui header"><%= details.name %></h1>
-  
+
             <!-- Filter through Genre Name -->
             <% const genre = details.genres.map(genre => { %>
             <% return genre.name %>
             <% }).filter(name => name).join(', ') %>
-  
+
             <p><strong>Rating:</strong> <%= details.vote_average.toFixed(1) %></p>
             <p><strong>Genre:</strong> <%= genre %></p>
             <p><strong>Release Date:</strong> <%= details.first_air_date %></p>
@@ -62,10 +72,10 @@
           </div>
         </div>
       </div>
-  
-  
-  
-  
+
+
+
+
       <!-- Video Carousel -->
       <h1 class='heading'>Videos</h1>
       <div id="videoCarousel" class="carousel slide mt-5" data-ride="carousel" style='height: 13rem;'>
@@ -80,7 +90,7 @@
               <% } %>
             </div>
           </div>
-  
+
           <!-- Subsequent carousel items -->
           <% for(let i = 3; i < videos.length; i += 3) { %>
           <div class="carousel-item">
@@ -103,8 +113,8 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-  
-  
+
+
       <!-- Cast Carousel -->
       <h1 class='heading'>Cast</h1>
       <div id="castCarousel" class="carousel slide mt-5" data-ride="carousel">
@@ -140,7 +150,7 @@
               </div>
             </div>
           </div>
-  
+
           <% for(let i = 4; i < credits.length; i += 4) { %>
           <div class="carousel-item">
             <div class="d-flex justify-content-around">
@@ -178,8 +188,8 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-  
-  
+
+
       <!-- Image Carousel -->
       <h1 class='heading'>Images</h1>
       <div id="imagesCarousel" class="carousel slide mt-5" data-ride="carousel" style='height: 15rem;'>
@@ -194,7 +204,7 @@
               <% } %>
             </div>
           </div>
-  
+
           <% for (let i = 3; i < images.length; i += 3) { %>
           <div class="carousel-item">
             <div class="d-flex justify-content-around">
@@ -217,19 +227,19 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-  
-  
-  
+
+
+
       <!-- Top Reviews -->
       <h1 class="ui center aligned header" style="z-index: 2; text-align: center;">Reviews</h1>
       <div class="ui segment mt-5">
-  
+
         <h2 class="ui header">Top Reviews</h2>
-  
+
         <div class="ui right floated">
           <button class="ui teal button"><a href="/tv/<%= details.id %>/reviews/<%= user._id %>">View All</a></button>
         </div>
-  
+
         <% for( let i = 0; i < 3; i++ ) { %>
         <!-- Reviews from database -->
         <% if (newReviews.length >= 3 || i+1 <= newReviews.length) { %>
@@ -243,7 +253,7 @@
             <p class="short-content"></p>
             <a href="#" class="view-more" onclick="toggleFullReview(event, this)">View More</a>
           </div>
-  
+
         </div>
         <% } else if(reviews.length >= i+1) {%>
         <!-- Reviews from Api -->
@@ -264,11 +274,11 @@
         <% } %>
         <% } %>
       </div>
-  
-  
-  
-  
-  
+
+
+
+
+
       <!-- Recommendations Carousel -->
       <h1 class='heading'>Recommendations</h1>
       <div id="recommendationsCarousel" class="carousel slide mt-5" data-ride="carousel" style="padding-bottom: 5rem">
@@ -294,7 +304,7 @@
               </div>
             </div>
           </div>
-  
+
           <% for(let i = 3; i < recommendations.length; i += 3) { %>
           <div class="carousel-item">
             <div class="d-flex justify-content-around">
@@ -329,9 +339,9 @@
         </a>
       </div>
     </div>
-  
-  
-  
+
+
+
     <!-- Footer -->
     <footer class="ui inverted vertical footer segment">
       <div class="ui container">
