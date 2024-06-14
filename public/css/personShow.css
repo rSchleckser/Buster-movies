@@ -1,119 +1,175 @@
-    /* Header Container */
-    div.ui.inverted.vertical.masthead.center.aligned.segment {
-      background: linear-gradient(60deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
-    }
-
+/* Header Container */
+div.ui.inverted.vertical.masthead.center.aligned.segment {
+  background: linear-gradient(
+    60deg,
+    rgb(0, 0, 0) 11.2%,
+    rgb(11, 132, 145) 91.1%
+  );
+}
 
 .profile-pic {
-    max-width: 100%;
+  max-width: 100%;
+}
+
+.person-info {
+  padding-left: 20px;
+}
+
+h1.heading {
+  text-align: center;
+}
+
+.card img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-inner {
+  height: 400px;
+}
+
+/* side bar */
+div.ui.large.secondary.inverted.pointing.menu a.toc.item {
+  display: none;
+}
+
+ui card .content,
+.ui.cards .card .content.text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+}
+
+.ui card .content,
+.ui.cards .card .content.text .character-name {
+  color: rgb(152, 194, 194);
+}
+
+.ui.inverted.button {
+  top: 0;
+}
+
+/* Center Carousel */
+div.ui.link.cards {
+  justify-content: center;
+}
+
+/* Movie Carousel Button */
+#movieCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 12.8rem;
+  /* margin-left: 3rem; */
+}
+
+#movieCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 12.8rem;
+  /* margin-right: 3rem; */
+}
+
+/* TV Carousel Button */
+#tvCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 12.8rem;
+  /* margin-left: 3rem; */
+}
+
+#tvCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 12.8rem;
+  /* margin-right: 3rem; */
+}
+
+/* Images Carousel Button */
+#imagesCarousel a.carousel-control-next {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 12.8rem;
+  /* margin-right: 3rem; */
+}
+
+#imagesCarousel a.carousel-control-prev {
+  background-color: rgba(19, 18, 18, 0.507);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-top: 12.8rem;
+  /* margin-right: 3rem; */
+}
+
+/* footer */
+footer.ui.inverted.vertical.footer.segment {
+  padding: 3rem;
+  margin-top: 15rem;
+}
+
+/* Media Queries */
+
+@media (max-width: 1000px) {
+  div.ui.large.secondary.inverted.pointing.menu div.item {
+    display: none;
   }
 
-  .person-info {
-    padding-left: 20px;
+  div.ui.large.secondary.inverted.pointing.menu a.toc.item {
+    display: flex;
+  }
+}
+
+@media (max-width: 620px) {
+  div.ui.special.cards {
+    justify-content: center;
   }
 
-  h1.heading {
-    text-align: center;
+  /* input Search */
+  input.prompt {
+    width: 420px;
+  }
+}
+
+@media (max-width: 570px) {
+  div.ui.large.top.fixed.menu.transition.visible div.ui.container {
+    display: none;
+  }
+}
+
+@media (max-width: 530px) {
+  /* input Search */
+  input.prompt {
+    width: 350px;
+  }
+}
+
+@media (max-width: 420px) {
+  div.ui.large.secondary.inverted.pointing.menu a.item {
+    display: none;
   }
 
-  .card img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+  input.prompt {
+    width: 300px;
   }
-
-  .carousel-item img {
-    width: 100%;
-    height: auto;
-  }
-
-  .carousel-inner {
-    height: 400px;
-  }
-
-  ui card .content,
-  .ui.cards .card .content.text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    text-align: center;
-  }
-
-  .ui card .content,
-  .ui.cards .card .content.text .character-name {
-    color: rgb(152, 194, 194)
-  }
-
-  .ui.inverted.button {
-    top: 0;
-  }
-
-
-
-  /* Movie Carousel Button */
-  #movieCarousel a.carousel-control-next {
-    background-color: rgba(19, 18, 18, 0.507);
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-top: 12.8rem;
-    /* margin-left: 3rem; */
-  }
-
-  #movieCarousel a.carousel-control-prev {
-    background-color: rgba(19, 18, 18, 0.507);
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-top: 12.8rem;
-    /* margin-right: 3rem; */
-  }
-
-  /* TV Carousel Button */
-  #tvCarousel a.carousel-control-next {
-    background-color: rgba(19, 18, 18, 0.507);
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-top: 12.8rem;
-    /* margin-left: 3rem; */
-  }
-
-  #tvCarousel a.carousel-control-prev {
-    background-color: rgba(19, 18, 18, 0.507);
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-top: 12.8rem;
-    /* margin-right: 3rem; */
-  }
-
-  /* Images Carousel Button */
-  #imagesCarousel a.carousel-control-next {
-    background-color: rgba(19, 18, 18, 0.507);
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-top: 12.8rem;
-    /* margin-right: 3rem; */
-  }
-
-  #imagesCarousel a.carousel-control-prev {
-    background-color: rgba(19, 18, 18, 0.507);
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-top: 12.8rem;
-    /* margin-right: 3rem; */
-  }
-
-
-    /* footer */
-    footer.ui.inverted.vertical.footer.segment {
-      padding: 3rem;
-      margin-top: 15rem;
-    }
+}
