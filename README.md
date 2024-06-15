@@ -8,6 +8,7 @@
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [ERD](#erd)
+- [Installation](#installation)
 
 ## Introduction
 
@@ -58,3 +59,72 @@ Users can:
   <br>id, userid, subject, message, vote
 
 ![ERD](/public/img/coral_erd.png)
+
+## Installation
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+- [Node.js](https://nodejs.org/en/download/) (which includes npm)
+- [MongoDB](https://docs.mongodb.com/manual/installation/)
+
+### Steps
+
+1. **Clone the repository**
+
+   Open your terminal and run:
+   ```sh
+   git clone https://github.com/yourusername/buster-movie-website.git
+
+2. **Navigate to the project directory**
+   
+   ```sh
+   cd Buster-movies
+
+3. **Install dependencies**
+
+   Run the following command to install the necessary packages:
+  
+   ```sh
+   npm install
+
+4. **Creating a TMDB API Account**
+
+   - **Sign Up for TMDB Account:**
+     - Go to the [TMDB website](https://www.themoviedb.org/).
+     - Click on "Join TMDB" at the top right corner.
+     - Fill in the required information to create your account.
+     - Verify your email address by clicking the link sent to your email.
+
+   - **Generate API Key:**
+     - Log in to your TMDB account.
+     - Click on your profile icon in the top right corner and select "Settings".
+     - In the left-hand menu, click on "API".
+     - Click on the "Create" button to generate a new API key.
+     - Fill in the necessary details about your application and agree to the terms of use.
+     - Your API key will be generated and displayed. Make sure to copy and save it for later use.
+
+   
+5. **Set up environment variables**
+
+   Create a .env file in the root directory of the project and add the following environment variables:
+
+   ```sh
+   TMDB_API_KEY=your_tmdb_api_key
+   MONGODB_URI=your_mongodb_connection_string
+   SESSION_SECRET=your_session_secret
+
+6. **Start MongoDB**
+
+   Make sure your MongoDB server is running. You can start it with the following command if you're running MongoDB locally:
+
+   ```sh
+   mongod
+
+7. **Run the application**
+
+   Start the application using the following command:
+
+   ```sh
+   npm start
+
