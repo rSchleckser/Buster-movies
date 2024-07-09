@@ -35,6 +35,12 @@ div.ui.link.cards{
   justify-content: center;
   }
 
+/* Img modals */
+
+/* #imageCarousel .carousel-inner .carousel-item .card{
+  background-color: black;
+} */
+
 
   /* Video Carousel buttons */
   #videoCarousel a.carousel-control-next {
