@@ -222,7 +222,7 @@
               <% for (let j = 0; j < 3 && (i + j) < images.length; j++) { %>
               <% let image = images[i + j]; %>
               <div class="card" style="width: 18rem;">
-                <img src="https://image.tmdb.org/t/p/w500/<%= image.file_path %>" class="card-img-top" alt="Image" />
+                <img src="https://image.tmdb.org/t/p/original/<%= image.file_path %>" class="card-img-top" alt="Image" />
               </div>
               <% } %>
             </div>
@@ -240,7 +240,7 @@
       </div>
 
       <!-- Semantic UI Modal -->
-      <div id="imageModal" class="ui modal" style='margin-left: 10%; margin-top: 10%; width: 80%; max-height: 500px; background-color: rgba(78, 76, 76, 0);'>
+      <div id="imageModal" class="ui modal" style='margin-left: 10%; margin-top: 10%; width: 80%; max-height: auto; background-color: rgba(78, 76, 76, 0);'>
         <i class="ui close icon"></i>
         <div class="header" style='text-align: center;'>Image</div>
         <div class="content" style='display: flex; justify-content: center;'>
@@ -403,8 +403,6 @@
         </div>
       </div>
     </footer>
-
-
   </div>
 
 
