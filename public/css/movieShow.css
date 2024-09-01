@@ -37,9 +37,27 @@ div.ui.link.cards{
 
 /* Img modals */
 
-/* #imageCarousel .carousel-inner .carousel-item .card{
-  background-color: black;
-} */
+div#imageModal{
+  margin-left: 10%;
+  margin-top: 10%;
+  width: 80%;
+  max-height: auto;
+  background-color: rgba(78, 76, 76, 0);
+}
+
+div#imageModal div.header{
+  text-align: center;
+}
+
+div#imageModal div.content{
+  display: flex;
+  justify-content: center;
+}
+
+div#imageModal div.actions{
+  display: flex;
+  justify-content: center;
+}
 
 
   /* Video Carousel buttons */

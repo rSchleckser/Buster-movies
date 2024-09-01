@@ -37,8 +37,6 @@ router.post('/signup', async (req, res) => {
   // create the phone number error, then we can address a solution
   // search for the email in database (unique)
   try {
-
-
     const findUser = await User.findOne({ email: req.body.email });
     // if findUser is null, then we create user
     if (!findUser) {

@@ -291,11 +291,23 @@
                     <div class="ui dimmer">
                       <div class="content">
                         <div class="center">
-                          <button class="ui inverted button"> <a href="/tv/<%= recommend.id %>/<%= user._id %>">View Show</a></button>
+                          <% if (recommend && recommend.id) { %>
+                          <button class="ui inverted button">
+                            <a href="/tv/<%= recommend.id %>/<%= user._id %>">View Show</a>
+                          </button>
+                          <% } else { %>
+                          <p>No recommendation available.</p>
+                          <% } %>
+
                         </div>
                       </div>
                     </div>
+                    <% if (recommend && recommend.title) { %>
                     <img src="https://image.tmdb.org/t/p/w500/<%= recommend.poster_path %>" class="card-img-top" alt="<%= recommend.title %>" />
+                    <% } else { %>
+                    <p>No recommendation available.</p>
+                    <% } %>
+
                   </div>
                 </div>
                 <% } %>
