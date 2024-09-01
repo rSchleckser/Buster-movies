@@ -114,6 +114,7 @@ const options = {
    const getMovieShowPage = async (req,res)=>{
     try {
     const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}`, options);
+    const whereToWatchResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/watch/providers`, options)
     const imagesResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/images`, options)
     const videoResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/videos`, options)
     const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/credits`, options)
@@ -123,6 +124,7 @@ const options = {
     
     
     const details = detailsResponse.data;
+    const whereToWatch = whereToWatchResponse.data.results.US;
     const images = imagesResponse.data.backdrops;
     const videos = videoResponse.data.results;
     const credits = creditsResponse.data.cast;
@@ -132,8 +134,9 @@ const options = {
     const newReviews = await Review.find({movieId: req.params.id})
     // Mongo User
     const user = await User.findOne({ _id: req.params.userId })
+
     
-      res.status(200).render('movie/show', {details, images,videos, credits, reviews, recommendations, newReviews, user})
+      res.status(200).render('movie/show', {details, whereToWatch, images,videos, credits, reviews, recommendations, newReviews, user})
     } catch (error) {
       console.error('Error fetching movie', error)
       res.status(404).render('404');

@@ -64,6 +64,61 @@
             <p><strong>Rating:</strong> PG-13</p>
             <p><strong>Runtime: </strong><%= details.runtime %> minutes</p>
             <p><strong>Description:</strong> <%= details.overview %></p>
+            <% 
+            function renderProviders(category, providers) { 
+              if (providers && providers.length > 0) { 
+                providers.forEach(function(provider) { 
+          %>
+            <img class="provider-img" src="https://image.tmdb.org/t/p/w185/<%= provider.logo_path %>" alt="<%= provider.provider_name %>">
+
+            <% 
+                }); 
+              } else { 
+          %>
+            <p>No <%= category.toLowerCase() %> providers available.</p>
+            <% 
+              } 
+            } 
+          %>
+
+            <div>
+              <ul>
+                <li class="category">
+                  <h2>Stream</h2>
+                  <% if (whereToWatch && whereToWatch.flatrate && whereToWatch.flatrate.length > 0) { %>
+                  <% whereToWatch.flatrate.forEach(function(provider) { %>
+                  <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="<%= provider.provider_name %>">
+                  <% }); %>
+                  <% } else { %>
+                  <p>No streaming options available.</p>
+                  <% } %>
+                </li>
+
+                <li class="category">
+                  <h2>Rent</h2>
+                  <% if (whereToWatch && whereToWatch.rent && whereToWatch.rent.length > 0) { %>
+                  <% whereToWatch.rent.forEach(function(provider) { %>
+                  <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="<%= provider.provider_name %>">
+                  <% }); %>
+                  <% } else { %>
+                  <p>No rental options available.</p>
+                  <% } %>
+                </li>
+
+                <li class="category">
+                  <h2>Buy</h2>
+                  <% if (whereToWatch && whereToWatch.buy && whereToWatch.buy.length > 0) { %>
+                  <% whereToWatch.buy.forEach(function(provider) { %>
+                  <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="<%= provider.provider_name %>">
+                  <% }); %>
+                  <% } else { %>
+                  <p>No purchase options available.</p>
+                  <% } %>
+                </li>
+              </ul>
+            </div>
+
+
           </div>
         </div>
       </div>

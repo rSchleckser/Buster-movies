@@ -102,6 +102,7 @@ const updateTvShowsList = async (req, res) => {
 const getTvShowPage = async (req,res)=>{
     try {
     const detailsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}`, options);
+    const whereToWatchResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/watch/providers`, options)
     const imagesResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/images`, options)
     const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/videos`, options)
     const creditsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${req.params.id}/credits`, options)
@@ -111,6 +112,7 @@ const getTvShowPage = async (req,res)=>{
     
     
     const details = detailsResponse.data;
+    const whereToWatch = whereToWatchResponse.data.results.US;
     const images = imagesResponse.data.backdrops;
     const videos = videoResponse.data.results;
     const credits = creditsResponse.data.cast;
@@ -121,7 +123,7 @@ const getTvShowPage = async (req,res)=>{
   // Mongo User
   const user = await User.findOne({ _id: req.params.userId })
     
-      res.status(200).render('tvShow/show', {details, images, videos, credits, reviews, recommendations, newReviews, user})
+      res.status(200).render('tvShow/show', {details,whereToWatch, images, videos, credits, reviews, recommendations, newReviews, user})
     } catch (error) {
       console.error('Error fetching movie', error)
       res.status(404).render('404');

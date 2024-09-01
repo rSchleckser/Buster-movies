@@ -30,6 +30,22 @@
     height: 400px;
   }
 
+  /* Whaere to watch container */
+  .whereToWatch ul{
+    padding: 0;
+  }
+
+.provider-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.category{
+  list-style: none;
+}
+
+
   /* Center Carousel */
 div.ui.link.cards{
   justify-content: center;

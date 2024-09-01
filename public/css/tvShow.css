@@ -44,6 +44,21 @@ div.ui.link.cards{
   justify-content: center;
   }
 
+    /* Whaere to watch container */
+    .whereToWatch ul{
+      padding: 0;
+    }
+  
+  .provider-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+  
+  .category{
+    list-style: none;
+  }
+
 /* Video Carousel buttons */
 #videoCarousel a.carousel-control-next {
   background-color: rgba(19, 18, 18, 0.507);
