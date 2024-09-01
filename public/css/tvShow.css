@@ -67,6 +67,34 @@ div.ui.link.cards{
   margin-right: 0.3rem;
 }
 
+ /* Img modals */
+ div#imageModal{
+  margin-left: 10%;
+  margin-top: 10%;
+  width: 80%;
+  max-height: auto;
+  background-color: rgba(78, 76, 76, 0);
+}
+
+div#imageModal div.header{
+  text-align: center;
+}
+
+div#imageModal div.content{
+  display: flex;
+  justify-content: center;
+}
+
+div#imageModal div.actions{
+  display: flex;
+  justify-content: center;
+}
+
+/* Image */
+div.card img.card-img-top:hover{
+cursor: pointer;
+}
+
 /* Image Carousel Buttons*/
 #imagesCarousel a.carousel-control-next {
   background-color: rgba(19, 18, 18, 0.507);

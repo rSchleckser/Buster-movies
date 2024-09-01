@@ -72,7 +72,6 @@ div.ui.link.cards {
   height: 40px;
   width: 40px;
   margin-top: 12.8rem;
-  /* margin-left: 3rem; */
 }
 
 #movieCarousel a.carousel-control-prev {
@@ -81,7 +80,7 @@ div.ui.link.cards {
   height: 40px;
   width: 40px;
   margin-top: 12.8rem;
-  /* margin-right: 3rem; */
+
 }
 
 /* TV Carousel Button */
@@ -91,7 +90,6 @@ div.ui.link.cards {
   height: 40px;
   width: 40px;
   margin-top: 12.8rem;
-  /* margin-left: 3rem; */
 }
 
 #tvCarousel a.carousel-control-prev {
@@ -100,7 +98,35 @@ div.ui.link.cards {
   height: 40px;
   width: 40px;
   margin-top: 12.8rem;
-  /* margin-right: 3rem; */
+
+}
+
+ /* Img modals */
+ div#imageModal{
+  margin-left: 10%;
+  margin-top: 10%;
+  width: 80%;
+  max-height: auto;
+  background-color: rgba(78, 76, 76, 0);
+}
+
+div#imageModal div.header{
+  text-align: center;
+}
+
+div#imageModal div.content{
+  display: flex;
+  justify-content: center;
+}
+
+div#imageModal div.actions{
+  display: flex;
+  justify-content: center;
+}
+
+/* Image */
+div.card img.card-img-top:hover{
+cursor: pointer;
 }
 
 /* Images Carousel Button */

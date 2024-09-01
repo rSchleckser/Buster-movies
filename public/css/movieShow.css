@@ -36,7 +36,6 @@ div.ui.link.cards{
   }
 
 /* Img modals */
-
 div#imageModal{
   margin-left: 10%;
   margin-top: 10%;
@@ -58,6 +57,11 @@ div#imageModal div.actions{
   display: flex;
   justify-content: center;
 }
+
+/* Image */
+div.card img.card-img-top:hover{
+  cursor: pointer;
+  }
 
 
   /* Video Carousel buttons */
